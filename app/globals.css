@@ -1,0 +1,228 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
+  --border: #ffffff;
+  --accent: #a855f7;
+  --accent-dark: #7c3aed;
+}
+
+/* Accent themes - stored in data-accent on html */
+[data-accent="purple"] {
+  --accent: #a855f7;
+  --accent-dark: #7c3aed;
+}
+[data-accent="cyan"] {
+  --accent: #00d9ff;
+  --accent-dark: #00a8cc;
+}
+[data-accent="green"] {
+  --accent: #00ff88;
+  --accent-dark: #00cc6a;
+}
+[data-accent="orange"] {
+  --accent: #ff6b35;
+  --accent-dark: #cc5529;
+}
+[data-accent="red"] {
+  --accent: #ff3333;
+  --accent-dark: #cc2929;
+}
+
+@theme inline {
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-dark: var(--accent-dark);
+}
+
+@layer base {
+  * {
+    @apply m-0 p-0 box-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Brutalist Typography */
+.text-massive {
+  font-size: clamp(7rem, 15vw, 12rem);
+  font-weight: 700;
+  line-height: 0.85;
+  letter-spacing: -0.03em;
+}
+
+.text-giant {
+  font-size: clamp(4rem, 10vw, 8rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+
+.text-huge {
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+}
+
+.text-large {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.text-body {
+  font-size: 1.125rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.text-small {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+/* Brutalist Elements */
+.brutal-border {
+  border: 4px solid var(--foreground);
+}
+
+.brutal-border-accent {
+  border: 4px solid var(--accent);
+}
+
+.brutal-border-thick {
+  border: 6px solid var(--foreground);
+}
+
+.brutal-shadow {
+  box-shadow: 8px 8px 0 var(--accent);
+}
+
+.brutal-shadow-heavy {
+  box-shadow: 12px 12px 0 var(--accent);
+}
+
+/* Accent utilities */
+.text-accent {
+  color: var(--accent);
+}
+
+.bg-accent {
+  background-color: var(--accent);
+  color: var(--background);
+}
+
+.border-accent {
+  border-color: var(--accent);
+}
+
+/* Transitions */
+.transition-accent {
+  transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Hover states */
+.hover-accent:hover {
+  color: var(--accent);
+}
+
+.hover-bg-accent:hover {
+  background-color: var(--accent);
+  color: var(--background);
+}
+
+.hover-rise {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hover-rise:hover {
+  transform: translate(-4px, -4px);
+}
+
+/* Layout utilities */
+.section-brutal {
+  padding: 10rem 2rem;
+}
+
+@media (max-width: 768px) {
+  .section-brutal {
+    padding: 6rem 1.5rem;
+  }
+}
+
+.container-brutal {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Vertical text */
+.text-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+/* Selection */
+::selection {
+  background: var(--accent);
+  color: var(--background);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border: 2px solid var(--background);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--foreground);
+}
+
+/* Animations */
+@keyframes pulse-border {
+  0%, 100% {
+    border-color: var(--foreground);
+  }
+  50% {
+    border-color: var(--accent);
+  }
+}
+
+.animate-pulse-border {
+  animation: pulse-border 2s ease-in-out infinite;
+}
+
+/* Remove default link styles */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Mono font for code/tech */
+.font-mono {
+  font-family: var(--font-mono);
+}
