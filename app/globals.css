@@ -3,21 +3,24 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #000000;
-  --foreground: #ffffff;
-  --border: #ffffff;
+  --background: #0a0a0a;
+  --foreground: #f0f0f0;
+  --border: #f0f0f0;
   --accent: #a855f7;
   --accent-dark: #7c3aed;
+  --muted: #1a1a1a;
+  --glass: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.08);
 }
 
-/* Accent themes - stored in data-accent on html */
+/* Accent themes */
 [data-accent="purple"] {
   --accent: #a855f7;
   --accent-dark: #7c3aed;
 }
 [data-accent="cyan"] {
-  --accent: #00d9ff;
-  --accent-dark: #00a8cc;
+  --accent: #06d6a0;
+  --accent-dark: #05b384;
 }
 [data-accent="green"] {
   --accent: #00ff88;
@@ -28,18 +31,22 @@
   --accent-dark: #cc5529;
 }
 [data-accent="red"] {
-  --accent: #ff3333;
-  --accent-dark: #cc2929;
+  --accent: #ef4444;
+  --accent-dark: #dc2626;
 }
 
 @theme inline {
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-sans: var(--font-body), -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-heading: var(--font-heading), 'Space Grotesk', sans-serif;
   --font-mono: 'JetBrains Mono', 'Courier New', monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-border: var(--border);
   --color-accent: var(--accent);
   --color-accent-dark: var(--accent-dark);
+  --color-muted: var(--muted);
+  --color-glass: var(--glass);
+  --color-glass-border: var(--glass-border);
 }
 
 @layer base {
@@ -58,68 +65,79 @@
   }
 }
 
-/* Brutalist Typography */
+/* ─── Typography ─── */
 .text-massive {
-  font-size: clamp(7rem, 15vw, 12rem);
+  font-family: var(--font-heading);
+  font-size: clamp(6rem, 14vw, 11rem);
   font-weight: 700;
   line-height: 0.85;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
 }
 
 .text-giant {
-  font-size: clamp(4rem, 10vw, 8rem);
+  font-family: var(--font-heading);
+  font-size: clamp(3.5rem, 9vw, 7rem);
   font-weight: 700;
   line-height: 0.9;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
 }
 
 .text-huge {
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 5vw, 4rem);
   font-weight: 700;
   line-height: 0.95;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 
 .text-large {
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-family: var(--font-heading);
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
   font-weight: 600;
-  line-height: 1.1;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
 }
 
 .text-body {
-  font-size: 1.125rem;
-  line-height: 1.5;
+  font-size: 1.0625rem;
+  line-height: 1.6;
   font-weight: 400;
 }
 
 .text-small {
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   line-height: 1.4;
   font-weight: 400;
 }
 
-/* Brutalist Elements */
+/* ─── Brutalist Elements with Glass ─── */
 .brutal-border {
-  border: 4px solid var(--foreground);
+  border: 2px solid var(--glass-border);
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .brutal-border-accent {
-  border: 4px solid var(--accent);
+  border: 2px solid var(--accent);
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 .brutal-border-thick {
-  border: 6px solid var(--foreground);
+  border: 3px solid var(--foreground);
 }
 
 .brutal-shadow {
-  box-shadow: 8px 8px 0 var(--accent);
+  box-shadow: 6px 6px 0 var(--accent);
 }
 
 .brutal-shadow-heavy {
-  box-shadow: 12px 12px 0 var(--accent);
+  box-shadow: 0 0 40px rgba(168, 85, 247, 0.08), 8px 8px 0 var(--accent);
 }
 
-/* Accent utilities */
+/* ─── Accent Utilities ─── */
 .text-accent {
   color: var(--accent);
 }
@@ -133,12 +151,15 @@
   border-color: var(--accent);
 }
 
-/* Transitions */
+/* ─── Transitions ─── */
 .transition-accent {
-  transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Hover states */
+/* ─── Hover ─── */
 .hover-accent:hover {
   color: var(--accent);
 }
@@ -149,44 +170,46 @@
 }
 
 .hover-rise {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hover-rise:hover {
-  transform: translate(-4px, -4px);
+  transform: translate(-3px, -3px);
+  box-shadow: 6px 6px 0 var(--accent);
 }
 
-/* Layout utilities */
+/* ─── Layout ─── */
 .section-brutal {
-  padding: 10rem 2rem;
+  padding: 8rem 2rem;
 }
 
 @media (max-width: 768px) {
   .section-brutal {
-    padding: 6rem 1.5rem;
+    padding: 5rem 1.25rem;
   }
 }
 
 .container-brutal {
-  max-width: 1400px;
+  max-width: 1300px;
   margin: 0 auto;
 }
 
-/* Vertical text */
+/* ─── Vertical Text ─── */
 .text-vertical {
   writing-mode: vertical-rl;
   text-orientation: mixed;
 }
 
-/* Selection */
+/* ─── Selection ─── */
 ::selection {
   background: var(--accent);
   color: var(--background);
 }
 
-/* Scrollbar */
+/* ─── Scrollbar ─── */
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -195,17 +218,36 @@
 
 ::-webkit-scrollbar-thumb {
   background: var(--accent);
-  border: 2px solid var(--background);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: var(--foreground);
 }
 
-/* Animations */
+/* ─── Glow Effect ─── */
+.glow-accent {
+  box-shadow: 0 0 30px rgba(168, 85, 247, 0.15);
+}
+
+/* ─── Background Grain ─── */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
+
+/* ─── Animations ─── */
 @keyframes pulse-border {
   0%, 100% {
-    border-color: var(--foreground);
+    border-color: var(--glass-border);
   }
   50% {
     border-color: var(--accent);
@@ -213,16 +255,33 @@
 }
 
 .animate-pulse-border {
-  animation: pulse-border 2s ease-in-out infinite;
+  animation: pulse-border 3s ease-in-out infinite;
 }
 
-/* Remove default link styles */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* ─── Links ─── */
 a {
   color: inherit;
   text-decoration: none;
 }
 
-/* Mono font for code/tech */
+/* ─── Mono Font ─── */
 .font-mono {
   font-family: var(--font-mono);
+}
+
+/* ─── Glass Card ─── */
+.glass-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }

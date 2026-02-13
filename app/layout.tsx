@@ -1,18 +1,26 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Inter, Space_Grotesk } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
-const inter = Inter({ 
+const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
   display: "swap",
+  variable: "--font-body",
+})
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-heading",
 })
 
 export const metadata: Metadata = {
-  title: "Utkarsh Joshi | Systems Programmer",
-  description: "First-year CS student building from first principles. Unix shell in C, OSTEP, systems programming.",
+  title: "Utkarsh Joshi | Backend & Systems Engineer",
+  description: "Specializing in Information Retrieval, RAG systems, and systems programming. Building from first principles.",
 }
 
 export default function RootLayout({
@@ -21,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" data-accent="purple" suppressHydrationWarning>
+    <html lang="en" data-accent="purple" suppressHydrationWarning className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body className={inter.className}>
         {children}
         <Analytics />
