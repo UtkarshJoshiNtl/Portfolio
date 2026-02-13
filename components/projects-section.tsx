@@ -15,7 +15,7 @@ export function ProjectsSection() {
         <FadeUp>
           <p className="text-small font-mono text-accent mb-4">{"// 01"}</p>
           <h2 className="text-giant mb-4">PROJECTS</h2>
-          <p className="text-body opacity-40 mb-16 max-w-lg">
+          <p className="text-body opacity-55 mb-16 max-w-lg">
             Systems software and retrieval tools. Updated monthly.
           </p>
         </FadeUp>
@@ -43,7 +43,7 @@ export function ProjectsSection() {
               </motion.a>
             </div>
 
-            <p className="text-body mb-8 leading-relaxed opacity-70 max-w-2xl">
+            <p className="text-body mb-8 leading-relaxed opacity-80 max-w-2xl">
               Building a hybrid search engine from the ground up. Inverted indexes,
               BM25 weighting, and vector similarity for RAG-enhanced retrieval.
             </p>
@@ -58,7 +58,7 @@ export function ProjectsSection() {
               ].map(({ label, value }) => (
                 <StaggerItem key={label}>
                   <div className="code-border p-4">
-                    <p className="text-small font-mono opacity-30">{label}</p>
+                    <p className="text-small font-mono opacity-50">{label}</p>
                     <p className="text-body font-mono font-bold">{value}</p>
                   </div>
                 </StaggerItem>
@@ -147,7 +147,7 @@ export function ProjectsSection() {
                       <Github size={16} />
                     </motion.a>
                   </div>
-                  <p className="text-body mb-6 opacity-50 leading-relaxed">{project.desc}</p>
+                  <p className="text-body mb-6 opacity-60 leading-relaxed">{project.desc}</p>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map((t) => (

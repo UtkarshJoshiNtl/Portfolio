@@ -29,7 +29,7 @@ export function ContactSection() {
         </FadeUp>
 
         <FadeUp delay={0.2}>
-          <p className="text-body opacity-40 max-w-lg mb-12 leading-relaxed">
+          <p className="text-body opacity-60 max-w-lg mb-12 leading-relaxed">
             Open for internships (Summer 2026/2027) and full-time discussions.
             Interested in backend infrastructure, search systems, and low-level engineering.
           </p>
@@ -54,7 +54,7 @@ export function ContactSection() {
               >
                 <Icon size={28} className="mb-3 opacity-60 group-hover:opacity-100 group-hover:text-accent transition-all-smooth" />
                 <p className="text-body font-mono font-bold mb-1">{label}</p>
-                <p className="text-small opacity-30 group-hover:opacity-60 transition-all-smooth">{desc}</p>
+                <p className="text-small opacity-50 group-hover:opacity-70 transition-all-smooth">{desc}</p>
               </motion.a>
             </StaggerItem>
           ))}
@@ -62,8 +62,8 @@ export function ContactSection() {
 
         <FadeUp delay={0.3}>
           <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
-            <p className="text-small font-mono opacity-20">© 2025 utkarsh_joshi</p>
-            <p className="text-small font-mono opacity-20">next.js · three.js · updated monthly</p>
+            <p className="text-small font-mono opacity-40">© 2025 utkarsh_joshi</p>
+            <p className="text-small font-mono opacity-40">next.js · three.js · updated monthly</p>
           </div>
         </FadeUp>
       </div>

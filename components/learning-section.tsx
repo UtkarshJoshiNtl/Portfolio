@@ -26,7 +26,7 @@ export function LearningSection() {
                   <StaggerItem key={title}>
                     <div className="card p-5">
                       <p className="text-body font-bold font-mono mb-2">{title}</p>
-                      <p className="text-small opacity-50">{desc}</p>
+                      <p className="text-small opacity-60">{desc}</p>
                     </div>
                   </StaggerItem>
                 ))}
@@ -57,14 +57,14 @@ export function LearningSection() {
             <FadeUp delay={0.15}>
               <h3 className="text-large font-mono mb-3">languages</h3>
               <p className="text-body font-mono mb-1">C · Java · JavaScript</p>
-              <p className="text-small opacity-40 font-mono">// C++ (competitive programming only)</p>
+              <p className="text-small opacity-55 font-mono">// C++ (competitive programming only)</p>
             </FadeUp>
 
             <FadeUp delay={0.25}>
               <h3 className="text-large font-mono mb-4">trajectory</h3>
               <div className="space-y-3">
                 <div className="code-border p-4">
-                  <p className="text-small font-mono opacity-30">current</p>
+                  <p className="text-small font-mono opacity-50">current</p>
                   <p className="text-body">Strengthening IR foundations</p>
                 </div>
                 <div className="code-border p-4">
@@ -78,8 +78,8 @@ export function LearningSection() {
               <div className="card p-6 border-accent">
                 <p className="text-small font-mono text-accent mb-3">education</p>
                 <p className="text-body font-bold mb-1">B.Tech Computer Science</p>
-                <p className="text-small opacity-40">2025–2029 · India</p>
-                <p className="text-small mt-2 opacity-40 font-mono">
+                <p className="text-small opacity-55">2025–2029 · India</p>
+                <p className="text-small mt-2 opacity-55 font-mono">
                   // focus: systems, low-level software, IR
                 </p>
               </div>

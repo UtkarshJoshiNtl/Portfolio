@@ -28,7 +28,7 @@ export function Nav() {
             key={id}
             onClick={() => scrollToSection(id)}
             onMouseEnter={playHover}
-            className="text-small font-mono opacity-40 hover:opacity-100 hover:text-accent transition-all-smooth cursor-pointer"
+            className="text-small font-mono opacity-55 hover:opacity-100 hover:text-accent transition-all-smooth cursor-pointer"
           >
             $ {id}
           </button>

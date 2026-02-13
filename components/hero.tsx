@@ -34,7 +34,7 @@ export function Hero() {
             <p className="text-large text-accent mb-2">
               Information Retrieval · RAG Systems
             </p>
-            <p className="text-body opacity-40 max-w-md mb-8">
+            <p className="text-body opacity-55 max-w-md mb-8">
               India · CS '29 · Building from first principles
             </p>
           </motion.div>
@@ -52,7 +52,7 @@ export function Hero() {
               </p>
               <div className="mt-5 pt-4 border-t border-white/5 flex gap-8">
                 <div>
-                  <p className="text-small font-mono opacity-30">internships</p>
+                  <p className="text-small font-mono opacity-50">internships</p>
                   <p className="text-small font-bold">2026-2027</p>
                 </div>
                 <div>
