@@ -1,9 +1,13 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { useSounds } from "./sound-provider"
 
 export function Nav() {
+  const { playClick, playHover } = useSounds()
+
   const scrollToSection = (id: string) => {
+    playClick()
     const element = document.getElementById(id)
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
@@ -12,30 +16,32 @@ export function Nav() {
 
   return (
     <motion.nav
-      className="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-6"
-      initial={{ opacity: 0, x: 20 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{ delay: 1, duration: 0.6 }}
+      className="fixed top-6 left-6 z-50 hidden lg:flex items-center gap-6"
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 1, duration: 0.5 }}
     >
-      {[
-        { id: "projects", label: "Projects" },
-        { id: "learning", label: "Skills" },
-        { id: "contact", label: "Contact" },
-      ].map(({ id, label }) => (
-        <button
-          key={id}
-          onClick={() => scrollToSection(id)}
-          className="text-vertical text-small uppercase tracking-widest hover-accent transition-accent opacity-50 hover:opacity-100"
-        >
-          {label}
-        </button>
-      ))}
+      <span className="text-small font-mono text-accent">UJ</span>
+      <div className="flex gap-4">
+        {["projects", "skills", "contact"].map((id) => (
+          <button
+            key={id}
+            onClick={() => scrollToSection(id)}
+            onMouseEnter={playHover}
+            className="text-small font-mono opacity-40 hover:opacity-100 hover:text-accent transition-all-smooth cursor-pointer"
+          >
+            $ {id}
+          </button>
+        ))}
+      </div>
       <a
         href="/resume.pdf"
         target="_blank"
-        className="text-vertical text-small uppercase tracking-widest text-accent border-l border-accent pl-2 opacity-80 hover:opacity-100"
+        onMouseEnter={playHover}
+        onClick={playClick}
+        className="text-small font-mono text-accent opacity-60 hover:opacity-100 transition-all-smooth border-l border-white/10 pl-4"
       >
-        Resume
+        resume.pdf
       </a>
     </motion.nav>
   )

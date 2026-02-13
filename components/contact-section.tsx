@@ -1,86 +1,69 @@
 "use client"
 
 import { Github, Linkedin, Mail } from "lucide-react"
-import { FadeUp, MagneticWrap, StaggerContainer, StaggerItem } from "./motion"
+import { motion } from "framer-motion"
+import { FadeUp, StaggerContainer, StaggerItem } from "./motion"
+import { useSounds } from "./sound-provider"
 
 export function ContactSection() {
+  const { playClick, playHover } = useSounds()
+
   return (
-    <section id="contact" className="section-brutal relative">
-      {/* Ambient glow */}
-      <div
-        className="absolute bottom-0 right-1/4 w-[400px] h-[400px] rounded-full opacity-[0.03] pointer-events-none blur-[100px]"
-        style={{ background: "var(--accent)" }}
-      />
-
-      <div className="container-brutal relative">
-        {/* Title */}
+    <section id="contact" className="section-main relative z-10">
+      <div className="container-main">
         <FadeUp>
-          <div className="mb-16">
-            <h2 className="text-giant">LET'S</h2>
-            <h2 className="text-giant text-accent">BUILD</h2>
-          </div>
+          <p className="text-small font-mono text-accent mb-4">{"// 03"}</p>
+          <h2 className="text-giant mb-2">LET'S</h2>
+          <h2 className="text-giant text-accent mb-16">BUILD</h2>
         </FadeUp>
 
-        {/* Email */}
         <FadeUp delay={0.15}>
-          <div className="mb-16">
-            <a
-              href="mailto:joshiutkarshntl@gmail.com"
-              className="group inline-block"
-            >
-              <p className="text-huge hover:text-accent transition-accent break-all">
-                joshiutkarshntl@<br className="md:hidden" />gmail.com
-              </p>
-              <div className="w-full h-[2px] bg-accent mt-4 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500" />
-            </a>
-          </div>
-        </FadeUp>
-
-        {/* Description */}
-        <FadeUp delay={0.25}>
-          <div className="max-w-2xl mb-14">
-            <p className="text-body leading-relaxed opacity-60">
-              Open for internships (Summer 2026/2027) and full-time discussions.
-              Particularly interested in backend infrastructure, search systems, and low-level engineering.
+          <a
+            href="mailto:joshiutkarshntl@gmail.com"
+            className="animated-underline inline-block mb-12"
+          >
+            <p className="text-huge opacity-80 hover:opacity-100 hover:text-accent transition-all-smooth break-all">
+              joshiutkarshntl@gmail.com
             </p>
-          </div>
+          </a>
         </FadeUp>
 
-        {/* Social Links */}
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mb-16" staggerDelay={0.08}>
+        <FadeUp delay={0.2}>
+          <p className="text-body opacity-40 max-w-lg mb-12 leading-relaxed">
+            Open for internships (Summer 2026/2027) and full-time discussions.
+            Interested in backend infrastructure, search systems, and low-level engineering.
+          </p>
+        </FadeUp>
+
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mb-20">
           {[
-            { href: "https://github.com/UtkarshJoshiNtl", icon: Github, label: "GitHub", desc: "View my code" },
-            { href: "https://linkedin.com/in/utkarsh-joshi", icon: Linkedin, label: "LinkedIn", desc: "Let's connect" },
-            { href: "mailto:joshiutkarshntl@gmail.com", icon: Mail, label: "Email", desc: "Say hello" },
+            { href: "https://github.com/UtkarshJoshiNtl", icon: Github, label: "github", desc: "view my code" },
+            { href: "https://linkedin.com/in/utkarsh-joshi", icon: Linkedin, label: "linkedin", desc: "let's connect" },
+            { href: "mailto:joshiutkarshntl@gmail.com", icon: Mail, label: "email", desc: "say hello" },
           ].map(({ href, icon: Icon, label, desc }) => (
             <StaggerItem key={label}>
-              <MagneticWrap>
-                <a
-                  href={href}
-                  target={href.startsWith("mailto") ? undefined : "_blank"}
-                  rel="noopener noreferrer"
-                  className="brutal-border p-6 hover-rise transition-all group block"
-                >
-                  <Icon size={36} className="mb-3 opacity-80" />
-                  <p className="text-body font-bold mb-1">{label}</p>
-                  <p className="text-small opacity-40 group-hover:opacity-70 transition-opacity">{desc}</p>
-                </a>
-              </MagneticWrap>
+              <motion.a
+                href={href}
+                target={href.startsWith("mailto") ? undefined : "_blank"}
+                rel="noopener noreferrer"
+                className="card p-6 block cursor-pointer group"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.97 }}
+                onMouseEnter={playHover}
+                onClick={playClick}
+              >
+                <Icon size={28} className="mb-3 opacity-60 group-hover:opacity-100 group-hover:text-accent transition-all-smooth" />
+                <p className="text-body font-mono font-bold mb-1">{label}</p>
+                <p className="text-small opacity-30 group-hover:opacity-60 transition-all-smooth">{desc}</p>
+              </motion.a>
             </StaggerItem>
           ))}
         </StaggerContainer>
 
-        {/* Footer */}
         <FadeUp delay={0.3}>
-          <div className="pt-10 border-t border-foreground/10">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
-              <p className="text-small opacity-30">
-                © 2025 Utkarsh Joshi
-              </p>
-              <p className="text-small opacity-30">
-                Built with Next.js · Updated monthly
-              </p>
-            </div>
+          <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-start md:items-center gap-2">
+            <p className="text-small font-mono opacity-20">© 2025 utkarsh_joshi</p>
+            <p className="text-small font-mono opacity-20">next.js · three.js · updated monthly</p>
           </div>
         </FadeUp>
       </div>
