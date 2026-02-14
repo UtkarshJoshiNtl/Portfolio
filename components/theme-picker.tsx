@@ -12,7 +12,7 @@ const themes = [
 ]
 
 export function ThemePicker() {
-  const [currentTheme, setCurrentTheme] = useState("purple")
+  const [currentTheme, setCurrentTheme] = useState("green")
 
   useEffect(() => {
     const saved = localStorage.getItem("portfolio-accent")

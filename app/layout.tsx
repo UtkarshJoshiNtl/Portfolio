@@ -29,7 +29,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" data-accent="purple" suppressHydrationWarning className={`${inter.variable} ${spaceGrotesk.variable}`}>
+    <html lang="en" data-accent="green" suppressHydrationWarning className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body className={inter.className}>
         {children}
         <Analytics />

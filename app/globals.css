@@ -25,8 +25,8 @@
 }
 
 [data-accent="green"] {
-  --accent: #00ff88;
-  --accent-glow: rgba(0, 255, 136, 0.15);
+  --accent: #ccff00;
+  --accent-glow: rgba(204, 255, 0, 0.15);
 }
 
 [data-accent="orange"] {

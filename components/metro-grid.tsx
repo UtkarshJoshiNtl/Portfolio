@@ -76,7 +76,7 @@ export function Tile({
                 <div className="absolute inset-0 bg-accent opacity-0 md:group-hover:opacity-[0.03] transition-opacity duration-300 pointer-events-none" />
 
                 {/* Content Container */}
-                <div className="relative h-full w-full p-6 flex flex-col pointer-events-none">
+                <div className="relative h-full w-full p-6 flex flex-col">
                     {children}
                 </div>
             </div>

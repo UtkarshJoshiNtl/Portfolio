@@ -110,8 +110,8 @@ const FluidShader = {
       vec3 color = mix(vec3(0.02), uAccent, intensity * 0.6);
       
       // Add subtle grid lines
-      float grid = step(0.98, fract(st.x * 20.0)) + step(0.98, fract(st.y * 20.0));
-      color += vec3(grid * 0.03);
+      // float grid = step(0.98, fract(st.x * 20.0)) + step(0.98, fract(st.y * 20.0));
+      // color += vec3(grid * 0.03);
 
       gl_FragColor = vec4(color, 1.0);
     }
