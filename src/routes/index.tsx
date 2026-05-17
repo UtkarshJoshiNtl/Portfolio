@@ -404,6 +404,7 @@ function Index() {
             </Tile>
           </motion.div>
         </section>
+        </LayoutGroup>
       </div>
 
       <AnimatePresence>
