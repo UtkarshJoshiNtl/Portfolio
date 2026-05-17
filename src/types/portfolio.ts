@@ -1,11 +1,4 @@
-export type PanelId =
-  | "astrosis"
-  | "projects"
-  | "roadmap"
-  | "contact"
-  | "identity"
-  | "art3d"
-  | "music";
+export type PanelId = "astrosis" | "projects" | "roadmap" | "contact" | "identity";
 
 export interface TileConfig {
   id: PanelId;

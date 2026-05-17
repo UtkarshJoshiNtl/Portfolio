@@ -10,8 +10,7 @@ import {
   Map,
   Mail,
   Linkedin,
-  Sparkles,
-  Music,
+  Wrench,
   Trophy,
   Waves,
 } from "lucide-react";
@@ -21,16 +20,22 @@ import { CyclingText } from "@/components/portfolio/CyclingText";
 import { usePanel } from "@/components/portfolio/usePanel";
 import { GitHubCalendar } from "@/components/portfolio/GitHubCalendar";
 import { CodeforcesRating } from "@/components/portfolio/CodeforcesRating";
-import { MusicVisualizer } from "@/components/portfolio/MusicVisualizer";
+import { MusicPlayer } from "@/components/portfolio/MusicPlayer";
+import { GallerySlideshow } from "@/components/portfolio/GallerySlideshow";
 import { DoomGame } from "@/components/portfolio/DoomGame";
 import { AstrosisPanel } from "@/components/portfolio/panels/AstrosisPanel";
 import { ProjectsPanel } from "@/components/portfolio/panels/ProjectsPanel";
 import { RoadmapPanel } from "@/components/portfolio/panels/RoadmapPanel";
 import { ContactPanel } from "@/components/portfolio/panels/ContactPanel";
 import { IdentityPanel } from "@/components/portfolio/panels/IdentityPanel";
-import { Art3DPanel } from "@/components/portfolio/panels/Art3DPanel";
-import { MusicPanel } from "@/components/portfolio/panels/MusicPanel";
-import { astrosisCycle, identityCopy, links, projects, roadmapCycle } from "@/lib/portfolio-data";
+import {
+  astrosisCycle,
+  identityCopy,
+  links,
+  projects,
+  roadmapCycle,
+  toolboxCycle,
+} from "@/lib/portfolio-data";
 
 function MetroTile({
   className,
@@ -51,7 +56,7 @@ function MetroTile({
 const projectIcons = [Box, Code2, Waves] as const;
 const projectColors = ["bg-metro-graphite", "bg-metro-red", "bg-metro-green"] as const;
 
-type PanelKey = "astrosis" | "projects" | "roadmap" | "contact" | "identity" | "art3d" | "music";
+type PanelKey = "astrosis" | "projects" | "roadmap" | "contact" | "identity";
 
 export default function Index() {
   const { active: panel, open, close } = usePanel(null);
@@ -145,6 +150,19 @@ export default function Index() {
             </MetroTile>
 
             <MetroTile
+              label="Toolbox"
+              bg="bg-metro-graphite"
+              className="col-span-1 row-span-2 md:col-span-1 xl:col-span-3 xl:row-span-1"
+              asButton={false}
+            >
+              <Wrench className="h-5 w-5 text-white/70" />
+              <CyclingText
+                items={toolboxCycle}
+                className="mt-auto pb-8 text-xs md:text-sm font-mono text-white/85"
+              />
+            </MetroTile>
+
+            <MetroTile
               id="astrosis"
               label="Astrosis"
               onClick={() => openPanel("astrosis")}
@@ -196,8 +214,10 @@ export default function Index() {
               bg="bg-metro-graphite"
               className="col-span-2 row-span-2 md:col-span-3 md:row-span-2 xl:col-span-3 xl:row-span-2"
             >
-              <Github className="h-5 w-5 mb-1 opacity-70" />
-              <GitHubCalendar />
+              <Github className="h-5 w-5 mb-1 opacity-70 shrink-0" />
+              <div className="flex-1 min-h-0 w-full">
+                <GitHubCalendar />
+              </div>
             </MetroTile>
 
             <MetroTile
@@ -243,25 +263,13 @@ export default function Index() {
             </MetroTile>
 
             <MetroTile
-              id="art3d"
-              label="3D Art"
-              onClick={() => openPanel("art3d")}
+              id="gallery"
+              label="Gallery"
               bg="bg-gradient-to-br from-cyan-600 to-blue-700"
-              className="col-span-1 row-span-2 md:col-span-2 md:row-span-2"
+              className="col-span-1 row-span-2 md:col-span-2 md:row-span-2 relative overflow-hidden"
+              asButton={false}
             >
-              <motion.div
-                className="h-full flex flex-col justify-between"
-                animate={{ rotate: [0, 2, -2, 0] }}
-                transition={{ duration: 4, repeat: Infinity }}
-              >
-                <Sparkles className="h-6 w-6 text-cyan-200" />
-                <div className="pb-8">
-                  <div className="text-xl md:text-2xl font-bold text-cyan-50">3D Art</div>
-                  <div className="mt-2 text-xs md:text-sm font-mono text-cyan-100/70">
-                    Graphics & visualization
-                  </div>
-                </div>
-              </motion.div>
+              <GallerySlideshow />
             </MetroTile>
 
             <MetroTile
@@ -271,16 +279,7 @@ export default function Index() {
               className="col-span-1 row-span-2"
               asButton={false}
             >
-              <motion.div
-                className="flex flex-col gap-3 h-full cursor-pointer"
-                onClick={() => openPanel("music")}
-                onKeyDown={(e) => e.key === "Enter" && openPanel("music")}
-                role="button"
-                tabIndex={0}
-              >
-                <Music className="h-5 w-5 text-pink-200" />
-                <MusicVisualizer />
-              </motion.div>
+              <MusicPlayer />
             </MetroTile>
 
             <MetroTile
@@ -305,8 +304,6 @@ export default function Index() {
         {panel === "projects" && <ProjectsPanel key="projects" onClose={close} />}
         {panel === "roadmap" && <RoadmapPanel key="roadmap" onClose={close} />}
         {panel === "contact" && <ContactPanel key="contact" onClose={close} />}
-        {panel === "art3d" && <Art3DPanel key="art3d" onClose={close} />}
-        {panel === "music" && <MusicPanel key="music" onClose={close} />}
       </AnimatePresence>
     </main>
   );

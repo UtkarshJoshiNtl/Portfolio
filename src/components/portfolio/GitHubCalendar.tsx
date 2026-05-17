@@ -93,19 +93,19 @@ export function GitHubCalendar() {
   };
 
   return (
-    <div className="flex h-full flex-col gap-2">
-      <div className="flex items-baseline justify-between gap-2">
+    <div className="flex h-full w-full min-h-0 flex-col gap-2">
+      <div className="flex items-baseline justify-between gap-2 shrink-0">
         <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-white/60">Contributions</span>
         <span className="text-sm font-semibold text-white tabular-nums">{totalContributions}</span>
       </div>
-      <div ref={scrollRef} className="flex-1 overflow-x-auto overflow-y-hidden min-h-0">
-        <div className="flex gap-0.5 min-w-fit h-full items-end pb-1">
+      <div ref={scrollRef} className="flex-1 w-full overflow-x-auto overflow-y-hidden min-h-0">
+        <div className="flex gap-0.5 min-w-fit h-full items-end justify-end pb-1 ml-auto">
           {weeks.map((week, weekIdx) => (
             <div key={weekIdx} className="flex flex-col gap-0.5">
               {week.map((day) => (
                 <div
                   key={day.date}
-                  className={`w-3 h-3 rounded-sm shrink-0 ${getColor(day.count)}`}
+                  className={`w-3 h-3 md:w-3.5 md:h-3.5 rounded-sm shrink-0 ${getColor(day.count)}`}
                   title={`${day.count} on ${day.date}`}
                 />
               ))}

@@ -6,8 +6,6 @@ export type PanelId =
   | "roadmap"
   | "contact"
   | "identity"
-  | "art3d"
-  | "music"
   | null;
 
 export function usePanel(initial: PanelId = null) {
