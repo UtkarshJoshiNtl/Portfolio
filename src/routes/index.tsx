@@ -258,9 +258,10 @@ function Index() {
           </button>
         </div>
 
+        <LayoutGroup>
         <section
-          key={seed}
           className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 auto-rows-[110px] md:auto-rows-[120px] grid-flow-dense"
+          style={{ perspective: 1400 }}
         >
           <motion.div layout key={`${seed}-astrosis`} transition={{ type: "spring", stiffness: 220, damping: 28 }} className={cls("astrosis")} style={{ transformStyle: "preserve-3d" }}>
             <Tile
