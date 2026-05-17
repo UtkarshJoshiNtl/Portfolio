@@ -14,8 +14,6 @@ import {
   Map,
   Palette,
   Trophy,
-  Volume2,
-  VolumeX,
   Waves,
   Linkedin,
   BookOpen,
@@ -45,54 +43,6 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-type TileTone = "click" | "slide";
-
-function useMetroSound() {
-  const [muted, setMuted] = useState(false);
-  const [ready, setReady] = useState(false);
-  const contextRef = useRef<AudioContext | null>(null);
-
-  const play = useCallback(
-    (tone: TileTone = "click") => {
-      if (muted || typeof window === "undefined") return;
-
-      const AudioContextCtor =
-        window.AudioContext ||
-        (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
-      if (!AudioContextCtor) return;
-
-      const context = contextRef.current ?? new AudioContextCtor();
-      contextRef.current = context;
-      setReady(true);
-
-      void context.resume();
-      const oscillator = context.createOscillator();
-      const gain = context.createGain();
-      const now = context.currentTime;
-
-      oscillator.type = "sine";
-      oscillator.frequency.setValueAtTime(tone === "slide" ? 340 : 520, now);
-      oscillator.frequency.exponentialRampToValueAtTime(tone === "slide" ? 260 : 390, now + 0.08);
-      gain.gain.setValueAtTime(0.0001, now);
-      gain.gain.exponentialRampToValueAtTime(tone === "slide" ? 0.028 : 0.022, now + 0.01);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.13);
-
-      oscillator.connect(gain);
-      gain.connect(context.destination);
-      oscillator.start(now);
-      oscillator.stop(now + 0.14);
-    },
-    [muted],
-  );
-
-  return {
-    muted,
-    ready,
-    toggleMuted: () => setMuted((value) => !value),
-    play,
-  };
-}
-
 function MetroTile({
   className,
   children,
@@ -106,16 +56,6 @@ function MetroTile({
     >
       <Tile {...tileProps}>{children}</Tile>
     </motion.div>
-  );
-}
-
-function GroupLabel({ children, className = "" }: { children: ReactNode; className?: string }) {
-  return (
-    <div
-      className={`col-span-2 md:col-span-4 xl:col-span-6 mt-4 first:mt-0 font-mono text-[11px] uppercase tracking-[0.18em] text-foreground/55 ${className}`}
-    >
-      {children}
-    </div>
   );
 }
 
@@ -140,65 +80,55 @@ function MetricTile({
 
 export function Index() {
   const { active: panel, open, close } = usePanel(null);
-  const { muted, ready, toggleMuted, play } = useMetroSound();
-
-  const handleInteractiveClick = useCallback(
-    (event: React.MouseEvent<HTMLElement>) => {
-      const target = event.target as HTMLElement;
-      if (target.closest("button,a")) play("click");
-    },
-    [play],
-  );
 
   const openPanel = useCallback(
     (id: "astrosis" | "projects" | "roadmap" | "hobby" | "about" | "contact" | "blog") => {
-      play("slide");
       open(id);
     },
-    [open, play],
+    [open],
   );
 
   return (
-    <main
-      className="min-h-screen bg-background text-foreground"
-      onClickCapture={handleInteractiveClick}
-    >
+    <main className="min-h-screen bg-background text-foreground">
       <div className="max-w-[92rem] mx-auto px-4 md:px-8 py-6 md:py-10">
-        <div className="mb-4 flex items-center justify-between gap-4">
-          <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-foreground/55">
-            Metro board / technical portfolio
-          </div>
-          <button
-            onClick={toggleMuted}
-            className="inline-flex h-9 w-9 items-center justify-center border border-white/10 bg-metro-graphite text-white/80 transition-colors hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
-            aria-label={muted ? "Unmute tile sounds" : "Mute tile sounds"}
-            title={
-              ready ? (muted ? "Unmute sounds" : "Mute sounds") : "Sounds start after first click"
-            }
-          >
-            {muted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
-          </button>
-        </div>
-
         <LayoutGroup>
           <section className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-2 md:gap-3 auto-rows-[106px] md:auto-rows-[118px] grid-flow-dense">
-            <GroupLabel>Featured</GroupLabel>
-
             <MetroTile
-              label="Identity"
-              bg="bg-metro-cobalt"
-              className="col-span-2 row-span-2 md:col-span-2 md:row-span-2"
+              label="Utkarsh Joshi"
+              bg="bg-gradient-to-br from-metro-cobalt via-metro-teal to-metro-violet"
+              className="col-span-2 row-span-3 md:col-span-3 md:row-span-3"
             >
               <div className="flex h-full flex-col justify-between pb-8">
                 <div>
-                  <h1 className="text-3xl md:text-5xl font-semibold leading-none">
+                  <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/60 mb-4">
+                    Software Engineer
+                  </div>
+                  <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-2">
                     {identityCopy.title}
                   </h1>
-                  <p className="mt-3 max-w-md text-sm md:text-base text-white/85">
+                  <p className="mt-3 max-w-lg text-base md:text-lg text-white/90 font-medium">
                     {identityCopy.tagline}
                   </p>
                 </div>
-                <p className="max-w-md text-xs md:text-sm text-white/75">{identityCopy.body}</p>
+                <div>
+                  <p className="max-w-lg text-xs md:text-sm text-white/70 leading-relaxed">
+                    {identityCopy.body}
+                  </p>
+                  <div className="mt-4 flex gap-2 flex-wrap">
+                    <span className="px-3 py-1 bg-white/10 backdrop-blur-sm rounded text-[11px] font-mono uppercase tracking-[0.1em]">
+                      GPU
+                    </span>
+                    <span className="px-3 py-1 bg-white/10 backdrop-blur-sm rounded text-[11px] font-mono uppercase tracking-[0.1em]">
+                      CUDA
+                    </span>
+                    <span className="px-3 py-1 bg-white/10 backdrop-blur-sm rounded text-[11px] font-mono uppercase tracking-[0.1em]">
+                      C++
+                    </span>
+                    <span className="px-3 py-1 bg-white/10 backdrop-blur-sm rounded text-[11px] font-mono uppercase tracking-[0.1em]">
+                      Systems
+                    </span>
+                  </div>
+                </div>
               </div>
             </MetroTile>
 
@@ -207,7 +137,7 @@ export function Index() {
               label="Astrosis"
               onClick={() => openPanel("astrosis")}
               bg="bg-metro-teal"
-              className="col-span-2 row-span-2 md:col-span-2 md:row-span-2"
+              className="col-span-2 row-span-3 md:col-span-3 md:row-span-3"
             >
               <div className="relative h-full w-full">
                 <AstrosisBg />
@@ -264,8 +194,6 @@ export function Index() {
               </div>
             </MetroTile>
 
-            <GroupLabel>Projects</GroupLabel>
-
             {projects.map((project, index) => {
               const icons = [Box, Code2, Waves] as const;
               const colors = ["bg-metro-graphite", "bg-metro-red", "bg-metro-green"];
@@ -313,8 +241,6 @@ export function Index() {
                 </div>
               </div>
             </MetroTile>
-
-            <GroupLabel>Signal</GroupLabel>
 
             <MetroTile
               label="GitHub"
@@ -379,8 +305,6 @@ export function Index() {
                 Get in touch
               </div>
             </MetroTile>
-
-            <GroupLabel>Personal</GroupLabel>
 
             <MetroTile
               id="about"
