@@ -35,21 +35,8 @@ function Index() {
       <div className="max-w-7xl mx-auto px-5 md:px-8 py-8 md:py-10">
         <Header />
 
-        <section
-          className="grid gap-2 md:gap-3"
-          style={{
-            gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
-          }}
-        >
-          <style>{`
-            @media (min-width: 768px) {
-              .tile-grid { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
-            }
-          `}</style>
-          <div
-            className="tile-grid contents md:!grid md:gap-3"
-            style={{ gridAutoRows: "minmax(140px, 1fr)" }}
-          >
+        <section className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 auto-rows-[140px] md:auto-rows-[160px]">
+          <>
             {/* Astrosis 2x2 */}
             <div className="col-span-2 row-span-2 md:col-span-2 md:row-span-2 min-h-[300px]">
               <Tile
