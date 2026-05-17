@@ -25,13 +25,24 @@ export function Tile({
   const content = (
     <motion.div
       layoutId={id ? `tile-${id}` : undefined}
-      className={`group relative overflow-hidden border border-transparent hover:border-amber transition-colors duration-150 cursor-pointer ${bg} ${className}`}
-      style={{ minHeight: 0 }}
+      whileHover={{
+        rotateY: 6,
+        rotateX: -4,
+        scale: 1.015,
+        z: 20,
+      }}
+      whileTap={{ scale: 0.985, rotateY: 0, rotateX: 0 }}
+      transition={{ type: "spring", stiffness: 320, damping: 22 }}
+      style={{ minHeight: 0, transformStyle: "preserve-3d" }}
+      className={`group relative overflow-hidden border border-transparent hover:border-amber cursor-pointer ${bg} ${className}`}
     >
-      <div className="relative z-10 h-full w-full p-5 flex flex-col">
+      <div className="relative z-10 h-full w-full p-5 flex flex-col" style={{ transform: "translateZ(20px)" }}>
         {children}
       </div>
-      <div className="absolute bottom-3 left-4 z-20 font-mono text-[10px] tracking-[0.15em] uppercase text-muted-foreground group-hover:text-amber transition-colors">
+      <div
+        className="absolute bottom-3 left-4 z-20 font-mono text-[10px] tracking-[0.15em] uppercase text-muted-foreground group-hover:text-amber transition-colors"
+        style={{ transform: "translateZ(30px)" }}
+      >
         {label}
       </div>
     </motion.div>
