@@ -35,9 +35,9 @@ function Index() {
       <div className="max-w-7xl mx-auto px-5 md:px-8 py-8 md:py-10">
         <Header />
 
-        <section className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 auto-rows-[140px] md:auto-rows-[160px]">
-            {/* Astrosis 2x2 */}
-            <div className="col-span-2 row-span-2 md:col-span-2 md:row-span-2 min-h-[300px]">
+        <section className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 auto-rows-[120px] md:auto-rows-[130px]">
+            {/* Astrosis 2x3 — featured, tallest */}
+            <div className="col-span-2 row-span-2 md:col-span-2 md:row-span-3 min-h-[260px]">
               <Tile
                 id="astrosis"
                 label="Astrosis · Featured"
@@ -81,97 +81,109 @@ function Index() {
               </Tile>
             </div>
 
-            {/* Resume */}
-            <Tile
-              id="resume"
-              label="Resume"
-              href={links.resume}
-              external
-              className="h-full border-b-2 border-b-amber min-h-[140px]"
-              bg="bg-tile-alt"
-            >
-              <FileText className="w-8 h-8 text-amber" />
-              <div className="mt-auto pb-6 font-mono text-sm">resume.pdf ↗</div>
-            </Tile>
+            {/* Resume — tall 1x2 */}
+            <div className="col-span-1 md:row-span-2 min-h-[120px]">
+              <Tile
+                id="resume"
+                label="Resume"
+                href={links.resume}
+                external
+                className="h-full border-b-2 border-b-amber"
+                bg="bg-tile-alt"
+              >
+                <FileText className="w-8 h-8 text-amber" />
+                <div className="mt-auto pb-6 font-mono text-sm">resume.pdf ↗</div>
+              </Tile>
+            </div>
 
-            {/* Roadmap */}
-            <Tile
-              id="roadmap"
-              label="Roadmap"
-              onClick={() => setPanel("roadmap")}
-              className="h-full min-h-[140px]"
-            >
-              <div className="mt-auto pb-6">
-                <CyclingText
-                  items={roadmapCycle}
-                  className="text-base md:text-lg font-semibold leading-snug"
-                />
-              </div>
-            </Tile>
+            {/* Roadmap — wide 2x1 */}
+            <div className="col-span-2 min-h-[120px]">
+              <Tile
+                id="roadmap"
+                label="Roadmap"
+                onClick={() => setPanel("roadmap")}
+                className="h-full"
+              >
+                <div className="mt-auto pb-6">
+                  <CyclingText
+                    items={roadmapCycle}
+                    className="text-base md:text-lg font-semibold leading-snug"
+                  />
+                </div>
+              </Tile>
+            </div>
 
-            {/* Hobby */}
-            <Tile
-              id="hobby"
-              label="Hobby Gallery"
-              onClick={() => setPanel("hobby")}
-              className="h-full min-h-[140px]"
-              bg="bg-tile-purple"
-            >
-              <div className="mt-auto pb-6">
-                <CyclingText
-                  items={hobbyCycle}
-                  className="text-xl md:text-2xl font-semibold"
-                />
-              </div>
-            </Tile>
+            {/* Hobby — tall 1x2 */}
+            <div className="col-span-1 md:row-span-2 min-h-[120px]">
+              <Tile
+                id="hobby"
+                label="Hobby Gallery"
+                onClick={() => setPanel("hobby")}
+                className="h-full"
+                bg="bg-tile-purple"
+              >
+                <div className="mt-auto pb-6">
+                  <CyclingText
+                    items={hobbyCycle}
+                    className="text-xl md:text-2xl font-semibold"
+                  />
+                </div>
+              </Tile>
+            </div>
 
-            {/* Codeforces */}
-            <Tile
-              id="cf"
-              label="Codeforces"
-              href={links.codeforces}
-              external
-              className="h-full min-h-[140px]"
-              bg="bg-tile-alt"
-            >
-              <div className="font-mono text-amber text-sm">Rating: —</div>
-              <div className="mt-auto pb-6 font-mono text-[11px] text-muted-foreground leading-relaxed">
-                2 contests/week
-                <br />
-                upsolve everything
-              </div>
-            </Tile>
+            {/* Codeforces — small 1x1 */}
+            <div className="col-span-1 min-h-[120px]">
+              <Tile
+                id="cf"
+                label="Codeforces"
+                href={links.codeforces}
+                external
+                className="h-full"
+                bg="bg-tile-alt"
+              >
+                <div className="font-mono text-amber text-sm">Rating: —</div>
+                <div className="mt-auto pb-6 font-mono text-[11px] text-muted-foreground leading-relaxed">
+                  2 contests/week
+                  <br />
+                  upsolve everything
+                </div>
+              </Tile>
+            </div>
 
-            {/* GitHub */}
-            <Tile
-              id="gh"
-              label="GitHub"
-              href={links.github}
-              external
-              className="h-full min-h-[140px]"
-            >
-              <GithubIcon className="w-6 h-6 text-amber" />
-              <div className="mt-auto pb-6 font-mono text-xs md:text-sm break-all">
-                UtkarshJoshiNtl
-              </div>
-            </Tile>
+            {/* GitHub — 2x1 wide */}
+            <div className="col-span-2 min-h-[120px]">
+              <Tile
+                id="gh"
+                label="GitHub"
+                href={links.github}
+                external
+                className="h-full"
+              >
+                <GithubIcon className="w-6 h-6 text-amber" />
+                <div className="mt-auto pb-6 font-mono text-xs md:text-sm break-all">
+                  UtkarshJoshiNtl
+                </div>
+              </Tile>
+            </div>
 
-            {/* About */}
-            <Tile
-              id="about"
-              label="About"
-              onClick={() => setPanel("about")}
-              className="h-full min-h-[140px]"
-              bg="bg-tile-alt"
-            >
-              <Trophy className="w-5 h-5 text-amber opacity-0" aria-hidden />
-              <div className="mt-auto pb-6">
-                <CyclingText
-                  items={aboutCycle}
-                  className="text-base md:text-lg font-semibold leading-snug"
-                />
-              </div>
-            </Tile>
+            {/* About — 1x1 */}
+            <div className="col-span-2 md:col-span-1 min-h-[120px]">
+              <Tile
+                id="about"
+                label="About"
+                onClick={() => setPanel("about")}
+                className="h-full"
+                bg="bg-tile-alt"
+              >
+                <Trophy className="w-5 h-5 text-amber opacity-0" aria-hidden />
+                <div className="mt-auto pb-6">
+                  <CyclingText
+                    items={aboutCycle}
+                    className="text-base md:text-lg font-semibold leading-snug"
+                  />
+                </div>
+              </Tile>
+            </div>
         </section>
       </div>
 
