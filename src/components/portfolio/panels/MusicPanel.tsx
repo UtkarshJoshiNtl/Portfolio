@@ -59,7 +59,6 @@ export function MusicPanel({ onClose }: MusicPanelProps) {
       transition: {
         duration: 2,
         repeat: Infinity,
-        ease: "easeInOut",
       },
     },
   };

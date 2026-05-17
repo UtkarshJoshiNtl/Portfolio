@@ -1,11 +1,12 @@
 "use client";
 
 import { createFileRoute } from "@tanstack/react-router";
-import { useCallback, type ComponentProps } from "react";
+import { useCallback, useRef, useState, type ComponentProps, type ReactNode } from "react";
 import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import {
   Box,
   Code2,
+  Cpu,
   FileText,
   Github,
   Info,
@@ -26,6 +27,7 @@ import { usePanel } from "@/components/portfolio/usePanel";
 import { AstrosisPanel } from "@/components/portfolio/panels/AstrosisPanel";
 import { ProjectsPanel } from "@/components/portfolio/panels/ProjectsPanel";
 import { RoadmapPanel } from "@/components/portfolio/panels/RoadmapPanel";
+import { HobbyPanel } from "@/components/portfolio/panels/HobbyPanel";
 import { AboutPanel } from "@/components/portfolio/panels/AboutPanel";
 import { ContactPanel } from "@/components/portfolio/panels/ContactPanel";
 import { BlogPanel } from "@/components/portfolio/panels/BlogPanel";
@@ -62,6 +64,25 @@ function MetroTile({
   );
 }
 
+function MetricTile({
+  value,
+  label,
+  className,
+}: {
+  value: string;
+  label: string;
+  className: string;
+}) {
+  return (
+    <MetroTile label={label} bg="bg-metro-amber" className={className}>
+      <div className="text-3xl md:text-4xl font-semibold leading-none">{value}</div>
+      <div className="mt-2 max-w-[10rem] font-mono text-[10px] uppercase tracking-[0.12em] text-white/80">
+        {label}
+      </div>
+    </MetroTile>
+  );
+}
+
 export function Index() {
   const { active: panel, open, close } = usePanel(null);
 
@@ -71,6 +92,7 @@ export function Index() {
         | "astrosis"
         | "projects"
         | "roadmap"
+        | "hobby"
         | "about"
         | "contact"
         | "blog"
@@ -95,58 +117,38 @@ export function Index() {
               bg="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900"
               className="col-span-2 row-span-3 md:col-span-3 md:row-span-3"
             >
-              <motion.div
-                className="flex h-full flex-col justify-between pb-8 relative overflow-hidden"
-                animate={{ backgroundPosition: ["0%", "100%"] }}
-                transition={{ duration: 8, repeat: Infinity }}
-              >
+              <div className="flex h-full flex-col justify-between pb-8">
                 <div>
-                  <motion.div
-                    className="font-mono text-[9px] uppercase tracking-[0.2em] text-blue-300 mb-4"
-                    animate={{ opacity: [0.6, 1, 0.6] }}
-                    transition={{ duration: 3, repeat: Infinity }}
-                  >
+                  <div className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/60 mb-4">
                     Software Engineer
-                  </motion.div>
-                  <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-2 bg-gradient-to-r from-blue-200 to-indigo-200 bg-clip-text text-transparent">
+                  </div>
+                  <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-2">
                     {identityCopy.title}
                   </h1>
-                  <p className="mt-3 max-w-lg text-base md:text-lg text-blue-100 font-medium">
+                  <p className="mt-3 max-w-lg text-base md:text-lg text-white/90 font-medium">
                     {identityCopy.tagline}
                   </p>
                 </div>
                 <div>
-                  <p className="max-w-lg text-xs md:text-sm text-blue-200/70 leading-relaxed">
+                  <p className="max-w-lg text-xs md:text-sm text-white/70 leading-relaxed">
                     {identityCopy.body}
                   </p>
                   <div className="mt-4 flex gap-2 flex-wrap">
-                    <motion.span
-                      className="px-3 py-1 bg-blue-500/20 border border-blue-400/30 rounded text-[11px] font-mono uppercase tracking-[0.1em] text-blue-200"
-                      whileHover={{ scale: 1.05, backgroundColor: "rgba(59, 130, 246, 0.3)" }}
-                    >
+                    <span className="px-3 py-1 bg-white/10 backdrop-blur-sm rounded text-[11px] font-mono uppercase tracking-[0.1em]">
                       GPU
-                    </motion.span>
-                    <motion.span
-                      className="px-3 py-1 bg-blue-500/20 border border-blue-400/30 rounded text-[11px] font-mono uppercase tracking-[0.1em] text-blue-200"
-                      whileHover={{ scale: 1.05, backgroundColor: "rgba(59, 130, 246, 0.3)" }}
-                    >
+                    </span>
+                    <span className="px-3 py-1 bg-white/10 backdrop-blur-sm rounded text-[11px] font-mono uppercase tracking-[0.1em]">
                       CUDA
-                    </motion.span>
-                    <motion.span
-                      className="px-3 py-1 bg-blue-500/20 border border-blue-400/30 rounded text-[11px] font-mono uppercase tracking-[0.1em] text-blue-200"
-                      whileHover={{ scale: 1.05, backgroundColor: "rgba(59, 130, 246, 0.3)" }}
-                    >
+                    </span>
+                    <span className="px-3 py-1 bg-white/10 backdrop-blur-sm rounded text-[11px] font-mono uppercase tracking-[0.1em]">
                       C++
-                    </motion.span>
-                    <motion.span
-                      className="px-3 py-1 bg-blue-500/20 border border-blue-400/30 rounded text-[11px] font-mono uppercase tracking-[0.1em] text-blue-200"
-                      whileHover={{ scale: 1.05, backgroundColor: "rgba(59, 130, 246, 0.3)" }}
-                    >
+                    </span>
+                    <span className="px-3 py-1 bg-white/10 backdrop-blur-sm rounded text-[11px] font-mono uppercase tracking-[0.1em]">
                       Systems
-                    </motion.span>
+                    </span>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             </MetroTile>
 
             <MetroTile
@@ -175,6 +177,39 @@ export function Index() {
                     </div>
                   </div>
                 </div>
+              </div>
+            </MetroTile>
+
+            <MetricTile
+              value="507x"
+              label="Batch speedup"
+              className="hidden md:block md:col-span-1 md:row-span-1"
+            />
+            <MetricTile
+              value="83x"
+              label="CUDA detection"
+              className="hidden md:block md:col-span-1 md:row-span-1"
+            />
+
+            <MetroTile
+              label="CUDA"
+              bg="bg-metro-violet"
+              className="hidden md:block md:col-span-1 md:row-span-1"
+            >
+              <Cpu className="h-7 w-7" />
+              <div className="mt-auto pb-8 font-mono text-xs uppercase tracking-[0.12em] text-white/85">
+                GPU experiments
+              </div>
+            </MetroTile>
+
+            <MetroTile
+              label="C++"
+              bg="bg-metro-green"
+              className="hidden md:block md:col-span-1 md:row-span-1"
+            >
+              <Code2 className="h-7 w-7" />
+              <div className="mt-auto pb-8 font-mono text-xs uppercase tracking-[0.12em] text-white/85">
+                Systems code
               </div>
             </MetroTile>
 
@@ -384,6 +419,7 @@ export function Index() {
         {panel === "astrosis" && <AstrosisPanel key="astrosis" onClose={close} />}
         {panel === "projects" && <ProjectsPanel key="projects" onClose={close} />}
         {panel === "roadmap" && <RoadmapPanel key="roadmap" onClose={close} />}
+        {panel === "hobby" && <HobbyPanel key="hobby" onClose={close} />}
         {panel === "about" && <AboutPanel key="about" onClose={close} />}
         {panel === "contact" && <ContactPanel key="contact" onClose={close} />}
         {panel === "blog" && <BlogPanel key="blog" onClose={close} />}
