@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import type { MouseEvent, ReactNode } from "react";
+import { motionConfig } from "@/lib/motion-config";
 
 type TileProps = {
   id?: string;
@@ -11,6 +12,8 @@ type TileProps = {
   children: ReactNode;
   bg?: string;
   ariaLabel?: string;
+  index?: number;
+  animationVariant?: "bounce" | "fade" | "swing" | "default";
 };
 
 export function Tile({
@@ -23,13 +26,58 @@ export function Tile({
   children,
   bg = "bg-tile",
   ariaLabel,
+  index = 0,
+  animationVariant = "default",
 }: TileProps) {
+  // Animation variants for different tile entrance styles
+  const getAnimationVariant = (variant: string) => {
+    switch (variant) {
+      case "bounce":
+        return {
+          initial: { opacity: 0, scale: 0.8, y: 16 },
+          animate: { opacity: 1, scale: 1, y: 0 },
+          transition: {
+            ...motionConfig.springs.bouncy,
+            delay: (index * motionConfig.stagger.tile) / 1000,
+          },
+        };
+      case "fade":
+        return {
+          initial: { opacity: 0 },
+          animate: { opacity: 1 },
+          transition: { delay: (index * motionConfig.stagger.tile) / 1000, duration: 0.3 },
+        };
+      case "swing":
+        return {
+          initial: { opacity: 0, scale: 0.9, rotate: -2 },
+          animate: { opacity: 1, scale: 1, rotate: 0 },
+          transition: {
+            ...motionConfig.springs.smooth,
+            delay: (index * motionConfig.stagger.tile) / 1000,
+          },
+        };
+      default:
+        return {
+          initial: motionConfig.transforms.tile.initial,
+          animate: motionConfig.transforms.tile.animate,
+          transition: {
+            ...motionConfig.springs.smooth,
+            delay: (index * motionConfig.stagger.tile) / 1000,
+          },
+        };
+    }
+  };
+
+  const animation = getAnimationVariant(animationVariant);
+
   const inner = (
     <motion.div
       layoutId={id ? `tile-${id}` : undefined}
-      transition={{ type: "spring", stiffness: 420, damping: 34 }}
-      whileHover={{ y: -2 }}
-      whileTap={{ scale: 0.985 }}
+      initial={animation.initial}
+      animate={animation.animate}
+      transition={animation.transition}
+      whileHover={motionConfig.transforms.tile.hover}
+      whileTap={motionConfig.transforms.tile.press}
       className={`h-full w-full group relative overflow-hidden border border-white/10 ${bg}`}
       style={{ minHeight: 0 }}
     >
