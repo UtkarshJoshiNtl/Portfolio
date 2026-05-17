@@ -4,7 +4,6 @@ export type PanelId =
   | "astrosis"
   | "projects"
   | "roadmap"
-  | "hobby"
   | "about"
   | "contact"
   | "blog"

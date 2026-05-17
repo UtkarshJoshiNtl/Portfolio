@@ -27,22 +27,13 @@ import { usePanel } from "@/components/portfolio/usePanel";
 import { AstrosisPanel } from "@/components/portfolio/panels/AstrosisPanel";
 import { ProjectsPanel } from "@/components/portfolio/panels/ProjectsPanel";
 import { RoadmapPanel } from "@/components/portfolio/panels/RoadmapPanel";
-import { HobbyPanel } from "@/components/portfolio/panels/HobbyPanel";
 import { AboutPanel } from "@/components/portfolio/panels/AboutPanel";
 import { ContactPanel } from "@/components/portfolio/panels/ContactPanel";
 import { BlogPanel } from "@/components/portfolio/panels/BlogPanel";
 import { IdentityPanel } from "@/components/portfolio/panels/IdentityPanel";
 import { Art3DPanel } from "@/components/portfolio/panels/Art3DPanel";
 import { MusicPanel } from "@/components/portfolio/panels/MusicPanel";
-import {
-  astrosisCycle,
-  hobbyCycle,
-  identityCopy,
-  links,
-  projects,
-  roadmapCycle,
-  toolboxCycle,
-} from "@/lib/portfolio-data";
+import { astrosisCycle, identityCopy, links, projects, roadmapCycle } from "@/lib/portfolio-data";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -92,7 +83,6 @@ export function Index() {
         | "astrosis"
         | "projects"
         | "roadmap"
-        | "hobby"
         | "about"
         | "contact"
         | "blog"
@@ -114,7 +104,7 @@ export function Index() {
               id="identity"
               label="Utkarsh Joshi"
               onClick={() => openPanel("identity")}
-              bg="bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900"
+              bg="bg-gradient-to-br from-metro-cobalt via-metro-teal to-metro-violet"
               className="col-span-2 row-span-3 md:col-span-3 md:row-span-3"
             >
               <div className="flex h-full flex-col justify-between pb-8">
@@ -191,28 +181,6 @@ export function Index() {
               className="hidden md:block md:col-span-1 md:row-span-1"
             />
 
-            <MetroTile
-              label="CUDA"
-              bg="bg-metro-violet"
-              className="hidden md:block md:col-span-1 md:row-span-1"
-            >
-              <Cpu className="h-7 w-7" />
-              <div className="mt-auto pb-8 font-mono text-xs uppercase tracking-[0.12em] text-white/85">
-                GPU experiments
-              </div>
-            </MetroTile>
-
-            <MetroTile
-              label="C++"
-              bg="bg-metro-green"
-              className="hidden md:block md:col-span-1 md:row-span-1"
-            >
-              <Code2 className="h-7 w-7" />
-              <div className="mt-auto pb-8 font-mono text-xs uppercase tracking-[0.12em] text-white/85">
-                Systems code
-              </div>
-            </MetroTile>
-
             {projects.map((project, index) => {
               const icons = [Box, Code2, Waves] as const;
               const colors = ["bg-metro-graphite", "bg-metro-red", "bg-metro-green"];
@@ -241,25 +209,6 @@ export function Index() {
                 </MetroTile>
               );
             })}
-
-            <MetroTile
-              label="Toolbox"
-              bg="bg-metro-cobalt"
-              className="col-span-2 row-span-1 md:col-span-4 md:row-span-1"
-            >
-              <div className="flex h-full items-center gap-4 pb-5">
-                <Cpu className="hidden h-9 w-9 shrink-0 md:block" />
-                <div>
-                  <div className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/70">
-                    Toolbox
-                  </div>
-                  <CyclingText
-                    items={toolboxCycle}
-                    className="mt-1 text-lg md:text-3xl font-semibold"
-                  />
-                </div>
-              </div>
-            </MetroTile>
 
             <MetroTile
               label="GitHub"
@@ -419,7 +368,6 @@ export function Index() {
         {panel === "astrosis" && <AstrosisPanel key="astrosis" onClose={close} />}
         {panel === "projects" && <ProjectsPanel key="projects" onClose={close} />}
         {panel === "roadmap" && <RoadmapPanel key="roadmap" onClose={close} />}
-        {panel === "hobby" && <HobbyPanel key="hobby" onClose={close} />}
         {panel === "about" && <AboutPanel key="about" onClose={close} />}
         {panel === "contact" && <ContactPanel key="contact" onClose={close} />}
         {panel === "blog" && <BlogPanel key="blog" onClose={close} />}
