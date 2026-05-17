@@ -81,18 +81,20 @@ function Index() {
               </Tile>
             </div>
 
-            {/* Resume */}
-            <Tile
-              id="resume"
-              label="Resume"
-              href={links.resume}
-              external
-              className="h-full border-b-2 border-b-amber min-h-[140px]"
-              bg="bg-tile-alt"
-            >
-              <FileText className="w-8 h-8 text-amber" />
-              <div className="mt-auto pb-6 font-mono text-sm">resume.pdf ↗</div>
-            </Tile>
+            {/* Resume — tall 1x2 */}
+            <div className="col-span-1 md:row-span-2 min-h-[120px]">
+              <Tile
+                id="resume"
+                label="Resume"
+                href={links.resume}
+                external
+                className="h-full border-b-2 border-b-amber"
+                bg="bg-tile-alt"
+              >
+                <FileText className="w-8 h-8 text-amber" />
+                <div className="mt-auto pb-6 font-mono text-sm">resume.pdf ↗</div>
+              </Tile>
+            </div>
 
             {/* Roadmap */}
             <Tile
