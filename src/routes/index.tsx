@@ -35,9 +35,9 @@ function Index() {
       <div className="max-w-7xl mx-auto px-5 md:px-8 py-8 md:py-10">
         <Header />
 
-        <section className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 auto-rows-[140px] md:auto-rows-[160px]">
-            {/* Astrosis 2x2 */}
-            <div className="col-span-2 row-span-2 md:col-span-2 md:row-span-2 min-h-[300px]">
+        <section className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 auto-rows-[120px] md:auto-rows-[130px]">
+            {/* Astrosis 2x3 — featured, tallest */}
+            <div className="col-span-2 row-span-2 md:col-span-2 md:row-span-3 min-h-[260px]">
               <Tile
                 id="astrosis"
                 label="Astrosis · Featured"
