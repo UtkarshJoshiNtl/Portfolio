@@ -5,9 +5,7 @@ import { ExternalLink } from "lucide-react";
 export function ProjectsPanel({ onClose }: { onClose: () => void }) {
   return (
     <PanelShell id="projects" onClose={onClose}>
-      <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-amber">
-        Projects
-      </div>
+      <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-amber">Projects</div>
       <h2 className="mt-2 text-4xl md:text-5xl font-semibold">Selected work</h2>
       <p className="mt-2 text-muted-foreground">
         Systems code, simulation, and tools — written from first principles.

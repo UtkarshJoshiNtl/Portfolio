@@ -58,7 +58,7 @@
   --input: oklch(0.25 0 0);
   --ring: oklch(0.78 0.16 75);
 
-  --tile: oklch(0.20 0 0);
+  --tile: oklch(0.2 0 0);
   --tile-alt: oklch(0.24 0 0);
   --tile-purple: oklch(0.22 0.04 300);
   --amber: oklch(0.78 0.16 75);
@@ -73,11 +73,14 @@
   * {
     border-color: var(--color-border);
   }
-  html, body {
+  html,
+  body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
-  .font-mono { font-family: var(--font-mono); }
+  .font-mono {
+    font-family: var(--font-mono);
+  }
 }

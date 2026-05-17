@@ -10,9 +10,7 @@ import {
 export function RoadmapPanel({ onClose }: { onClose: () => void }) {
   return (
     <PanelShell id="roadmap" onClose={onClose}>
-      <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-amber">
-        Roadmap
-      </div>
+      <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-amber">Roadmap</div>
       <h2 className="mt-2 text-3xl md:text-5xl font-semibold">
         Technical Roadmap — May to October 2026
       </h2>
@@ -51,7 +49,11 @@ export function RoadmapPanel({ onClose }: { onClose: () => void }) {
         <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-amber mb-3">
           Seven phases
         </div>
-        <Accordion type="single" collapsible className="border border-border divide-y divide-border">
+        <Accordion
+          type="single"
+          collapsible
+          className="border border-border divide-y divide-border"
+        >
           {phases.map((p, i) => (
             <AccordionItem key={i} value={`p${i}`} className="border-b-0">
               <AccordionTrigger className="px-4 hover:no-underline hover:text-amber">

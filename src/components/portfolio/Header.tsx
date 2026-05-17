@@ -7,9 +7,7 @@ export function Header() {
       <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-amber">
         Systems &amp; Simulation Engineer
       </div>
-      <h1 className="mt-2 text-3xl md:text-5xl font-semibold tracking-tight">
-        Utkarsh Joshi
-      </h1>
+      <h1 className="mt-2 text-3xl md:text-5xl font-semibold tracking-tight">Utkarsh Joshi</h1>
       <p className="mt-2 text-sm md:text-base text-muted-foreground max-w-2xl">
         First-year CS undergrad building high-performance systems from first principles.
       </p>

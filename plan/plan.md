@@ -2,10 +2,6 @@
 
 Spec is detailed and unambiguous. One implementation pass, no clarifying questions needed.
 
-### Stack note (important)
-
-You asked for Next.js 14, but this project is **TanStack Start + Vite** (the Lovable template). I will keep the entire functional and visual spec identical and build it on TanStack Start instead of swapping frameworks. Everything else — Tailwind, Framer Motion, fonts, tile behavior, panels, content — matches your spec exactly. Say the word if you'd rather I migrate to Next.js first.
-
 ### Design tokens (`src/styles.css`)
 
 - `--background`: `oklch(0.145 0 0)` (#0f0f0f)
@@ -38,20 +34,16 @@ Resume tile is an external link to `/resume.pdf` (opens new tab, no panel).
 
 ### Tile grid layout
 
-
 | Tile          | Size                  | Notes                     |
 | ------------- | --------------------- | ------------------------- |
-| Astrosis      | col-span-2 row-span-2 | featured, animated SVG bg |
-| Projects      | col-span-2            | cycling project names     |
-| Resume        | 1×1                   | external link             |
-| Roadmap       | 1×1                   | cycling                   |
-| Hobby Gallery | 1×1                   | purple-tinted             |
-| Codeforces    | 1×1                   | rating placeholder        |
-| GitHub        | 1×1                   | username large mono       |
-| About         | 1×1                   | cycling                   |
-
-
-Mobile: 2 cols, Astrosis becomes 2×2, Projects 2×1, rest 1×1.
+| Astrosis      | big                   | featured, animated SVG bg |
+| Projects      | medium                | cycling project names and small description     |
+| Resume        | small                 | external link             |
+| Roadmap       | tiny                  | cycling                   |
+| Hobby Gallery | medium                | amber coloured            |
+| Codeforces    | small                 | rating placeholder        |
+| GitHub        | medium                | maybe activity            |
+| About         | small                 | cycling                   |
 
 ### Panel content
 
@@ -63,27 +55,22 @@ Mobile: 2 cols, Astrosis becomes 2×2, Projects 2×1, rest 1×1.
 
 ### Motion
 
-- Tile hover: 150ms border color transition only, no scale
-- Panel open: Framer Motion `layoutId` shared between tile and panel so it expands from the tile's position; close reverses
+- Tile hover: perimeter color loop, with scale
+- Panel open: random transitions
 - Escape key + X button both call close
 - Cycling text: simple `AnimatePresence` fade between strings every 4s
 
 ### Astrosis SVG background
 
-Inline SVG with 3 elliptical paths and amber/white dots animated via `<animateMotion>` along each ellipse. Pure SVG, no canvas, no Three.js — keeps grid fast as required.
+Inline SVG with 3 elliptical paths and amber/white dots animated via `<animateMotion>` along each ellipse. Pure SVG, no canvas, no Three.js — keeps grid fast as required. should look like an orbit
 
 ### What's explicitly excluded (per your spec)
 
-No navbar, no main footer, no hero animation, no scroll reveals, no glass, no gradients, no particle bg on grid, no contact form, no testimonials, no skill bars, no dramatic hover scale.
-
-### Files to create/modify
-
-- modify: `src/routes/__root.tsx` (fonts, meta), `src/styles.css` (tokens), `src/routes/index.tsx` (compose)
-- create: `src/components/portfolio/*` (≈10 files listed above), `src/hooks/usePanel.ts`, `src/lib/portfolio-data.ts` (all copy/links/benchmarks in one place for easy editing)
-- add dep: `framer-motion`
+No navbar, no main footer, no hero animation, no scroll reveals, no glass, no gradients, no particle bg on grid, no contact form, no testimonials, no skill bars.
 
 ### Placeholders you'll fill later
 
 - `/resume.pdf` link
-- Codeforces rating number
+- Codeforces API
 - Hobby 3D art images + music track links
+- other possible pannels/tiles for stuff yet to be planned(Like github stats, Oss contributions, Research paper and blogs and experience)

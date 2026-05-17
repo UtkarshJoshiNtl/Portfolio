@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 type TileProps = {
   id?: string;
   label: string;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent) => void;
   href?: string;
   external?: boolean;
   className?: string;
@@ -25,18 +25,14 @@ export function Tile({
   const content = (
     <motion.div
       layoutId={id ? `tile-${id}` : undefined}
-      whileHover={{
-        rotateY: 6,
-        rotateX: -4,
-        scale: 1.015,
-        z: 20,
-      }}
-      whileTap={{ scale: 0.985, rotateY: 0, rotateX: 0 }}
       transition={{ type: "spring", stiffness: 320, damping: 22 }}
-      style={{ minHeight: 0, transformStyle: "preserve-3d" }}
-      className={`group relative overflow-hidden border border-transparent hover:border-amber cursor-pointer ${bg} ${className}`}
+      style={{ minHeight: 0 }}
+      className={`group relative overflow-hidden border border-transparent hover:border-amber ${bg} ${className}`}
     >
-      <div className="relative z-10 h-full w-full p-5 flex flex-col" style={{ transform: "translateZ(20px)" }}>
+      <div
+        className="relative z-10 h-full w-full p-5 flex flex-col"
+        style={{ transform: "translateZ(20px)" }}
+      >
         {children}
       </div>
       <div

@@ -91,8 +91,16 @@ export const roadmapRules = [
 ];
 
 export const dailyStructure = [
-  { hours: "3h", title: "Core build", body: "Main project work: Astrosis, CuFloda, or active OSS contribution" },
-  { hours: "1.5h", title: "Structured learning", body: "OpenGL / CUDA / C++ via specific resources, not random tutorials" },
+  {
+    hours: "3h",
+    title: "Core build",
+    body: "Main project work: Astrosis, CuFloda, or active OSS contribution",
+  },
+  {
+    hours: "1.5h",
+    title: "Structured learning",
+    body: "OpenGL / CUDA / C++ via specific resources, not random tutorials",
+  },
   { hours: "1.5h", title: "Codeforces", body: "2 contests/week minimum, upsolve everything" },
   { hours: "After Aug", title: "Drop to 4-5h total", body: "Protect build time first" },
 ];
@@ -145,6 +153,11 @@ export const phases = [
     when: "Oct 1 – Oct 31",
     title: "Hacktoberfest + writing",
     body: "4 meaningful OSS contributions (no typo fixes). Publish one technical post about something actually learned — not a tutorial. Dev.to or GitHub Pages.",
-    tags: ["5+ OSS contributions", "1 published post", "Astrosis with GIF + benchmarks", "stable CF routine"],
+    tags: [
+      "5+ OSS contributions",
+      "1 published post",
+      "Astrosis with GIF + benchmarks",
+      "stable CF routine",
+    ],
   },
 ];

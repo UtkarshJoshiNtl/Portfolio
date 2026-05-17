@@ -22,12 +22,11 @@ export function AstrosisPanel({ onClose }: { onClose: () => void }) {
       </div>
 
       <p className="mt-8 leading-relaxed text-foreground/90">
-        High-fidelity orbital mechanics engine built from first principles. Implements RK4
-        numerical integration with J2, J3, and J4 gravity harmonics, US Standard Atmosphere
-        1976 drag model with Earth-rotation correction, solar radiation pressure with
-        cylindrical shadow modeling, and lunisolar third-body effects. Multi-backend
-        architecture with automatic selection between CUDA GPU, C++/OpenMP, NumPy, and pure
-        Python.
+        High-fidelity orbital mechanics engine built from first principles. Implements RK4 numerical
+        integration with J2, J3, and J4 gravity harmonics, US Standard Atmosphere 1976 drag model
+        with Earth-rotation correction, solar radiation pressure with cylindrical shadow modeling,
+        and lunisolar third-body effects. Multi-backend architecture with automatic selection
+        between CUDA GPU, C++/OpenMP, NumPy, and pure Python.
       </p>
 
       <div className="mt-10">
@@ -40,11 +39,7 @@ export function AstrosisPanel({ onClose }: { onClose: () => void }) {
               {benchmarks.map((row, ri) => (
                 <tr
                   key={ri}
-                  className={
-                    ri === 0
-                      ? "bg-tile-alt text-amber"
-                      : "border-t border-border"
-                  }
+                  className={ri === 0 ? "bg-tile-alt text-amber" : "border-t border-border"}
                 >
                   {row.map((cell, ci) => (
                     <td key={ci} className="px-3 py-2 whitespace-nowrap">
