@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useMemo, useState } from "react";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { Header } from "@/components/portfolio/Header";
 import { Tile } from "@/components/portfolio/Tile";
 import { CyclingText } from "@/components/portfolio/CyclingText";
