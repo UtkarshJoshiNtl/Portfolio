@@ -39,6 +39,8 @@
   --color-metro-red: var(--metro-red);
   --color-metro-violet: var(--metro-violet);
   --color-metro-graphite: var(--metro-graphite);
+  --color-metro-orange: var(--metro-orange);
+  --color-metro-purple: var(--metro-purple);
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
@@ -76,6 +78,8 @@
   --metro-red: #e81123;
   --metro-violet: #5c2d91;
   --metro-graphite: #2b2b2b;
+  --metro-orange: #f7630c;
+  --metro-purple: #881798;
 }
 
 .dark {

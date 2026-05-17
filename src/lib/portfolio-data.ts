@@ -2,8 +2,8 @@ export const links = {
   github: "https://github.com/UtkarshJoshiNtl",
   linkedin: "https://linkedin.com/in/utkarsh-joshi",
   email: "joshiutkarshntl@gmail.com",
-  codeforces: "https://codeforces.com/profile/UtkarshJoshiNtl",
-  resume: "/resume.pdf",
+  codeforces: "https://codeforces.com/profile/BakedRajma",
+  resume: "/resume.txt",
 };
 
 export const astrosisCycle = [
