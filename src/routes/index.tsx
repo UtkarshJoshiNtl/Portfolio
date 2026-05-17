@@ -262,7 +262,7 @@ function Index() {
           key={seed}
           className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 auto-rows-[110px] md:auto-rows-[120px] grid-flow-dense"
         >
-          <div className={cls("astrosis")}>
+          <motion.div layout key={`${seed}-"astrosis"`} transition={{ type: "spring", stiffness: 220, damping: 28 }} className={cls("astrosis")} style={{ transformStyle: "preserve-3d" }}>
             <Tile
               id="astrosis"
               label="Astrosis · Featured"
@@ -274,18 +274,18 @@ function Index() {
               <div className="relative z-10 flex flex-col h-full">
                 <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-amber">
                   Featured
-                </div>
+                </motion.div>
                 <div className="mt-auto pb-6">
                   <CyclingText
                     items={astrosisCycle}
                     className="text-xl md:text-2xl font-semibold leading-snug max-w-md"
                   />
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
             </Tile>
-          </div>
+          </motion.div>
 
-          <div className={cls("projects")}>
+          <motion.div layout key={`${seed}-"projects"`} transition={{ type: "spring", stiffness: 220, damping: 28 }} className={cls("projects")} style={{ transformStyle: "preserve-3d" }}>
             <Tile
               id="projects"
               label="Projects"
@@ -294,18 +294,18 @@ function Index() {
             >
               <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
                 5 projects
-              </div>
+              </motion.div>
               <div className="mt-auto pb-6">
                 <CyclingText
                   items={projectsCycle}
                   interval={2200}
                   className="text-2xl md:text-3xl font-semibold font-mono text-amber"
                 />
-              </div>
+              </motion.div>
             </Tile>
-          </div>
+          </motion.div>
 
-          <div className={cls("resume")}>
+          <motion.div layout key={`${seed}-"resume"`} transition={{ type: "spring", stiffness: 220, damping: 28 }} className={cls("resume")} style={{ transformStyle: "preserve-3d" }}>
             <Tile
               id="resume"
               label="Resume"
@@ -317,9 +317,9 @@ function Index() {
               <FileText className="w-8 h-8 text-amber" />
               <div className="mt-auto pb-6 font-mono text-sm">resume.pdf ↗</div>
             </Tile>
-          </div>
+          </motion.div>
 
-          <div className={cls("roadmap")}>
+          <motion.div layout key={`${seed}-"roadmap"`} transition={{ type: "spring", stiffness: 220, damping: 28 }} className={cls("roadmap")} style={{ transformStyle: "preserve-3d" }}>
             <Tile
               id="roadmap"
               label="Roadmap"
@@ -331,11 +331,11 @@ function Index() {
                   items={roadmapCycle}
                   className="text-base md:text-lg font-semibold leading-snug"
                 />
-              </div>
+              </motion.div>
             </Tile>
-          </div>
+          </motion.div>
 
-          <div className={cls("hobby")}>
+          <motion.div layout key={`${seed}-"hobby"`} transition={{ type: "spring", stiffness: 220, damping: 28 }} className={cls("hobby")} style={{ transformStyle: "preserve-3d" }}>
             <Tile
               id="hobby"
               label="Hobby Gallery"
@@ -348,11 +348,11 @@ function Index() {
                   items={hobbyCycle}
                   className="text-xl md:text-2xl font-semibold"
                 />
-              </div>
+              </motion.div>
             </Tile>
-          </div>
+          </motion.div>
 
-          <div className={cls("cf")}>
+          <motion.div layout key={`${seed}-"cf"`} transition={{ type: "spring", stiffness: 220, damping: 28 }} className={cls("cf")} style={{ transformStyle: "preserve-3d" }}>
             <Tile
               id="cf"
               label="Codeforces"
@@ -366,11 +366,11 @@ function Index() {
                 2 contests/week
                 <br />
                 upsolve everything
-              </div>
+              </motion.div>
             </Tile>
-          </div>
+          </motion.div>
 
-          <div className={cls("gh")}>
+          <motion.div layout key={`${seed}-"gh"`} transition={{ type: "spring", stiffness: 220, damping: 28 }} className={cls("gh")} style={{ transformStyle: "preserve-3d" }}>
             <Tile
               id="gh"
               label="GitHub"
@@ -381,11 +381,11 @@ function Index() {
               <GithubIcon className="w-6 h-6 text-amber" />
               <div className="mt-auto pb-6 font-mono text-xs md:text-sm break-all">
                 UtkarshJoshiNtl
-              </div>
+              </motion.div>
             </Tile>
-          </div>
+          </motion.div>
 
-          <div className={cls("about")}>
+          <motion.div layout key={`${seed}-"about"`} transition={{ type: "spring", stiffness: 220, damping: 28 }} className={cls("about")} style={{ transformStyle: "preserve-3d" }}>
             <Tile
               id="about"
               label="About"
@@ -399,9 +399,9 @@ function Index() {
                   items={aboutCycle}
                   className="text-base md:text-lg font-semibold leading-snug"
                 />
-              </div>
+              </motion.div>
             </Tile>
-          </div>
+          </motion.div>
         </section>
       </div>
 
