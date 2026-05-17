@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useMemo, useState } from "react";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import { Header } from "@/components/portfolio/Header";
 import { Tile } from "@/components/portfolio/Tile";
 import { CyclingText } from "@/components/portfolio/CyclingText";
@@ -258,11 +258,12 @@ function Index() {
           </button>
         </div>
 
+        <LayoutGroup>
         <section
-          key={seed}
           className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 auto-rows-[110px] md:auto-rows-[120px] grid-flow-dense"
+          style={{ perspective: 1400 }}
         >
-          <div className={cls("astrosis")}>
+          <motion.div layout key={`${seed}-astrosis`} transition={{ type: "spring", stiffness: 220, damping: 28 }} className={cls("astrosis")} style={{ transformStyle: "preserve-3d" }}>
             <Tile
               id="astrosis"
               label="Astrosis · Featured"
@@ -283,9 +284,9 @@ function Index() {
                 </div>
               </div>
             </Tile>
-          </div>
+          </motion.div>
 
-          <div className={cls("projects")}>
+          <motion.div layout key={`${seed}-projects`} transition={{ type: "spring", stiffness: 220, damping: 28 }} className={cls("projects")} style={{ transformStyle: "preserve-3d" }}>
             <Tile
               id="projects"
               label="Projects"
@@ -303,9 +304,9 @@ function Index() {
                 />
               </div>
             </Tile>
-          </div>
+          </motion.div>
 
-          <div className={cls("resume")}>
+          <motion.div layout key={`${seed}-resume`} transition={{ type: "spring", stiffness: 220, damping: 28 }} className={cls("resume")} style={{ transformStyle: "preserve-3d" }}>
             <Tile
               id="resume"
               label="Resume"
@@ -317,9 +318,9 @@ function Index() {
               <FileText className="w-8 h-8 text-amber" />
               <div className="mt-auto pb-6 font-mono text-sm">resume.pdf ↗</div>
             </Tile>
-          </div>
+          </motion.div>
 
-          <div className={cls("roadmap")}>
+          <motion.div layout key={`${seed}-roadmap`} transition={{ type: "spring", stiffness: 220, damping: 28 }} className={cls("roadmap")} style={{ transformStyle: "preserve-3d" }}>
             <Tile
               id="roadmap"
               label="Roadmap"
@@ -333,9 +334,9 @@ function Index() {
                 />
               </div>
             </Tile>
-          </div>
+          </motion.div>
 
-          <div className={cls("hobby")}>
+          <motion.div layout key={`${seed}-hobby`} transition={{ type: "spring", stiffness: 220, damping: 28 }} className={cls("hobby")} style={{ transformStyle: "preserve-3d" }}>
             <Tile
               id="hobby"
               label="Hobby Gallery"
@@ -350,9 +351,9 @@ function Index() {
                 />
               </div>
             </Tile>
-          </div>
+          </motion.div>
 
-          <div className={cls("cf")}>
+          <motion.div layout key={`${seed}-cf`} transition={{ type: "spring", stiffness: 220, damping: 28 }} className={cls("cf")} style={{ transformStyle: "preserve-3d" }}>
             <Tile
               id="cf"
               label="Codeforces"
@@ -368,9 +369,9 @@ function Index() {
                 upsolve everything
               </div>
             </Tile>
-          </div>
+          </motion.div>
 
-          <div className={cls("gh")}>
+          <motion.div layout key={`${seed}-gh`} transition={{ type: "spring", stiffness: 220, damping: 28 }} className={cls("gh")} style={{ transformStyle: "preserve-3d" }}>
             <Tile
               id="gh"
               label="GitHub"
@@ -383,9 +384,9 @@ function Index() {
                 UtkarshJoshiNtl
               </div>
             </Tile>
-          </div>
+          </motion.div>
 
-          <div className={cls("about")}>
+          <motion.div layout key={`${seed}-about`} transition={{ type: "spring", stiffness: 220, damping: 28 }} className={cls("about")} style={{ transformStyle: "preserve-3d" }}>
             <Tile
               id="about"
               label="About"
@@ -401,8 +402,9 @@ function Index() {
                 />
               </div>
             </Tile>
-          </div>
+          </motion.div>
         </section>
+        </LayoutGroup>
       </div>
 
       <AnimatePresence>
