@@ -96,20 +96,22 @@ function Index() {
               </Tile>
             </div>
 
-            {/* Roadmap */}
-            <Tile
-              id="roadmap"
-              label="Roadmap"
-              onClick={() => setPanel("roadmap")}
-              className="h-full min-h-[140px]"
-            >
-              <div className="mt-auto pb-6">
-                <CyclingText
-                  items={roadmapCycle}
-                  className="text-base md:text-lg font-semibold leading-snug"
-                />
-              </div>
-            </Tile>
+            {/* Roadmap — wide 2x1 */}
+            <div className="col-span-2 min-h-[120px]">
+              <Tile
+                id="roadmap"
+                label="Roadmap"
+                onClick={() => setPanel("roadmap")}
+                className="h-full"
+              >
+                <div className="mt-auto pb-6">
+                  <CyclingText
+                    items={roadmapCycle}
+                    className="text-base md:text-lg font-semibold leading-snug"
+                  />
+                </div>
+              </Tile>
+            </div>
 
             {/* Hobby */}
             <Tile
