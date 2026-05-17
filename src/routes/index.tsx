@@ -195,6 +195,27 @@ function pack(cols: number, order: TileKey[], seed: number): Placed[] {
   return placed;
 }
 
+// Static class maps so Tailwind's JIT can detect every used class.
+const COL_M: Record<number, string> = { 1: "col-span-1", 2: "col-span-2" };
+const ROW_M: Record<number, string> = {
+  1: "row-span-1",
+  2: "row-span-2",
+  3: "row-span-3",
+  4: "row-span-4",
+};
+const COL_D: Record<number, string> = {
+  1: "md:col-span-1",
+  2: "md:col-span-2",
+  3: "md:col-span-3",
+  4: "md:col-span-4",
+};
+const ROW_D: Record<number, string> = {
+  1: "md:row-span-1",
+  2: "md:row-span-2",
+  3: "md:row-span-3",
+  4: "md:row-span-4",
+};
+
 function Index() {
   const [panel, setPanel] = useState<PanelId>(null);
   const [seed, setSeed] = useState(() => Math.floor(Math.random() * 1e9));
@@ -219,7 +240,7 @@ function Index() {
   const cls = (key: TileKey) => {
     const d = dMap[key];
     const m = mMap[key];
-    return `col-span-${m.w} row-span-${m.h} md:col-span-${d.w} md:row-span-${d.h}`;
+    return `${COL_M[m.w] ?? "col-span-1"} ${ROW_M[m.h] ?? "row-span-1"} ${COL_D[d.w] ?? "md:col-span-1"} ${ROW_D[d.h] ?? "md:row-span-1"}`;
   };
 
   return (
