@@ -36,7 +36,6 @@ function Index() {
         <Header />
 
         <section className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 auto-rows-[140px] md:auto-rows-[160px]">
-          <>
             {/* Astrosis 2x2 */}
             <div className="col-span-2 row-span-2 md:col-span-2 md:row-span-2 min-h-[300px]">
               <Tile
@@ -173,7 +172,6 @@ function Index() {
                 />
               </div>
             </Tile>
-          </div>
         </section>
       </div>
 
