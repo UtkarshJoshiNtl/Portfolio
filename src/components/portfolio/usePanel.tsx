@@ -4,10 +4,12 @@ export type PanelId =
   | "astrosis"
   | "projects"
   | "roadmap"
-  | "hobby"
   | "about"
   | "contact"
   | "blog"
+  | "identity"
+  | "art3d"
+  | "music"
   | null;
 
 export function usePanel(initial: PanelId = null) {
