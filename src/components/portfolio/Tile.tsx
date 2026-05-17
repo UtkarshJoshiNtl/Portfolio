@@ -22,12 +22,14 @@ export function Tile({
   children,
   bg = "bg-tile",
 }: TileProps) {
-  const content = (
+  const inner = (
     <motion.div
       layoutId={id ? `tile-${id}` : undefined}
       transition={{ type: "spring", stiffness: 320, damping: 22 }}
-      style={{ minHeight: 0 }}
-      className={`group relative overflow-hidden border border-transparent hover:border-amber ${bg} ${className}`}
+      whileHover={{ rotateY: 6, rotateX: -4, scale: 1.015, z: 20 }}
+      whileTap={{ scale: 0.985, rotateY: 0, rotateX: 0 }}
+      className={`h-full w-full group relative overflow-hidden border border-transparent hover:border-amber ${bg}`}
+      style={{ minHeight: 0, transformStyle: "preserve-3d" }}
     >
       <div
         className="relative z-10 h-full w-full p-5 flex flex-col"
@@ -50,15 +52,15 @@ export function Tile({
         href={href}
         target={external ? "_blank" : undefined}
         rel={external ? "noopener noreferrer" : undefined}
-        className="block h-full"
+        className={`block h-full ${className}`}
       >
-        {content}
+        {inner}
       </a>
     );
   }
   return (
-    <button onClick={onClick} className="block h-full w-full text-left">
-      {content}
+    <button onClick={onClick} className={`block h-full w-full text-left ${className}`}>
+      {inner}
     </button>
   );
 }

@@ -13,7 +13,7 @@ export const astrosisCycle = [
   "RK4 + J2/J3/J4 harmonics + atmospheric drag",
 ];
 
-export const projectsCycle = ["cjit", "Quip", "CuFloda", "OwlEchoSense", "LANParty"];
+export const projectsCycle = ["cjit", "Quip", "CuFloda"];
 export const roadmapCycle = ["May → October 2026", "7-phase technical plan"];
 export const hobbyCycle = ["3D Art", "Music"];
 export const aboutCycle = ["First-year CS undergraduate", "Building from first principles"];
@@ -54,20 +54,6 @@ export const projects = [
     description:
       "Fluid dynamics simulation using the D2Q9 Lattice Boltzmann Method. CPU prototype with real-time PyGame visualization, complex boundary conditions (inflow, outflow, walls, obstacles), and interactive obstacle drawing. CUDA acceleration planned as the next phase.",
     github: "https://github.com/UtkarshJoshiNtl/CuFloda",
-  },
-  {
-    name: "OwlEchoSense",
-    tech: ["ESP32", "AODV Mesh", "BirdNET ML", "LoRa"],
-    description:
-      "Field ecology monitoring system for bird species identification. ESP32 microcontrollers with AODV mesh networking for decentralized communication, BirdNET machine learning for species identification, and LoRa for long-range data transmission in areas without connectivity.",
-    github: "https://github.com/UtkarshJoshiNtl/OwlEchoSense",
-  },
-  {
-    name: "LANParty",
-    tech: ["Flutter", "WebSocket", "Dart", "Real-time Multiplayer"],
-    description:
-      "Cross-platform LAN gaming application. Real-time multiplayer using WebSocket communication with automatic game discovery and lobby management. Supports chess, ludo, and monopoly with no internet dependency.",
-    github: "https://github.com/UtkarshJoshiNtl/LANParty",
   },
 ];
 

@@ -1,4 +1,5 @@
 import js from "@eslint/js";
+import nextPlugin from "@next/eslint-plugin-next";
 import eslintPluginPrettier from "eslint-plugin-prettier/recommended";
 import globals from "globals";
 import reactHooks from "eslint-plugin-react-hooks";
@@ -15,10 +16,13 @@ export default tseslint.config(
       globals: globals.browser,
     },
     plugins: {
+      "@next/next": nextPlugin,
       "react-hooks": reactHooks,
       "react-refresh": reactRefresh,
     },
     rules: {
+      ...nextPlugin.configs.recommended.rules,
+      ...nextPlugin.configs["core-web-vitals"].rules,
       ...reactHooks.configs.recommended.rules,
       "no-restricted-imports": [
         "error",
@@ -32,8 +36,16 @@ export default tseslint.config(
           ],
         },
       ],
+      "@next/next/no-head-element": "off",
+      "@next/next/no-page-custom-font": "off",
       "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
       "@typescript-eslint/no-unused-vars": "off",
+    },
+  },
+  {
+    files: ["app/**", "src/components/ui/**"],
+    rules: {
+      "react-refresh/only-export-components": "off",
     },
   },
   eslintPluginPrettier,
