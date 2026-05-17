@@ -1,0 +1,21 @@
+UTKARSH JOSHI
+GPU Computing | Systems Engineering | Performance Optimization
+
+CONTACT
+Email: joshiutkarshntl@gmail.com
+GitHub: github.com/UtkarshJoshiNtl
+LinkedIn: linkedin.com/in/utkarsh-joshi
+Codeforces: codeforces.com/profile/UtkarshJoshiNtl
+
+TECHNICAL SKILLS
+Languages: C, C++, CUDA, Python
+Systems: Linux, gdb, Make, OpenMP, POSIX
+Areas: GPU Computing, Simulation, Performance, Low-level Systems
+
+PROJECTS
+Astrosis: Satellite simulation with 507× batch speedup (C++ vs Python) and 83× conjunction detection speedup (CUDA vs Python)
+cjit: Version control system in C with content-addressed storage
+Quip: Unix shell in C99 with job control and signal handling
+CuFloda: Fluid dynamics simulation using Lattice Boltzmann Method
+
+Resume PDF version available at: https://utkarshportfolio.com

@@ -16,6 +16,8 @@ type TileGridProps = {
 };
 
 export function TileGrid({ open }: TileGridProps) {
+  let tileIndex = 0;
+
   return (
     <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3 auto-rows-[110px] md:auto-rows-[120px] grid-flow-dense">
       {/* Astrosis - Big (2x2) */}
@@ -24,6 +26,8 @@ export function TileGrid({ open }: TileGridProps) {
         label="Astrosis"
         onClick={() => open("astrosis")}
         className="md:col-span-2 md:row-span-2"
+        index={tileIndex++}
+        animationVariant="bounce"
       >
         <div className="relative h-full w-full">
           <AstrosisBg />
@@ -39,17 +43,24 @@ export function TileGrid({ open }: TileGridProps) {
         label="Projects"
         onClick={() => open("projects")}
         className="md:row-span-2"
+        index={tileIndex++}
       >
         <CyclingText items={projectsCycle} className="text-xs md:text-sm" />
       </Tile>
 
       {/* Resume - Small (1x1) */}
-      <Tile label="Resume" href={links.resume} external className="bg-purple-900/20">
+      <Tile
+        label="Resume"
+        href={links.resume}
+        external
+        className="bg-purple-900/20"
+        index={tileIndex++}
+      >
         <div className="text-xs md:text-sm">Download PDF</div>
       </Tile>
 
       {/* Roadmap - Small (1x1) */}
-      <Tile id="roadmap" label="Roadmap" onClick={() => open("roadmap")}>
+      <Tile id="roadmap" label="Roadmap" onClick={() => open("roadmap")} index={tileIndex++}>
         <CyclingText items={roadmapCycle} className="text-xs" />
       </Tile>
 
@@ -59,22 +70,29 @@ export function TileGrid({ open }: TileGridProps) {
         label="Hobby"
         onClick={() => open("hobby")}
         className="md:col-span-2 bg-amber-950/30"
+        index={tileIndex++}
       >
         <CyclingText items={hobbyCycle} className="text-xs md:text-sm" />
       </Tile>
 
       {/* Codeforces - Small (1x1) */}
-      <Tile label="Codeforces" href={links.codeforces} external>
+      <Tile label="Codeforces" href={links.codeforces} external index={tileIndex++}>
         <div className="text-xs md:text-sm">View Profile</div>
       </Tile>
 
       {/* GitHub - Tall (1x2) */}
-      <Tile label="GitHub" href={links.github} external className="md:row-span-2">
+      <Tile
+        label="GitHub"
+        href={links.github}
+        external
+        className="md:row-span-2"
+        index={tileIndex++}
+      >
         <div className="text-xs md:text-sm">@UtkarshJoshiNtl</div>
       </Tile>
 
       {/* About - Small (1x1) */}
-      <Tile id="about" label="About" onClick={() => open("about")}>
+      <Tile id="about" label="About" onClick={() => open("about")} index={tileIndex++}>
         <CyclingText items={aboutCycle} className="text-xs" />
       </Tile>
     </div>

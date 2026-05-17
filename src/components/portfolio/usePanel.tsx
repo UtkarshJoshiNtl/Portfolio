@@ -1,6 +1,14 @@
 import { useCallback, useState } from "react";
 
-export type PanelId = "astrosis" | "projects" | "roadmap" | "hobby" | "about" | null;
+export type PanelId =
+  | "astrosis"
+  | "projects"
+  | "roadmap"
+  | "hobby"
+  | "about"
+  | "contact"
+  | "blog"
+  | null;
 
 export function usePanel(initial: PanelId = null) {
   const [active, setActive] = useState<PanelId>(initial);

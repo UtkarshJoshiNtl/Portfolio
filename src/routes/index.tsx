@@ -17,6 +17,8 @@ import {
   Volume2,
   VolumeX,
   Waves,
+  Linkedin,
+  BookOpen,
 } from "lucide-react";
 import { Tile } from "@/components/portfolio/Tile";
 import { AstrosisBg } from "@/components/portfolio/AstrosisBg";
@@ -27,6 +29,8 @@ import { ProjectsPanel } from "@/components/portfolio/panels/ProjectsPanel";
 import { RoadmapPanel } from "@/components/portfolio/panels/RoadmapPanel";
 import { HobbyPanel } from "@/components/portfolio/panels/HobbyPanel";
 import { AboutPanel } from "@/components/portfolio/panels/AboutPanel";
+import { ContactPanel } from "@/components/portfolio/panels/ContactPanel";
+import { BlogPanel } from "@/components/portfolio/panels/BlogPanel";
 import {
   astrosisCycle,
   hobbyCycle,
@@ -147,7 +151,7 @@ export function Index() {
   );
 
   const openPanel = useCallback(
-    (id: "astrosis" | "projects" | "roadmap" | "hobby" | "about") => {
+    (id: "astrosis" | "projects" | "roadmap" | "hobby" | "about" | "contact" | "blog") => {
       play("slide");
       open(id);
     },
@@ -326,6 +330,19 @@ export function Index() {
             </MetroTile>
 
             <MetroTile
+              label="LinkedIn"
+              href={links.linkedin}
+              external
+              bg="bg-metro-cobalt"
+              className="col-span-1 row-span-1"
+            >
+              <Linkedin className="h-6 w-6" />
+              <div className="mt-auto pb-8 font-mono text-[10px] uppercase tracking-[0.12em] text-white/75">
+                profile
+              </div>
+            </MetroTile>
+
+            <MetroTile
               label="Resume"
               href={links.resume}
               external
@@ -352,14 +369,14 @@ export function Index() {
             </MetroTile>
 
             <MetroTile
-              label="Mail"
-              href={`mailto:${links.email}`}
+              label="Contact"
+              onClick={() => openPanel("contact")}
               bg="bg-metro-green"
               className="col-span-1 row-span-1"
             >
               <Mail className="h-6 w-6" />
               <div className="mt-auto pb-8 font-mono text-[10px] uppercase tracking-[0.12em] text-white/75">
-                contact
+                Get in touch
               </div>
             </MetroTile>
 
@@ -379,11 +396,24 @@ export function Index() {
             </MetroTile>
 
             <MetroTile
+              id="blog"
+              label="Blog"
+              onClick={() => openPanel("blog")}
+              bg="bg-metro-amber"
+              className="col-span-1 row-span-1"
+            >
+              <BookOpen className="h-6 w-6" />
+              <div className="mt-auto pb-8 font-mono text-[10px] uppercase tracking-[0.12em] text-white/85">
+                Writing
+              </div>
+            </MetroTile>
+
+            <MetroTile
               id="hobby"
               label="Hobby"
               onClick={() => openPanel("hobby")}
-              bg="bg-metro-amber"
-              className="col-span-1 row-span-1 md:col-span-1 md:row-span-1"
+              bg="bg-metro-red"
+              className="col-span-1 row-span-1"
             >
               <Palette className="h-6 w-6" />
               <CyclingText items={hobbyCycle} className="mt-auto pb-8 text-sm font-semibold" />
@@ -394,7 +424,7 @@ export function Index() {
               label="Roadmap"
               onClick={() => openPanel("roadmap")}
               bg="bg-metro-graphite"
-              className="col-span-2 row-span-1 md:col-span-3 md:row-span-1"
+              className="col-span-2 row-span-1 md:col-span-2 md:row-span-1"
             >
               <Map className="h-6 w-6" />
               <CyclingText
@@ -412,6 +442,8 @@ export function Index() {
         {panel === "roadmap" && <RoadmapPanel key="roadmap" onClose={close} />}
         {panel === "hobby" && <HobbyPanel key="hobby" onClose={close} />}
         {panel === "about" && <AboutPanel key="about" onClose={close} />}
+        {panel === "contact" && <ContactPanel key="contact" onClose={close} />}
+        {panel === "blog" && <BlogPanel key="blog" onClose={close} />}
       </AnimatePresence>
     </main>
   );
