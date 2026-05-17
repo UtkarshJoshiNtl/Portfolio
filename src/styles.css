@@ -32,6 +32,13 @@
   --color-tile-alt: var(--tile-alt);
   --color-tile-purple: var(--tile-purple);
   --color-amber: var(--amber);
+  --color-metro-cobalt: var(--metro-cobalt);
+  --color-metro-teal: var(--metro-teal);
+  --color-metro-green: var(--metro-green);
+  --color-metro-amber: var(--metro-amber);
+  --color-metro-red: var(--metro-red);
+  --color-metro-violet: var(--metro-violet);
+  --color-metro-graphite: var(--metro-graphite);
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
 }
@@ -62,6 +69,13 @@
   --tile-alt: oklch(0.24 0 0);
   --tile-purple: oklch(0.22 0.04 300);
   --amber: oklch(0.78 0.16 75);
+  --metro-cobalt: #0078d7;
+  --metro-teal: #008272;
+  --metro-green: #107c10;
+  --metro-amber: #d83b01;
+  --metro-red: #e81123;
+  --metro-violet: #5c2d91;
+  --metro-graphite: #2b2b2b;
 }
 
 .dark {

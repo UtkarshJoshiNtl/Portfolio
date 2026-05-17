@@ -10,7 +10,7 @@ export function AstrosisPanel({ onClose }: { onClose: () => void }) {
       </div>
       <h2 className="mt-2 text-4xl md:text-5xl font-semibold">Astrosis</h2>
       <p className="mt-2 text-lg text-muted-foreground">
-        GPU-Accelerated Orbital Propagation and Conjunction Analysis Engine
+        A performance-heavy simulation project using C++, CUDA, and numerical methods.
       </p>
 
       <div className="mt-5 flex flex-wrap gap-2 font-mono text-[11px]">
@@ -22,11 +22,11 @@ export function AstrosisPanel({ onClose }: { onClose: () => void }) {
       </div>
 
       <p className="mt-8 leading-relaxed text-foreground/90">
-        High-fidelity orbital mechanics engine built from first principles. Implements RK4 numerical
-        integration with J2, J3, and J4 gravity harmonics, US Standard Atmosphere 1976 drag model
-        with Earth-rotation correction, solar radiation pressure with cylindrical shadow modeling,
-        and lunisolar third-body effects. Multi-backend architecture with automatic selection
-        between CUDA GPU, C++/OpenMP, NumPy, and pure Python.
+        Astrosis started as an orbital mechanics engine, but the real point is performance: taking
+        math-heavy simulation code from Python into C++/OpenMP and CUDA, then making the speedups
+        visible with benchmarks. It includes RK4 integration, gravity harmonics, drag modeling, and
+        a multi-backend architecture that can compare CUDA GPU, C++/OpenMP, NumPy, and pure Python
+        paths.
       </p>
 
       <div className="mt-10">

@@ -8,19 +8,18 @@ export function AboutPanel({ onClose }: { onClose: () => void }) {
 
       <div className="mt-8 space-y-5 text-foreground/90 leading-relaxed max-w-3xl">
         <p>
-          I am a first-year computer science undergraduate focused on high-performance systems,
-          simulation, and GPU computing. My work lives at the intersection of orbital mechanics,
-          numerical methods, and low-level C/C++.
+          I am a first-year computer science undergraduate drawn to high-performance computing, GPU
+          work, simulation, and low-level systems. The common thread is simple: I like making
+          technically interesting things fast, understandable, and real.
         </p>
         <p>
-          I build things from first principles. When I work on an orbital propagator, I implement
-          the RK4 integrator, the J2 gravity harmonics, the atmospheric drag model, and the CUDA
-          kernel — not call a library. When I build a shell, I implement raw terminal mode, signal
-          handling, and job control from scratch.
+          The projects range from C tooling and shells to simulation experiments and CUDA kernels.
+          Astrosis is one proof point, not the whole identity: the broader obsession is performance,
+          graphics, systems, and cool builds that force me to learn the machinery underneath.
         </p>
         <p>
-          Currently deepening expertise in CUDA, OpenGL, and parallel computing while making the
-          portfolio signal clearer.
+          Currently deepening CUDA, OpenGL, C++, Linux tooling, and parallel computing while keeping
+          the work concrete enough that someone can inspect it quickly.
         </p>
       </div>
 

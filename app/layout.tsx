@@ -1,13 +1,11 @@
 import "../src/styles.css";
 
 export const metadata = {
-  title: "Utkarsh Joshi — Systems Engineer",
-  description:
-    "First-year CS undergraduate building high-performance systems from first principles. Orbital mechanics, CUDA, C++.",
+  title: "Utkarsh Joshi - Technical Projects",
+  description: "Cool technical projects, fast code, GPU curiosity, and low-level systems work.",
   openGraph: {
-    title: "Utkarsh Joshi — Systems Engineer",
-    description:
-      "First-year CS undergraduate building high-performance systems from first principles. Orbital mechanics, CUDA, C++.",
+    title: "Utkarsh Joshi - Technical Projects",
+    description: "Cool technical projects, fast code, GPU curiosity, and low-level systems work.",
     type: "website",
   },
   twitter: {

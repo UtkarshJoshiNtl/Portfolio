@@ -7,16 +7,27 @@ export const links = {
 };
 
 export const astrosisCycle = [
-  "Astrosis — Orbital Mechanics Engine",
+  "Astrosis — performance-heavy simulation work",
   "507× batch propagation speedup (C++ vs Python)",
   "83× conjunction detection speedup (CUDA vs Python)",
-  "RK4 + J2/J3/J4 harmonics + atmospheric drag",
+  "C++ / CUDA / numerical methods",
 ];
 
 export const projectsCycle = ["cjit", "Quip", "CuFloda"];
 export const roadmapCycle = ["May → October 2026", "7-phase technical plan"];
 export const hobbyCycle = ["3D Art", "Music"];
-export const aboutCycle = ["First-year CS undergraduate", "Building from first principles"];
+export const aboutCycle = ["Cool technical projects", "Fast code. GPU curiosity."];
+export const toolboxCycle = [
+  "C / C++ / Python",
+  "CUDA / OpenMP / GPU profiling",
+  "Linux / gdb / Makefiles",
+  "Simulation / visualization / performance",
+];
+export const identityCopy = {
+  title: "Utkarsh Joshi",
+  tagline: "Cool technical projects. Fast code. GPU curiosity.",
+  body: "C, C++, CUDA, simulation, systems, and whatever looks hard enough to be fun.",
+};
 
 export const benchmarks = [
   ["Operation", "Python", "C++", "CUDA"],
