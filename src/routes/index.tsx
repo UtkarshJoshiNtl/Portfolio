@@ -11,7 +11,6 @@ import { ProjectsPanel } from "@/components/portfolio/panels/ProjectsPanel";
 import { RoadmapPanel } from "@/components/portfolio/panels/RoadmapPanel";
 import { GalleryPanel } from "@/components/portfolio/panels/GalleryPanel";
 import { ThemeSwitcher } from "@/components/theme/ThemeSwitcher";
-import { DoomTile } from "@/components/portfolio/DoomTile";
 
 export const Route = createFileRoute("/")({ component: Index });
 
@@ -19,7 +18,10 @@ type PanelId = "astrosis" | "projects" | "roadmap" | "gallery" | null;
 
 function Index() {
   const [panel, setPanel] = useState<PanelId>(null);
-  const [seed, setSeed] = useState(() => Math.floor(Math.random() * 1e9));
+  const [seed, setSeed] = useState(() => {
+    if (typeof window !== "undefined") return Math.floor(Math.random() * 1e9);
+    return 0;
+  });
   const close = () => setPanel(null);
   const reshuffle = useCallback(
     () => setSeed(Math.floor(Math.random() * 1e9)),
@@ -53,7 +55,7 @@ function Index() {
           onOpenGallery={() => setPanel("gallery")}
           onOpenRoadmap={() => setPanel("roadmap")}
         />
-        <DoomTile />
+        {/* DoomTile temporarily disabled — needs public/doom/doom.jsdos and wdosbox.wasm.js */}
       </div>
 
       <AnimatePresence>

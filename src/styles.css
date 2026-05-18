@@ -195,6 +195,19 @@
   --gh-cell-4: oklch(0.98 0 0);
 }
 
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
 @layer base {
   * {
     border-color: var(--color-border);

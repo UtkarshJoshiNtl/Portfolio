@@ -16,14 +16,13 @@ const BEYOND_VARIANTS: Record<string, Size[]> = {
     { w: 3, h: 2 },
   ],
   cf: [
-    { w: 1, h: 1 },
-    { w: 1, h: 2 },
     { w: 2, h: 1 },
+    { w: 2, h: 2 },
   ],
   gh: [
+    { w: 2, h: 2 },
     { w: 1, h: 2 },
     { w: 2, h: 1 },
-    { w: 1, h: 1 },
   ],
   music: [
     { w: 2, h: 1 },

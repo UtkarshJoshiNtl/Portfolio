@@ -1,6 +1,5 @@
 import { techStack } from "@/lib/portfolio-data";
 
-// Single-character or short symbol for each tech. Calmer than a marquee.
 const SYMBOL: Record<string, string> = {
   C: "C",
   "C++": "++",
@@ -18,18 +17,18 @@ const SYMBOL: Record<string, string> = {
 
 export function TechStackBar() {
   return (
-    <div className="relative bg-tile-alt border border-transparent hover:border-amber transition-colors h-[72px] flex items-center px-4 group overflow-hidden">
+    <div className="relative bg-tile-alt border border-transparent hover:border-amber transition-colors flex items-center px-4 py-3 group">
       <div className="absolute left-4 top-2 font-mono text-[10px] uppercase tracking-[0.2em] text-amber pointer-events-none">
         Tech Stack
       </div>
-      <div className="mt-6 flex flex-wrap gap-1.5 w-full">
+      <div className="mt-5 flex flex-wrap gap-2 w-full">
         {techStack.map((t) => (
           <div
             key={t}
-            className="flex items-center gap-1.5 px-2 py-1 border border-border bg-tile font-mono text-[10px] uppercase tracking-[0.1em] text-muted-foreground hover:text-amber hover:border-amber transition-colors"
+            className="flex items-center gap-2 px-2.5 py-1.5 border border-border bg-tile font-mono text-[11px] uppercase tracking-[0.1em] text-muted-foreground hover:text-amber hover:border-amber transition-colors"
             title={t}
           >
-            <span className="text-amber text-[11px] font-semibold leading-none">
+            <span className="text-amber text-sm font-semibold leading-none">
               {SYMBOL[t] ?? t.charAt(0)}
             </span>
             <span>{t}</span>

@@ -4,7 +4,8 @@ type Artwork = {
   id: number;
   title: string;
   artist: string | null;
-  imageUrl: string;
+  imageId: string;
+  iiifUrl: string;
 };
 
 let cache: { at: number; data: Artwork[] } | null = null;
@@ -33,12 +34,13 @@ export const getRandomArt = createServerFn({ method: "GET" }).handler(
       };
       const base = json.config.iiif_url;
       const items: Artwork[] = json.data
-        .filter((d) => d.image_id)
+        .filter((d): d is typeof d & { image_id: string } => !!d.image_id)
         .map((d) => ({
           id: d.id,
           title: d.title,
           artist: d.artist_title,
-          imageUrl: `${base}/${d.image_id}/full/843,/0/default.jpg`,
+          imageId: d.image_id,
+          iiifUrl: `${base}/${d.image_id}/full/843,/0/default.jpg`,
         }));
       cache = { at: now, data: items };
       return { items, error: null };
@@ -47,3 +49,19 @@ export const getRandomArt = createServerFn({ method: "GET" }).handler(
     }
   },
 );
+
+// Proxy image through server to bypass CORS on IIIF
+export const getProxyImageUrl = createServerFn({ method: "GET" })
+  .inputValidator((input: { url: string }) => input)
+  .handler(async ({ data }): Promise<{ dataUrl: string | null; error: string | null }> => {
+    try {
+      const res = await fetch(data.url);
+      if (!res.ok) return { dataUrl: null, error: `HTTP ${res.status}` };
+      const buffer = await res.arrayBuffer();
+      const base64 = Buffer.from(buffer).toString("base64");
+      const contentType = res.headers.get("content-type") ?? "image/jpeg";
+      return { dataUrl: `data:${contentType};base64,${base64}`, error: null };
+    } catch (e) {
+      return { dataUrl: null, error: e instanceof Error ? e.message : "fetch failed" };
+    }
+  });

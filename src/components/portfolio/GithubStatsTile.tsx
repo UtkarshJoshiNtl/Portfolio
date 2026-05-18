@@ -21,9 +21,8 @@ export function GithubStatsTile() {
     refetchOnWindowFocus: false,
   });
 
-  // Take last 70 days = 10 weeks of 7 days. Calmer than full year.
   const allDays = data?.days ?? [];
-  const days = allDays.slice(-70);
+  const days = allDays.slice(-126);
   const cols: typeof days[] = [];
   for (let i = 0; i < days.length; i += 7) cols.push(days.slice(i, i + 7));
 
@@ -46,7 +45,7 @@ export function GithubStatsTile() {
           {data?.total ?? "—"}
         </span>
         <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
-          contributions · 1y
+          contributions
         </span>
       </div>
 
@@ -57,7 +56,7 @@ export function GithubStatsTile() {
               <div
                 key={d.date}
                 title={`${d.date}: ${d.count}`}
-                className="w-2.5 h-2.5"
+                className="w-3 h-3"
                 style={{ backgroundColor: LEVEL_VAR[d.level] }}
               />
             ))}

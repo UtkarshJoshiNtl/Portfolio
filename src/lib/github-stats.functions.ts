@@ -4,7 +4,7 @@ type Day = { date: string; count: number; level: 0 | 1 | 2 | 3 | 4 };
 type GHStats = {
   user: string;
   total: number;
-  days: Day[]; // last ~35 days
+  days: Day[];
   error: string | null;
 };
 
@@ -22,7 +22,7 @@ export const getGithubContributions = createServerFn({ method: "GET" })
         total: Record<string, number>;
         contributions: Day[];
       };
-      const days = json.contributions.slice(-35);
+      const days = json.contributions.slice(-126);
       const total = Object.values(json.total).reduce((a, b) => a + b, 0);
       return { user: data.user, total, days, error: null };
     } catch (e) {

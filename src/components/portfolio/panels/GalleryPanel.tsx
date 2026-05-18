@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { PanelShell } from "../PanelShell";
-import { getRandomArt } from "@/lib/gallery.functions";
+import { getRandomArt, getProxyImageUrl } from "@/lib/gallery.functions";
 
 export function GalleryPanel({ onClose }: { onClose: () => void }) {
   const fn = useServerFn(getRandomArt);
@@ -16,6 +16,16 @@ export function GalleryPanel({ onClose }: { onClose: () => void }) {
   const items = data?.items ?? [];
   const [i, setI] = useState(0);
 
+  const proxyFn = useServerFn(getProxyImageUrl);
+  const cur = items[i];
+  const { data: imgData } = useQuery({
+    queryKey: ["art-img", cur?.imageId],
+    queryFn: () => (cur ? proxyFn({ data: { url: cur.iiifUrl } }) : null),
+    enabled: !!cur,
+    staleTime: 5 * 60 * 1000,
+    refetchOnWindowFocus: false,
+  });
+
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "ArrowRight") setI((v) => (items.length ? (v + 1) % items.length : 0));
@@ -25,8 +35,6 @@ export function GalleryPanel({ onClose }: { onClose: () => void }) {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [items.length]);
-
-  const cur = items[i];
 
   return (
     <PanelShell id="gallery" onClose={onClose}>
@@ -40,11 +48,17 @@ export function GalleryPanel({ onClose }: { onClose: () => void }) {
 
       {cur && (
         <div className="mt-8 relative">
-          <img
-            src={cur.imageUrl}
-            alt={cur.title}
-            className="w-full max-h-[70vh] object-contain bg-tile-alt"
-          />
+          {imgData?.dataUrl ? (
+            <img
+              src={imgData.dataUrl}
+              alt={cur.title}
+              className="w-full max-h-[70vh] object-contain bg-tile-alt"
+            />
+          ) : (
+            <div className="w-full h-[50vh] flex items-center justify-center bg-tile-alt">
+              <Loader2 className="w-8 h-8 text-amber animate-spin" />
+            </div>
+          )}
           <div className="mt-3 flex items-center justify-between gap-4">
             <div>
               <div className="font-semibold text-lg">{cur.title}</div>
@@ -79,15 +93,44 @@ export function GalleryPanel({ onClose }: { onClose: () => void }) {
 
       <div className="mt-10 grid grid-cols-3 md:grid-cols-6 gap-2">
         {items.map((it, idx) => (
-          <button
-            key={it.id}
-            onClick={() => setI(idx)}
-            className={`aspect-square overflow-hidden border ${idx === i ? "border-amber" : "border-border"}`}
-          >
-            <img src={it.imageUrl} alt={it.title} className="w-full h-full object-cover" />
-          </button>
+          <Thumbnail key={it.id} item={it} active={idx === i} onClick={() => setI(idx)} />
         ))}
       </div>
     </PanelShell>
+  );
+}
+
+function Thumbnail({
+  item,
+  active,
+  onClick,
+}: {
+  item: { id: number; title: string; artist: string | null; imageId: string; iiifUrl: string };
+  active: boolean;
+  onClick: () => void;
+}) {
+  const proxyFn = useServerFn(getProxyImageUrl);
+  const { data: imgData } = useQuery({
+    queryKey: ["art-thumb", item.imageId],
+    queryFn: () => proxyFn({ data: { url: item.iiifUrl } }),
+    staleTime: 5 * 60 * 1000,
+    refetchOnWindowFocus: false,
+  });
+
+  return (
+    <button
+      onClick={onClick}
+      className={`aspect-square overflow-hidden border relative ${
+        active ? "border-amber" : "border-border"
+      }`}
+    >
+      {imgData?.dataUrl ? (
+        <img src={imgData.dataUrl} alt={item.title} className="w-full h-full object-cover" />
+      ) : (
+        <div className="w-full h-full flex items-center justify-center bg-tile-alt">
+          <Loader2 className="w-4 h-4 text-muted-foreground animate-spin" />
+        </div>
+      )}
+    </button>
   );
 }
