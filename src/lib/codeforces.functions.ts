@@ -69,3 +69,29 @@ export const getCodeforcesStats = createServerFn({ method: "GET" })
       return fallback;
     }
   });
+
+export const getCodeforcesRatingHistory = createServerFn({ method: "GET" })
+  .inputValidator((input: { handle: string }) => input)
+  .handler(async ({ data }) => {
+    try {
+      const res = await fetch(
+        `https://codeforces.com/api/user.rating?handle=${encodeURIComponent(data.handle)}`,
+      );
+      if (!res.ok) return [];
+      const json = (await res.json()) as {
+        status: string;
+        result?: Array<{
+          contestId: number;
+          ratingChange: number;
+          newRating: number;
+          rank: string;
+        }>;
+      };
+      if (json.status !== "OK" || !json.result) return [];
+      return json.result.map((r) => ({
+        rating: r.newRating,
+      }));
+    } catch {
+      return [];
+    }
+  });

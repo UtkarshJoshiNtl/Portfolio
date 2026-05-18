@@ -23,8 +23,8 @@ export function IdentitySection() {
             Utkarsh Joshi
           </h1>
           <p className="mt-2 text-sm md:text-base text-muted-foreground max-w-xl">
-            Cool technical projects. Fast code. GPU curiosity. C, C++, CUDA, simulation,
-            systems, and whatever looks hard enough to be fun.
+            Building high-performance simulation and systems software with C++, CUDA, and Python.
+            Focused on orbital mechanics, GPU acceleration, scientific visualization, and low-level systems engineering.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             {tags.map((t) => (

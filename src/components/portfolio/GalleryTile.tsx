@@ -3,7 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { ImageIcon } from "lucide-react";
-import { getRandomArt, getProxyImageUrl } from "@/lib/gallery.functions";
+import { getRandomArt } from "@/lib/gallery.functions";
 
 export function GalleryTile({ onOpen }: { onOpen: () => void }) {
   const fn = useServerFn(getRandomArt);
@@ -15,17 +15,7 @@ export function GalleryTile({ onOpen }: { onOpen: () => void }) {
   });
   const items = data?.items ?? [];
   const [i, setI] = useState(0);
-
-  // Fetch proxied (base64) image for the current artwork
   const cur = items[i];
-  const proxyFn = useServerFn(getProxyImageUrl);
-  const { data: imgData } = useQuery({
-    queryKey: ["art-img", cur?.imageId],
-    queryFn: () => (cur ? proxyFn({ data: { url: cur.iiifUrl } }) : null),
-    enabled: !!cur,
-    staleTime: 5 * 60 * 1000,
-    refetchOnWindowFocus: false,
-  });
 
   useEffect(() => {
     if (!items.length) return;
@@ -39,10 +29,10 @@ export function GalleryTile({ onOpen }: { onOpen: () => void }) {
       className="block w-full h-full relative overflow-hidden bg-tile border border-transparent hover:border-amber transition-colors group text-left"
     >
       <AnimatePresence mode="popLayout">
-        {cur && imgData?.dataUrl && (
+        {cur && (
           <motion.img
             key={cur.id}
-            src={imgData.dataUrl}
+            src={cur.imageUrl}
             alt={cur.title}
             initial={{ opacity: 0, scale: 1.0 }}
             animate={{ opacity: 1, scale: 1.06 }}
@@ -53,7 +43,7 @@ export function GalleryTile({ onOpen }: { onOpen: () => void }) {
         )}
       </AnimatePresence>
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-      {(!cur || !imgData?.dataUrl) && (
+      {!cur && (
         <div className="absolute inset-0 flex items-center justify-center text-muted-foreground">
           <ImageIcon className="w-8 h-8" />
         </div>

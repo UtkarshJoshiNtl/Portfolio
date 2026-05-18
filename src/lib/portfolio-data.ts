@@ -16,16 +16,17 @@ export const timeline = [
 export const techStack = [
   "C",
   "C++",
-  "CUDA",
   "Python",
+  "Git",
+  "CMake",
+  "CUDA",
+  "OpenMP",
   "OpenGL",
   "NumPy",
   "PyGame",
   "POSIX",
   "Bash",
   "Linux",
-  "OpenMP",
-  "Git",
 ];
 
 export const astrosisCycle = [
@@ -80,6 +81,7 @@ export const astrosisHighlights = [
 export const projects = [
   {
     name: "cjit",
+    repo: "UtkarshJoshiNtl/cjit",
     tech: ["C", "Content-Addressed Storage", "Version Control"],
     description:
       "Version control system implemented in C. Uses content-addressed storage for integrity and deduplication. Supports branch creation, checkout, and commit operations without external dependencies. Honest systems code — no wrappers, no shortcuts.",
@@ -87,6 +89,7 @@ export const projects = [
   },
   {
     name: "Quip",
+    repo: "UtkarshJoshiNtl/quip",
     tech: ["C", "Terminal Raw Mode", "Job Control", "Signal Handling", "POSIX"],
     description:
       "Fully-featured Unix shell in C99. Supports command pipelines, I/O redirection, background job management, signal handling (SIGINT, SIGTERM, SIGCHLD), command history with arrow key navigation, tab completion, and ANSI-colored prompts. Implemented raw terminal mode from scratch using termios.",
@@ -94,6 +97,7 @@ export const projects = [
   },
   {
     name: "CuFloda",
+    repo: "UtkarshJoshiNtl/CuFloda",
     tech: ["Python", "NumPy", "PyGame", "CUDA (planned)", "Lattice Boltzmann Method"],
     description:
       "Fluid dynamics simulation using the D2Q9 Lattice Boltzmann Method. CPU prototype with real-time PyGame visualization, complex boundary conditions (inflow, outflow, walls, obstacles), and interactive obstacle drawing. CUDA acceleration planned as the next phase.",
@@ -101,6 +105,7 @@ export const projects = [
   },
   {
     name: "OwlEchoSense",
+    repo: "UtkarshJoshiNtl/OwlEchoSense",
     tech: ["ESP32", "AODV Mesh", "BirdNET ML", "LoRa"],
     description:
       "Field ecology monitoring system for bird species identification. ESP32 microcontrollers with AODV mesh networking for decentralized communication, BirdNET machine learning for species identification, and LoRa for long-range data transmission in areas without connectivity.",
@@ -108,6 +113,7 @@ export const projects = [
   },
   {
     name: "LANParty",
+    repo: "UtkarshJoshiNtl/LANParty",
     tech: ["Flutter", "WebSocket", "Dart", "Real-time Multiplayer"],
     description:
       "Cross-platform LAN gaming application. Real-time multiplayer using WebSocket communication with automatic game discovery and lobby management. Supports chess, ludo, and monopoly with no internet dependency.",

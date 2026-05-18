@@ -1,37 +1,36 @@
 import { techStack } from "@/lib/portfolio-data";
 
-const SYMBOL: Record<string, string> = {
-  C: "C",
-  "C++": "++",
-  CUDA: "▣",
-  Python: "py",
-  OpenGL: "◇",
-  NumPy: "Σ",
-  PyGame: "▶",
-  POSIX: "$",
-  Bash: ">_",
-  Linux: "🐧",
-  OpenMP: "‖",
-  Git: "⎇",
-};
+const LANGUAGES = techStack.filter((t) => ["C", "C++", "Python"].includes(t));
+const TOOLS = techStack.filter((t) => ["Git", "CMake"].includes(t));
+const TECHNOLOGIES = techStack.filter(
+  (t) => !["C", "C++", "Python", "Git", "CMake"].includes(t),
+);
+
+const categories = [
+  { label: "Languages", items: LANGUAGES },
+  { label: "Tools", items: TOOLS },
+  { label: "Technologies", items: TECHNOLOGIES },
+];
 
 export function TechStackBar() {
   return (
-    <div className="relative bg-tile-alt border border-transparent hover:border-amber transition-colors flex items-center px-4 py-3 group">
-      <div className="absolute left-4 top-2 font-mono text-[10px] uppercase tracking-[0.2em] text-amber pointer-events-none">
-        Tech Stack
-      </div>
-      <div className="mt-5 flex flex-wrap gap-2 w-full">
-        {techStack.map((t) => (
-          <div
-            key={t}
-            className="flex items-center gap-2 px-2.5 py-1.5 border border-border bg-tile font-mono text-[11px] uppercase tracking-[0.1em] text-muted-foreground hover:text-amber hover:border-amber transition-colors"
-            title={t}
-          >
-            <span className="text-amber text-sm font-semibold leading-none">
-              {SYMBOL[t] ?? t.charAt(0)}
-            </span>
-            <span>{t}</span>
+    <div className="relative bg-tile-alt border border-transparent hover:border-amber transition-colors group overflow-hidden">
+      <div className="px-4 pt-3 pb-2 flex gap-6 md:gap-10">
+        {categories.map((cat) => (
+          <div key={cat.label} className="flex flex-col gap-1.5">
+            <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-amber">
+              {cat.label}
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {cat.items.map((t) => (
+                <span
+                  key={t}
+                  className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground hover:text-amber transition-colors"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
           </div>
         ))}
       </div>
