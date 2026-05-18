@@ -1,14 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { useServerFn } from "@tanstack/react-start";
 import { Play, Pause, SkipForward, SkipBack, Music } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { getKanyeTracks } from "@/lib/music.functions";
 
 export function MusicPlayer() {
-  const fn = useServerFn(getKanyeTracks);
   const { data } = useQuery({
     queryKey: ["music-kanye"],
-    queryFn: () => fn(),
+    queryFn: () => getKanyeTracks(),
     staleTime: 60 * 60 * 1000,
     refetchOnWindowFocus: false,
   });
@@ -25,7 +23,7 @@ export function MusicPlayer() {
     if (!el || !current) return;
     el.src = current.previewUrl;
     if (playing) el.play().catch(() => setPlaying(false));
-  }, [idx, current?.previewUrl]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [idx, current?.previewUrl]);
 
   useEffect(() => {
     const el = audioRef.current;

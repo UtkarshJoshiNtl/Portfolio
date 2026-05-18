@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { useServerFn } from "@tanstack/react-start";
 import { Trophy } from "lucide-react";
 import { getCodeforcesStats, getCodeforcesRatingHistory } from "@/lib/codeforces.functions";
 import { links } from "@/lib/portfolio-data";
@@ -60,18 +59,16 @@ function RatingChart({ ratings }: { ratings: Array<{ rating: number }> }) {
 }
 
 export function CodeforcesTile() {
-  const fn = useServerFn(getCodeforcesStats);
   const { data } = useQuery({
     queryKey: ["cf", links.codeforcesHandle],
-    queryFn: () => fn({ data: { handle: links.codeforcesHandle } }),
+    queryFn: () => getCodeforcesStats({ handle: links.codeforcesHandle }),
     staleTime: 5 * 60 * 1000,
     refetchOnWindowFocus: false,
   });
 
-  const ratingFn = useServerFn(getCodeforcesRatingHistory);
   const { data: ratingData } = useQuery({
     queryKey: ["cf-rating", links.codeforcesHandle],
-    queryFn: () => ratingFn({ data: { handle: links.codeforcesHandle } }),
+    queryFn: () => getCodeforcesRatingHistory({ handle: links.codeforcesHandle }),
     staleTime: 10 * 60 * 1000,
     refetchOnWindowFocus: false,
   });
@@ -86,7 +83,7 @@ export function CodeforcesTile() {
       rel="noopener noreferrer"
       className="block h-full group bg-tile-alt border border-transparent hover:border-amber transition-colors p-5 relative overflow-hidden flex flex-col"
     >
-      {ratingData && <RatingChart ratings={ratingData} />}
+      {Array.isArray(ratingData) && ratingData.length >= 2 && <RatingChart ratings={ratingData} />}
 
       <div className="flex items-center gap-2">
         <Trophy className="w-4 h-4 text-amber" />

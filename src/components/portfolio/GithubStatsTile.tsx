@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { useServerFn } from "@tanstack/react-start";
 import { Github } from "lucide-react";
 import { getGithubContributions } from "@/lib/github-stats.functions";
 import { links } from "@/lib/portfolio-data";
@@ -13,15 +12,14 @@ const LEVEL_VAR = [
 ];
 
 export function GithubStatsTile() {
-  const fn = useServerFn(getGithubContributions);
   const { data } = useQuery({
     queryKey: ["gh", links.githubUser],
-    queryFn: () => fn({ data: { user: links.githubUser } }),
+    queryFn: () => getGithubContributions({ user: links.githubUser }),
     staleTime: 10 * 60 * 1000,
     refetchOnWindowFocus: false,
   });
 
-  const allDays = data?.days ?? [];
+  const allDays = Array.isArray(data?.days) ? data.days : [];
   const days = allDays.slice(-126);
   const cols: typeof days[] = [];
   for (let i = 0; i < days.length; i += 7) cols.push(days.slice(i, i + 7));

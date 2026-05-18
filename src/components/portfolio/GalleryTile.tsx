@@ -1,15 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { useServerFn } from "@tanstack/react-start";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { ImageIcon } from "lucide-react";
 import { getRandomArt } from "@/lib/gallery.functions";
 
 export function GalleryTile({ onOpen }: { onOpen: () => void }) {
-  const fn = useServerFn(getRandomArt);
   const { data } = useQuery({
     queryKey: ["art"],
-    queryFn: () => fn(),
+    queryFn: () => getRandomArt(),
     staleTime: 5 * 60 * 1000,
     refetchOnWindowFocus: false,
   });

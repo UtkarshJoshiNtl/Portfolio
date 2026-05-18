@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useServerFn } from "@tanstack/react-start";
 import { PanelShell } from "../PanelShell";
 import { projects } from "@/lib/portfolio-data";
 import { ExternalLink, ChevronDown, Loader2 } from "lucide-react";
@@ -38,10 +37,9 @@ function ProjectCard({
   };
 }) {
   const [expanded, setExpanded] = useState(false);
-  const fn = useServerFn(getGithubReadme);
   const { data: readme } = useQuery({
     queryKey: ["readme", project.repo],
-    queryFn: () => (expanded ? fn({ data: { repo: project.repo } }) : null),
+    queryFn: () => getGithubReadme({ repo: project.repo }),
     enabled: expanded,
     staleTime: 10 * 60 * 1000,
     refetchOnWindowFocus: false,

@@ -1,15 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { useServerFn } from "@tanstack/react-start";
 import { useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { PanelShell } from "../PanelShell";
 import { getRandomArt } from "@/lib/gallery.functions";
 
 export function GalleryPanel({ onClose }: { onClose: () => void }) {
-  const fn = useServerFn(getRandomArt);
   const { data } = useQuery({
     queryKey: ["art"],
-    queryFn: () => fn(),
+    queryFn: () => getRandomArt(),
     staleTime: 5 * 60 * 1000,
     refetchOnWindowFocus: false,
   });
