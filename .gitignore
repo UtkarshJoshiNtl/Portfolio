@@ -27,5 +27,14 @@ dist-ssr
 *.sln
 *.sw?
 
+# Lock files (using bun)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Environment files
+.env
+.env.*
+
 # Windows alternate data streams
 *:Zone.Identifier
