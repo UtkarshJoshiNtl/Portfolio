@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 
-export type ThemeId = "terminal" | "artist" | "noir" | "retro" | "blueprint" | "vaporwave";
+export type ThemeId = "terminal" | "artist" | "noir" | "retro" | "blueprint" | "vaporwave" | "forest" | "ocean" | "nord" | "gruvbox";
 
 const THEME_COLORS: Record<ThemeId, string> = {
   terminal: "#252525",
@@ -9,6 +9,10 @@ const THEME_COLORS: Record<ThemeId, string> = {
   retro: "#0d0d00",
   blueprint: "oklch(0.25 0.12 240)",
   vaporwave: "#0d0221",
+  forest: "#0f1a0f",
+  ocean: "#0a141e",
+  nord: "#0f141a",
+  gruvbox: "#1b1410",
 };
 
 type ThemeDef = {
@@ -61,6 +65,34 @@ export const THEMES: ThemeDef[] = [
     tagline: "Synthwave sunset",
     swatches: ["#0d0221", "#1a0533", "oklch(0.70 0.32 345)", "#0d1a66"],
     fontClass: "font-display",
+  },
+  {
+    id: "forest",
+    label: "Forest",
+    tagline: "Deep woods. Earthy. Green.",
+    swatches: ["#0f1a0f", "#1a2e1a", "#4a7c4a", "#c4a55a"],
+    fontClass: "",
+  },
+  {
+    id: "ocean",
+    label: "Ocean",
+    tagline: "Abyssal blue. Teal depths.",
+    swatches: ["#0a141e", "#0f1f30", "#2a8c8c", "#e8645a"],
+    fontClass: "",
+  },
+  {
+    id: "nord",
+    label: "Nord",
+    tagline: "Arctic frost. Clean. Calm.",
+    swatches: ["#0f141a", "#1c2430", "#5e81ac", "#88c0d0"],
+    fontClass: "",
+  },
+  {
+    id: "gruvbox",
+    label: "Gruvbox",
+    tagline: "Warm retro groove.",
+    swatches: ["#1b1410", "#2d241a", "#d65d0e", "#98971a"],
+    fontClass: "",
   },
 ];
 

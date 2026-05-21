@@ -3,6 +3,8 @@
   "trailingSlash": false,
   "framework": null,
   "rewrites": [
+    { "source": "/api/music", "destination": "https://itunes.apple.com/search" },
+    { "source": "/api/steam", "destination": "https://store.steampowered.com/api/appdetails" },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [

@@ -13,7 +13,7 @@ import appCss from "../styles.css?url";
 
 // Inline script runs before hydration to set data-theme from localStorage,
 // avoiding a flash of the default theme.
-const VALID_THEMES = ["terminal", "artist", "noir", "retro", "blueprint", "vaporwave"];
+const VALID_THEMES = ["terminal", "artist", "noir", "retro", "blueprint", "vaporwave", "forest", "ocean", "nord", "gruvbox"];
 const themeBootstrap = `(function(){try{var t=localStorage.getItem('mtf-theme');if(t&&${JSON.stringify(VALID_THEMES)}.includes(t)){document.documentElement.setAttribute('data-theme',t);}else{document.documentElement.setAttribute('data-theme','terminal');}}catch(e){document.documentElement.setAttribute('data-theme','terminal');}})();`;
 
 function NotFoundComponent() {

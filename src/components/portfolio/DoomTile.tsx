@@ -101,8 +101,9 @@ export function DoomEmulator({ onExit }: { onExit: () => void }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-background flex flex-col">
-      <div className="absolute top-4 right-4 z-50 flex gap-2">
+    <div className="fixed inset-0 z-50 bg-background/95 backdrop-blur-sm flex items-center justify-center p-4">
+      {/* Controls */}
+      <div className="fixed top-4 right-4 z-50 flex gap-2">
         <button
           onClick={toggleMute}
           className="w-10 h-10 bg-black/60 backdrop-blur border border-border flex items-center justify-center text-white hover:border-amber"
@@ -119,28 +120,30 @@ export function DoomEmulator({ onExit }: { onExit: () => void }) {
         </button>
       </div>
 
-      {/* Container always visible so Dos() measures correct dimensions */}
-      <div ref={containerRef} className="flex-1 min-h-0" />
+      {/* Canvas container — centered, constrained size */}
+      <div className="relative w-full max-w-[960px] aspect-[4/3] border border-border shadow-2xl">
+        <div ref={containerRef} className="w-full h-full" />
 
-      {/* Overlays on top */}
-      {(stage === "loading" || stage === "error") && (
-        <div className="absolute inset-0 flex items-center justify-center bg-background">
-          {stage === "loading" ? (
-            <div className="flex flex-col items-center gap-3">
-              <Loader2 className="w-8 h-8 text-amber animate-spin" />
-              <div className="font-mono text-xl tracking-[0.2em] text-amber">LOADING DOOM…</div>
-            </div>
-          ) : (
-            <div className="flex flex-col items-center gap-3 text-center px-4">
-              <Skull className="w-10 h-10 text-doom" />
-              <div className="font-mono text-2xl font-bold text-doom">DOOM FAILED</div>
-              <div className="font-mono text-[10px] text-muted-foreground">
-                Could not start the emulator. Make sure /doom/doom.jsdos exists.
+        {/* Overlays on top */}
+        {(stage === "loading" || stage === "error") && (
+          <div className="absolute inset-0 flex items-center justify-center bg-background/90">
+            {stage === "loading" ? (
+              <div className="flex flex-col items-center gap-3">
+                <Loader2 className="w-8 h-8 text-amber animate-spin" />
+                <div className="font-mono text-xl tracking-[0.2em] text-amber">LOADING DOOM…</div>
               </div>
-            </div>
-          )}
-        </div>
-      )}
+            ) : (
+              <div className="flex flex-col items-center gap-3 text-center px-4">
+                <Skull className="w-10 h-10 text-doom" />
+                <div className="font-mono text-2xl font-bold text-doom">DOOM FAILED</div>
+                <div className="font-mono text-[10px] text-muted-foreground">
+                  Could not start the emulator. Make sure /doom/doom.jsdos exists.
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
