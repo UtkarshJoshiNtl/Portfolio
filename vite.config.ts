@@ -44,12 +44,14 @@ function fallbackIndexHtml(): import("vite").Plugin {
 export default defineConfig({
   cloudflare: false,
   tanstackStart: {
+    prerender: {
+      failOnError: false,
+    },
     spa: {
       enabled: true,
       prerender: {
         enabled: true,
         outputPath: "/index.html",
-        failOnError: false,
       },
     },
   },
