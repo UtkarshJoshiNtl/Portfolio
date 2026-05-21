@@ -30,9 +30,9 @@ export function GalleryPanel({ onClose }: { onClose: () => void }) {
       <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-amber">
         Gallery
       </div>
-      <h2 className="mt-2 text-3xl md:text-5xl font-semibold">Art Institute of Chicago</h2>
+      <h2 className="mt-2 text-3xl md:text-5xl font-semibold">Steam Game Art</h2>
       <p className="mt-2 text-sm text-muted-foreground">
-        Rotating selection of public-domain works. Use ← → to navigate.
+        Header art from games I've played. Use ← → to navigate.
       </p>
 
       {cur ? (

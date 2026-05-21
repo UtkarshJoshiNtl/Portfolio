@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { Play, Pause, SkipForward, SkipBack, Headphones } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { Headphones } from "lucide-react";
 import { getCuratedTracks } from "@/lib/music.functions";
 
 export function MusicPlayer() {
@@ -13,28 +13,13 @@ export function MusicPlayer() {
   const tracks = data?.items ?? [];
 
   const [idx, setIdx] = useState(0);
-  const [playing, setPlaying] = useState(false);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-
   const current = tracks[idx];
 
   useEffect(() => {
-    const el = audioRef.current;
-    if (!el || !current) return;
-    el.src = current.previewUrl;
-    if (playing) el.play().catch(() => setPlaying(false));
-  }, [idx, current?.previewUrl]);
-
-  useEffect(() => {
-    const el = audioRef.current;
-    if (!el) return;
-    if (playing) el.play().catch(() => setPlaying(false));
-    else el.pause();
-  }, [playing]);
-
-  const next = () => setIdx((i) => (tracks.length ? (i + 1) % tracks.length : 0));
-  const prev = () =>
-    setIdx((i) => (tracks.length ? (i - 1 + tracks.length) % tracks.length : 0));
+    if (!tracks.length) return;
+    const t = setInterval(() => setIdx((v) => (v + 1) % tracks.length), 7000);
+    return () => clearInterval(t);
+  }, [tracks.length]);
 
   return (
     <div className="h-full bg-tile-purple border border-transparent hover:border-amber transition-colors p-5 relative overflow-hidden flex flex-col">
@@ -42,17 +27,17 @@ export function MusicPlayer() {
         <img
           src={current.artworkUrl}
           alt=""
-          className="absolute inset-0 w-full h-full object-cover opacity-30 scale-110"
+          className="absolute inset-0 w-full h-full object-cover"
         />
       )}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
       <div className="relative z-10 flex items-center gap-2">
         <Headphones className="w-4 h-4 text-amber" />
         <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-amber">
-          Music · 30s clips
+          Music
         </span>
       </div>
-      <div className="relative z-10 mt-3 min-h-0 flex-1 flex flex-col justify-end">
+      <div className="relative z-10 mt-auto flex flex-col">
         <div className="font-mono text-sm font-semibold truncate text-white">
           {current?.title ?? "Loading…"}
         </div>
@@ -63,35 +48,7 @@ export function MusicPlayer() {
           {current?.album ?? ""}
         </div>
       </div>
-      <div className="relative z-10 flex items-center gap-2 mt-3">
-        <button
-          onClick={prev}
-          aria-label="Previous"
-          className="w-9 h-9 border border-border flex items-center justify-center hover:border-amber hover:text-amber transition-colors"
-        >
-          <SkipBack className="w-4 h-4" />
-        </button>
-        <button
-          onClick={() => setPlaying((p) => !p)}
-          aria-label={playing ? "Pause" : "Play"}
-          className="w-10 h-10 border border-amber text-amber flex items-center justify-center hover:bg-amber hover:text-background transition-colors"
-        >
-          {playing ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-        </button>
-        <button
-          onClick={next}
-          aria-label="Next"
-          className="w-9 h-9 border border-border flex items-center justify-center hover:border-amber hover:text-amber transition-colors"
-        >
-          <SkipForward className="w-4 h-4" />
-        </button>
-      </div>
-      <audio
-        ref={audioRef}
-        onEnded={next}
-        preload="none"
-      />
-      <div className="relative z-10 mt-auto pt-2 font-mono text-[10px] tracking-[0.15em] uppercase text-white/40">
+      <div className="relative z-10 mt-2 font-mono text-[10px] tracking-[0.15em] uppercase text-white/40">
         {tracks.length ? `${idx + 1}/${tracks.length}` : "—"}
       </div>
     </div>
