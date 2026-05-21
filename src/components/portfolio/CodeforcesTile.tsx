@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Trophy } from "lucide-react";
-import { getCodeforcesStats, getCodeforcesRatingHistory } from "@/lib/codeforces.functions";
+import { getCodeforcesAll } from "@/lib/codeforces.functions";
 import { links } from "@/lib/portfolio-data";
 
 const RANK_COLOR: Record<string, string> = {
@@ -60,20 +60,15 @@ function RatingChart({ ratings }: { ratings: Array<{ rating: number }> }) {
 
 export function CodeforcesTile() {
   const { data } = useQuery({
-    queryKey: ["cf", links.codeforcesHandle],
-    queryFn: () => getCodeforcesStats({ handle: links.codeforcesHandle }),
+    queryKey: ["cf-all", links.codeforcesHandle],
+    queryFn: () => getCodeforcesAll({ handle: links.codeforcesHandle }),
     staleTime: 5 * 60 * 1000,
     refetchOnWindowFocus: false,
   });
 
-  const { data: ratingData } = useQuery({
-    queryKey: ["cf-rating", links.codeforcesHandle],
-    queryFn: () => getCodeforcesRatingHistory({ handle: links.codeforcesHandle }),
-    staleTime: 10 * 60 * 1000,
-    refetchOnWindowFocus: false,
-  });
-
-  const rank = data?.rank ?? "";
+  const stats = data?.stats;
+  const ratings = data?.ratings ?? [];
+  const rank = stats?.rank ?? "";
   const color = RANK_COLOR[rank?.toLowerCase() ?? ""] ?? "text-amber";
 
   return (
@@ -83,7 +78,7 @@ export function CodeforcesTile() {
       rel="noopener noreferrer"
       className="block h-full group bg-tile-alt border border-transparent hover:border-amber transition-colors p-5 relative overflow-hidden flex flex-col"
     >
-      {Array.isArray(ratingData) && ratingData.length >= 2 && <RatingChart ratings={ratingData} />}
+      {ratings.length >= 2 && <RatingChart ratings={ratings} />}
 
       <div className="flex items-center gap-2">
         <Trophy className="w-4 h-4 text-amber" />
@@ -94,11 +89,16 @@ export function CodeforcesTile() {
 
       <div className="mt-auto">
         <div className={`font-mono text-4xl md:text-5xl font-semibold tabular-nums leading-none ${color}`}>
-          {data?.rating ?? "—"}
+          {stats?.rating ?? "—"}
         </div>
         <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
           {rank ?? ""}
         </div>
+        {stats?.maxRating != null && (
+          <div className="font-mono text-[9px] uppercase tracking-[0.15em] text-muted-foreground/60">
+            peak: {stats.maxRating}
+          </div>
+        )}
       </div>
     </a>
   );

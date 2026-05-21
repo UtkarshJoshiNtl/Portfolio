@@ -13,7 +13,8 @@ import appCss from "../styles.css?url";
 
 // Inline script runs before hydration to set data-theme from localStorage,
 // avoiding a flash of the default theme.
-const themeBootstrap = `(function(){try{var t=localStorage.getItem('mtf-theme');if(t==='artist'||t==='noir'||t==='terminal'){document.documentElement.setAttribute('data-theme',t);}else{document.documentElement.setAttribute('data-theme','terminal');}}catch(e){document.documentElement.setAttribute('data-theme','terminal');}})();`;
+const VALID_THEMES = ["terminal", "artist", "noir", "retro", "blueprint", "vaporwave"];
+const themeBootstrap = `(function(){try{var t=localStorage.getItem('mtf-theme');if(t&&${JSON.stringify(VALID_THEMES)}.includes(t)){document.documentElement.setAttribute('data-theme',t);}else{document.documentElement.setAttribute('data-theme','terminal');}}catch(e){document.documentElement.setAttribute('data-theme','terminal');}})();`;
 
 function NotFoundComponent() {
   return (
@@ -92,6 +93,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "theme-color", content: "#252525" },
+      { property: "og:image", content: "/og.png" },
+      { property: "og:image:width", content: "1200" },
+      { property: "og:image:height", content: "630" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -99,7 +104,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Press+Start+2P&family=Share+Tech+Mono&family=Righteous&display=swap",
       },
     ],
   }),

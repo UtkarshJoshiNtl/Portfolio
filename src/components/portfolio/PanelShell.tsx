@@ -36,12 +36,17 @@ export function PanelShell({
       >
         <X className="w-5 h-5" />
       </button>
-      <div className="max-w-5xl mx-auto px-6 md:px-10 py-12 md:py-16">
+      <motion.div
+        className="max-w-5xl mx-auto px-6 md:px-10 py-12 md:py-16"
+        initial={{ clipPath: "inset(0 0 100% 0)" }}
+        animate={{ clipPath: "inset(0 0 0% 0)" }}
+        transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
+      >
         {children}
         <div className="mt-20 pt-6 border-t border-border font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
           © 2026 Utkarsh Joshi
         </div>
-      </div>
+      </motion.div>
     </motion.div>
   );
 }

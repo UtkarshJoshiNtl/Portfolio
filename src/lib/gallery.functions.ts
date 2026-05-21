@@ -1,3 +1,5 @@
+import { games } from "@/lib/portfolio-data";
+
 type Artwork = {
   id: number;
   title: string;
@@ -8,28 +10,6 @@ type Artwork = {
 let cache: { at: number; data: Artwork[] } | null = null;
 const TTL_MS = 5 * 60 * 1000;
 
-async function arrayBufferToBase64(buffer: ArrayBuffer, contentType: string): Promise<string> {
-  const bytes = new Uint8Array(buffer);
-  let binary = "";
-  for (let i = 0; i < bytes.byteLength; i++) {
-    binary += String.fromCharCode(bytes[i]);
-  }
-  const base64 = btoa(binary);
-  return `data:${contentType};base64,${base64}`;
-}
-
-async function fetchImageAsBase64(url: string): Promise<string | null> {
-  try {
-    const res = await fetch(url);
-    if (!res.ok) return null;
-    const buffer = await res.arrayBuffer();
-    const contentType = res.headers.get("content-type") ?? "image/jpeg";
-    return arrayBufferToBase64(buffer, contentType);
-  } catch {
-    return null;
-  }
-}
-
 export async function getRandomArt(): Promise<{
   items: Artwork[];
   error: string | null;
@@ -39,36 +19,28 @@ export async function getRandomArt(): Promise<{
     return { items: cache.data, error: null };
   }
   try {
-    const page = 1 + Math.floor(Math.random() * 20);
+    const ids = games.map((g) => g.id).join(",");
     const res = await fetch(
-      `https://api.artic.edu/api/v1/artworks?fields=id,title,artist_title,image_id&limit=24&page=${page}`,
+      `https://store.steampowered.com/api/appdetails?appids=${ids}`,
     );
     if (!res.ok) return { items: [], error: `HTTP ${res.status}` };
-    const json = (await res.json()) as {
-      data: Array<{
-        id: number;
-        title: string;
-        artist_title: string | null;
-        image_id: string | null;
-      }>;
-      config: { iiif_url: string };
-    };
-    const base = json.config.iiif_url;
-    const withImages = json.data.filter(
-      (d): d is typeof d & { image_id: string } => !!d.image_id,
-    );
+    const json = (await res.json()) as Record<
+      string,
+      { success: boolean; data?: { name: string; header_image: string } }
+    >;
 
-    const items = (
-      await Promise.all(
-        withImages.slice(0, 8).map(async (d) => {
-          const url = `${base}/${d.image_id}/full/843,/0/default.jpg`;
-          const dataUrl = await fetchImageAsBase64(url);
-          return dataUrl
-            ? { id: d.id, title: d.title, artist: d.artist_title, imageUrl: dataUrl }
-            : null;
-        }),
-      )
-    ).filter(Boolean) as Artwork[];
+    const items: Artwork[] = [];
+    for (const game of games) {
+      const entry = json[String(game.id)];
+      if (entry?.success && entry.data?.header_image) {
+        items.push({
+          id: game.id,
+          title: game.name,
+          artist: game.dev,
+          imageUrl: entry.data.header_image,
+        });
+      }
+    }
 
     cache = { at: now, data: items };
     return { items, error: null };

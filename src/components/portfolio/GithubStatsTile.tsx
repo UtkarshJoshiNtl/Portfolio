@@ -38,13 +38,25 @@ export function GithubStatsTile() {
         </span>
       </div>
 
-      <div className="mt-3 flex items-baseline gap-2">
-        <span className="font-mono text-2xl font-semibold text-foreground tabular-nums">
-          {data?.total ?? "—"}
-        </span>
-        <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">
-          contributions
-        </span>
+      <div className="mt-3 flex items-baseline gap-4">
+        <div>
+          <span className="font-mono text-2xl font-semibold text-foreground tabular-nums">
+            {data?.total ?? "—"}
+          </span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground ml-1">
+            contributions
+          </span>
+        </div>
+        {data?.currentStreak != null && data.currentStreak > 0 && (
+          <div>
+            <span className="font-mono text-xl font-semibold text-amber tabular-nums">
+              {data.currentStreak}
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground ml-1">
+              day streak
+            </span>
+          </div>
+        )}
       </div>
 
       <div className="mt-3 flex gap-[3px]">

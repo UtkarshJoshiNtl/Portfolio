@@ -141,6 +141,18 @@
   letter-spacing: -0.01em;
 }
 
+[data-theme="artist"] body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 9999;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
 [data-theme="artist"] .bg-tile,
 [data-theme="artist"] .bg-tile-alt,
 [data-theme="artist"] .bg-tile-purple {
@@ -151,7 +163,7 @@
 [data-theme="artist"] .bg-tile:hover,
 [data-theme="artist"] .bg-tile-alt:hover,
 [data-theme="artist"] .bg-tile-purple:hover {
-  transform: translate(-1px, -1px);
+  transform: translate(-1px, -1px) rotate(-0.8deg);
   box-shadow: 4px 4px 0 0 var(--primary);
 }
 
@@ -196,9 +208,230 @@
   --gh-cell-4: oklch(0.98 0 0);
 }
 
+/* ============================================================
+   THEME: retro — 1980s home computer. Amber phosphor on black.
+   ============================================================ */
+[data-theme="retro"] {
+  --radius: 2px;
+  --font-mono-stack: "Press Start 2P", "JetBrains Mono", ui-monospace, monospace;
+  --font-sans-stack: "Press Start 2P", "JetBrains Mono", ui-monospace, monospace;
+  --font-display-stack: "Press Start 2P", "JetBrains Mono", ui-monospace, monospace;
+
+  --background: oklch(0.05 0.02 100);
+  --foreground: oklch(0.70 0.18 75);
+  --card: oklch(0.08 0.02 100);
+  --card-foreground: oklch(0.70 0.18 75);
+  --popover: oklch(0.08 0.02 100);
+  --popover-foreground: oklch(0.70 0.18 75);
+  --primary: oklch(0.70 0.18 75);
+  --primary-foreground: oklch(0.05 0.02 100);
+  --secondary: oklch(0.12 0.03 100);
+  --secondary-foreground: oklch(0.70 0.18 75);
+  --muted: oklch(0.10 0.02 100);
+  --muted-foreground: oklch(0.50 0.10 75);
+  --accent: oklch(0.70 0.18 75);
+  --accent-foreground: oklch(0.05 0.02 100);
+  --destructive: oklch(0.60 0.22 25);
+  --destructive-foreground: oklch(0.05 0.02 100);
+  --border: oklch(0.70 0.18 75);
+  --input: oklch(0.15 0.03 100);
+  --ring: oklch(0.70 0.18 75);
+
+  --tile: oklch(0.08 0.02 100);
+  --tile-alt: oklch(0.12 0.03 100);
+  --tile-purple: oklch(0.08 0.04 300);
+  --amber: oklch(0.70 0.18 75);
+  --doom: oklch(0.55 0.25 25);
+
+  --gh-cell-0: oklch(0.10 0.02 100);
+  --gh-cell-1: oklch(0.25 0.08 75);
+  --gh-cell-2: oklch(0.40 0.12 75);
+  --gh-cell-3: oklch(0.55 0.15 75);
+  --gh-cell-4: oklch(0.70 0.18 75);
+}
+
+[data-theme="retro"] body,
+[data-theme="retro"] .bg-tile,
+[data-theme="retro"] .bg-tile-alt,
+[data-theme="retro"] .bg-tile-purple {
+  border-style: dotted !important;
+  border-width: 2px;
+}
+
+[data-theme="retro"] .bg-tile,
+[data-theme="retro"] .bg-tile-alt,
+[data-theme="retro"] .bg-tile-purple {
+  box-shadow: 4px 4px 0 #ff8c00;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+[data-theme="retro"] .bg-tile:hover,
+[data-theme="retro"] .bg-tile-alt:hover,
+[data-theme="retro"] .bg-tile-purple:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0 #ff8c00;
+}
+
+[data-theme="retro"] .gh-cell {
+  content: "█";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+}
+
+/* ============================================================
+   THEME: blueprint — Engineering blueprint.
+   ============================================================ */
+[data-theme="blueprint"] {
+  --radius: 0px;
+  --font-mono-stack: "Share Tech Mono", "JetBrains Mono", ui-monospace, monospace;
+  --font-sans-stack: "Share Tech Mono", "JetBrains Mono", ui-monospace, monospace;
+  --font-display-stack: "Share Tech Mono", "JetBrains Mono", ui-monospace, monospace;
+
+  --background: oklch(0.25 0.12 240);
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.28 0.10 240);
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.28 0.10 240);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: oklch(0.90 0.05 200);
+  --primary-foreground: oklch(0.25 0.12 240);
+  --secondary: oklch(0.30 0.10 240);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.30 0.08 240);
+  --muted-foreground: oklch(0.80 0.03 240);
+  --accent: oklch(0.90 0.05 200);
+  --accent-foreground: oklch(0.25 0.12 240);
+  --destructive: oklch(0.60 0.22 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.40 0.05 240);
+  --input: oklch(0.30 0.08 240);
+  --ring: oklch(0.90 0.05 200);
+
+  --tile: oklch(0.28 0.10 240);
+  --tile-alt: oklch(0.32 0.10 240);
+  --tile-purple: oklch(0.28 0.08 260);
+  --amber: oklch(0.90 0.05 200);
+  --doom: oklch(0.60 0.25 25);
+
+  --gh-cell-0: oklch(0.30 0.08 240);
+  --gh-cell-1: oklch(0.50 0.08 200);
+  --gh-cell-2: oklch(0.65 0.08 200);
+  --gh-cell-3: oklch(0.80 0.06 200);
+  --gh-cell-4: oklch(0.90 0.05 200);
+}
+
+[data-theme="blueprint"] body {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px);
+  background-size: 20px 20px, 20px 20px;
+}
+
+[data-theme="blueprint"] body,
+[data-theme="blueprint"] .bg-tile,
+[data-theme="blueprint"] .bg-tile-alt,
+[data-theme="blueprint"] .bg-tile-purple {
+  border-style: dashed !important;
+  border-width: 1px;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+[data-theme="blueprint"] h1,
+[data-theme="blueprint"] h2,
+[data-theme="blueprint"] p,
+[data-theme="blueprint"] span,
+[data-theme="blueprint"] div {
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   THEME: vaporwave — Synthwave sunset.
+   ============================================================ */
+[data-theme="vaporwave"] {
+  --radius: 0px;
+  --font-mono-stack: "JetBrains Mono", ui-monospace, monospace;
+  --font-sans-stack: "Righteous", ui-sans-serif, system-ui, sans-serif;
+  --font-display-stack: "Righteous", ui-sans-serif, system-ui, sans-serif;
+
+  --background: #0d0221;
+  --foreground: oklch(0.95 0.02 330);
+  --card: oklch(0.12 0.04 300);
+  --card-foreground: oklch(0.95 0.02 330);
+  --popover: oklch(0.12 0.04 300);
+  --popover-foreground: oklch(0.95 0.02 330);
+  --primary: oklch(0.70 0.32 345);
+  --primary-foreground: oklch(0.95 0.02 330);
+  --secondary: oklch(0.15 0.06 300);
+  --secondary-foreground: oklch(0.95 0.02 330);
+  --muted: oklch(0.15 0.04 300);
+  --muted-foreground: oklch(0.60 0.10 330);
+  --accent: oklch(0.70 0.32 345);
+  --accent-foreground: oklch(0.95 0.02 330);
+  --destructive: oklch(0.60 0.22 25);
+  --destructive-foreground: oklch(0.95 0.02 330);
+  --border: oklch(0.70 0.32 345);
+  --input: oklch(0.15 0.06 300);
+  --ring: oklch(0.70 0.32 345);
+
+  --tile: linear-gradient(135deg, #1a0533, #0d1a66);
+  --tile-alt: linear-gradient(135deg, #1a0533, #0d1a66);
+  --tile-purple: linear-gradient(135deg, #2a0544, #1a0d77);
+  --amber: oklch(0.70 0.32 345);
+  --doom: oklch(0.60 0.25 25);
+
+  --gh-cell-0: oklch(0.15 0.04 300);
+  --gh-cell-1: oklch(0.35 0.15 345);
+  --gh-cell-2: oklch(0.50 0.20 345);
+  --gh-cell-3: oklch(0.65 0.25 345);
+  --gh-cell-4: oklch(0.70 0.32 345);
+}
+
+[data-theme="vaporwave"] body {
+  background: #0d0221;
+}
+
+[data-theme="vaporwave"] .bg-tile,
+[data-theme="vaporwave"] .bg-tile-alt,
+[data-theme="vaporwave"] .bg-tile-purple {
+  background: linear-gradient(135deg, #1a0533, #0d1a66);
+  border: 1px solid oklch(0.70 0.32 345);
+  box-shadow: 0 0 8px oklch(0.70 0.32 345);
+  transition: box-shadow 0.2s ease;
+}
+
+[data-theme="vaporwave"] .bg-tile:hover,
+[data-theme="vaporwave"] .bg-tile-alt:hover,
+[data-theme="vaporwave"] .bg-tile-purple:hover {
+  box-shadow: 0 0 16px oklch(0.70 0.32 345), 0 0 32px oklch(0.70 0.32 345 / 0.4);
+}
+
+[data-theme="vaporwave"] ::-webkit-scrollbar-thumb {
+  background: oklch(0.70 0.32 345) !important;
+}
+
+[data-theme="vaporwave"] ::-webkit-scrollbar-track {
+  background: #0d0221 !important;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+[data-theme="terminal"] .tagline-cursor::after {
+  content: "|";
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+  color: var(--color-amber);
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
+  }
+  :root {
+    will-change: background-color;
   }
   html, body {
     background-color: var(--color-background);
@@ -208,4 +441,9 @@
   }
   .font-mono { font-family: var(--font-mono); }
   .font-display { font-family: var(--font-display); }
+
+  *:focus-visible {
+    outline: 2px solid var(--color-amber);
+    outline-offset: 2px;
+  }
 }

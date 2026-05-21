@@ -4,6 +4,7 @@ import { CodeforcesTile } from "../CodeforcesTile";
 import { GithubStatsTile } from "../GithubStatsTile";
 import { MusicPlayer } from "../MusicPlayer";
 import { GalleryTile } from "../GalleryTile";
+import { DoomTile } from "../DoomTile";
 import { Tile } from "../Tile";
 import { CyclingText } from "../CyclingText";
 import { roadmapCycle } from "@/lib/portfolio-data";
@@ -34,17 +35,23 @@ const BEYOND_VARIANTS: Record<string, Size[]> = {
     { w: 1, h: 1 },
     { w: 2, h: 2 },
   ],
+  doom: [
+    { w: 1, h: 1 },
+    { w: 2, h: 1 },
+  ],
 };
-const BEYOND_ORDER = ["gallery", "cf", "gh", "music", "roadmap"];
+const BEYOND_ORDER = ["gallery", "cf", "gh", "music", "roadmap", "doom"];
 
 export function BeyondSection({
   seed,
   onOpenGallery,
   onOpenRoadmap,
+  onOpenDoom,
 }: {
   seed: number;
   onOpenGallery: () => void;
   onOpenRoadmap: () => void;
+  onOpenDoom: () => void;
 }) {
   const desktop = useMemo(() => pack(4, BEYOND_ORDER, seed, BEYOND_VARIANTS), [seed]);
   const mobile = useMemo(() => pack(2, BEYOND_ORDER, seed + 7, BEYOND_VARIANTS), [seed]);
@@ -123,6 +130,15 @@ export function BeyondSection({
                 />
               </div>
             </Tile>
+          </motion.div>
+
+          <motion.div
+            layout
+            key={`${seed}-doom`}
+            transition={{ type: "spring", stiffness: 220, damping: 28 }}
+            className={cls("doom")}
+          >
+            <DoomTile onOpen={onOpenDoom} />
           </motion.div>
         </div>
       </LayoutGroup>

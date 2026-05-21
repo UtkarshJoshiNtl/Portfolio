@@ -8,6 +8,34 @@ export const links = {
   resume: "/resume.pdf",
 };
 
+export const games = [
+  { id: 1245620, name: "Elden Ring", dev: "FromSoftware" },
+  { id: 1086940, name: "Baldur's Gate 3", dev: "Larian Studios" },
+  { id: 2215430, name: "Ghost of Tsushima", dev: "Sucker Punch" },
+  { id: 2331290, name: "Kingdom Come: Deliverance II", dev: "Warhorse Studios" },
+  { id: 374320, name: "Dark Souls III", dev: "FromSoftware" },
+  { id: 435150, name: "Divinity: Original Sin 2", dev: "Larian Studios" },
+  { id: 1627720, name: "Lies of P", dev: "Neowiz" },
+  { id: 292030, name: "The Witcher 3: Wild Hunt", dev: "CD Projekt Red" },
+] as const;
+
+export const songs = [
+  { artist: "Kendrick Lamar", track: "Sing About Me, I'm Dying of Thirst", album: "To Pimp a Butterfly" },
+  { artist: "Kanye West", track: "Runaway", album: "My Beautiful Dark Twisted Fantasy" },
+  { artist: "Frank Ocean", track: "Nights", album: "Blonde" },
+  { artist: "Travis Scott", track: "90210", album: "Rodeo" },
+  { artist: "Radiohead", track: "Fake Plastic Trees", album: "The Bends" },
+  { artist: "System of a Down", track: "Hypnotize", album: "Hypnotize" },
+  { artist: "System of a Down", track: "Question!", album: "Mezmerize" },
+  { artist: "System of a Down", track: "Lonely Day", album: "Hypnotize" },
+  { artist: "System of a Down", track: "Vicinity of Obscenity", album: "Mezmerize" },
+  { artist: "System of a Down", track: "Kill Rock 'n Roll", album: "Hypnotize" },
+  { artist: "Eagles", track: "Hotel California", album: "Hotel California" },
+  { artist: "Metallica", track: "Nothing Else Matters", album: "Metallica" },
+  { artist: "Death", track: "Painkiller", album: "The Sound of Perseverance" },
+  { artist: "ABOTT", track: "30th February", album: "Somnia" },
+] as const;
+
 export const timeline = [
   { year: "2025", text: "entered college" },
   { year: "2026", text: "contributing to open source" },

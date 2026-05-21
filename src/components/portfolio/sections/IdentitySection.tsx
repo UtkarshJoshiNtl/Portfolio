@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, FileText } from "lucide-react";
+import { toast } from "sonner";
 import { Tile } from "../Tile";
 import { links } from "@/lib/portfolio-data";
 
@@ -16,7 +17,7 @@ export function IdentitySection() {
         style={{ transformStyle: "preserve-3d" }}
       >
         <Tile id="identity" label="Utkarsh Joshi" className="h-full" bg="bg-tile">
-          <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-amber">
+          <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-amber tagline-cursor">
             Systems &amp; Simulation Engineer
           </div>
           <h1 className="mt-3 text-3xl md:text-5xl font-semibold tracking-tight">
@@ -47,12 +48,17 @@ export function IdentitySection() {
         delay={0.05}
       />
       <ContactTile
-        href={`mailto:${links.email}`}
+        onClick={() => {
+          navigator.clipboard.writeText(links.email).then(() => {
+            toast.success("Email copied to clipboard");
+          }).catch(() => {
+            window.open(`mailto:${links.email}`);
+          });
+        }}
         Icon={Mail}
         label="Email"
-        sub="say hi"
+        sub={`mailto:${links.email}`}
         delay={0.1}
-        external={false}
       />
       <ContactTile
         href={links.resume}
@@ -75,6 +81,7 @@ export function IdentitySection() {
 
 function ContactTile({
   href,
+  onClick,
   Icon,
   label,
   sub,
@@ -82,7 +89,8 @@ function ContactTile({
   accent,
   external = true,
 }: {
-  href: string;
+  href?: string;
+  onClick?: () => void;
   Icon: React.ComponentType<{ className?: string }>;
   label: string;
   sub: string;
@@ -101,6 +109,7 @@ function ContactTile({
       <Tile
         label={label}
         href={href}
+        onClick={onClick}
         external={external}
         className={`h-full ${accent ? "border-b-2 border-b-amber" : ""}`}
         bg={accent ? "bg-tile-alt" : "bg-tile"}

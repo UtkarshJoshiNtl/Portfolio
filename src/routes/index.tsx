@@ -10,11 +10,12 @@ import { AstrosisPanel } from "@/components/portfolio/panels/AstrosisPanel";
 import { ProjectsPanel } from "@/components/portfolio/panels/ProjectsPanel";
 import { RoadmapPanel } from "@/components/portfolio/panels/RoadmapPanel";
 import { GalleryPanel } from "@/components/portfolio/panels/GalleryPanel";
+import { DoomEmulator } from "@/components/portfolio/DoomTile";
 import { ThemeSwitcher } from "@/components/theme/ThemeSwitcher";
 
 export const Route = createFileRoute("/")({ component: Index });
 
-type PanelId = "astrosis" | "projects" | "roadmap" | "gallery" | null;
+type PanelId = "astrosis" | "projects" | "roadmap" | "gallery" | "doom" | null;
 
 function Index() {
   const [panel, setPanel] = useState<PanelId>(null);
@@ -54,8 +55,9 @@ function Index() {
           seed={seed}
           onOpenGallery={() => setPanel("gallery")}
           onOpenRoadmap={() => setPanel("roadmap")}
+          onOpenDoom={() => setPanel("doom")}
         />
-        {/* DoomTile temporarily disabled — needs public/doom/doom.jsdos and wdosbox.wasm.js */}
+        {/* DoomTile is now active in BeyondSection — assets at public/doom/ */}
       </div>
 
       <AnimatePresence>
@@ -63,6 +65,7 @@ function Index() {
         {panel === "projects" && <ProjectsPanel key="projects" onClose={close} />}
         {panel === "roadmap" && <RoadmapPanel key="roadmap" onClose={close} />}
         {panel === "gallery" && <GalleryPanel key="gallery" onClose={close} />}
+        {panel === "doom" && <DoomEmulator key="doom" onExit={close} />}
       </AnimatePresence>
     </main>
   );

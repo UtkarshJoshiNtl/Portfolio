@@ -24,6 +24,22 @@ export function AboutPanel({ onClose }: { onClose: () => void }) {
         </p>
       </div>
 
+      <div className="mt-8">
+        <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-amber mb-3">
+          Currently Reading / Learning
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {["GPU Gems 3", "Computer Graphics: Principles", "PBRT", "Real-Time Rendering"].map((item) => (
+            <span
+              key={item}
+              className="font-mono text-[10px] uppercase tracking-[0.15em] px-2 py-1 border border-border text-muted-foreground"
+            >
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+
       <div className="mt-10 grid grid-cols-2 max-w-md font-mono text-xs">
         <div className="text-muted-foreground uppercase tracking-[0.15em]">Location</div>
         <div>India</div>

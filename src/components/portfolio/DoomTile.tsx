@@ -1,170 +1,146 @@
 import { useEffect, useRef, useState } from "react";
-import { Skull, Loader2, X, Volume2, VolumeX } from "lucide-react";
+import { Skull, Loader2, X } from "lucide-react";
 
 declare global {
   interface Window {
-    Dos?: (
-      canvas: HTMLCanvasElement,
-      opts?: { wdosboxUrl?: string },
-    ) => {
-      ready: (
-        cb: (
-          fs: { extract: (url: string) => Promise<void> },
-          main: (args: string[]) => Promise<{ exit: () => void }>,
-        ) => void,
-      ) => void;
-    };
+    Dos: (
+      element: HTMLElement,
+      opts?: { url?: string },
+    ) => Promise<{
+      exit: () => Promise<void>;
+      mute: () => void;
+      unmute: () => void;
+      simulateKeyPress: (...keys: number[]) => void;
+    }>;
   }
 }
 
 type Stage = "idle" | "loading" | "running" | "error";
 
-export function DoomTile() {
-  const [stage, setStage] = useState<Stage>("idle");
-  const [muted, setMuted] = useState(false);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const ciRef = useRef<{ exit: () => void } | null>(null);
-
-  const launch = async () => {
-    if (stage !== "idle") return;
-    setStage("loading");
-    try {
-      // Inject the js-dos script + stylesheet if not already present.
-      if (!window.Dos) {
-        await Promise.all([
-          loadScript("/doom/js-dos.js"),
-          loadStylesheet("/doom/js-dos.css"),
-        ]);
-      }
-      if (!window.Dos || !canvasRef.current) throw new Error("js-dos failed to load");
-      const dos = window.Dos(canvasRef.current, { wdosboxUrl: "/doom/wdosbox.js" });
-      dos.ready((fs, main) => {
-        fs.extract("/doom/doom.jsdos").then(async () => {
-          const ci = await main(["-c", "DOOM.EXE"]);
-          ciRef.current = ci;
-          setStage("running");
-          // Trap arrow keys etc. — focus the canvas.
-          canvasRef.current?.focus();
-        });
-      });
-    } catch (e) {
-      console.error("[DOOM] failed", e);
-      setStage("error");
-    }
-  };
-
-  const stop = () => {
-    try {
-      ciRef.current?.exit();
-    } catch {
-      /* ignore */
-    }
-    ciRef.current = null;
-    setStage("idle");
-  };
-
-  useEffect(() => () => stop(), []);
-
+export function DoomTile({ onOpen }: { onOpen: () => void }) {
   return (
-    <section className="mt-6 md:mt-8">
-      <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-amber mb-3">
-        Bonus Level
-      </div>
-      <div
-        className="relative w-full bg-tile border border-border overflow-hidden"
-        style={{
-          aspectRatio: stage === "running" ? "4 / 3" : "16 / 5",
-          maxHeight: stage === "running" ? "min(70vh, 800px)" : "260px",
-        }}
-      >
-        {/* Canvas is always present so js-dos can attach to it */}
-        <canvas
-          ref={canvasRef}
-          tabIndex={0}
-          className={`w-full h-full block outline-none ${
-            stage === "running" ? "opacity-100" : "opacity-0 pointer-events-none"
-          }`}
-        />
+    <button
+      onClick={onOpen}
+      className="block w-full h-full group bg-tile border border-transparent hover:border-amber transition-colors p-5 relative overflow-hidden text-left"
+      aria-label="Launch DOOM"
+    >
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,oklch(0.25_0.18_25_/_0.25)_0%,transparent_70%)]" />
 
-        {/* Idle / loading / error overlay */}
-        {stage !== "running" && (
-          <button
-            onClick={launch}
-            disabled={stage === "loading"}
-            className="absolute inset-0 group flex items-center justify-center text-foreground bg-[radial-gradient(ellipse_at_center,oklch(0.25_0.18_25_/_0.35)_0%,transparent_70%)] hover:bg-[radial-gradient(ellipse_at_center,oklch(0.35_0.22_25_/_0.5)_0%,transparent_70%)] transition-colors"
-            aria-label="Launch DOOM"
-          >
-            <div className="flex flex-col items-center gap-3 px-4 text-center">
-              {stage === "loading" ? (
-                <Loader2 className="w-8 h-8 text-amber animate-spin" />
-              ) : (
-                <Skull className="w-10 h-10 text-amber group-hover:scale-110 transition-transform" />
-              )}
-              <div
-                className="font-mono text-2xl md:text-4xl font-bold tracking-[0.2em] text-amber"
-                style={{ textShadow: "0 0 24px oklch(0.55 0.25 25 / 0.6)" }}
-              >
-                {stage === "loading"
-                  ? "LOADING…"
-                  : stage === "error"
-                    ? "DOOM FAILED"
-                    : "ENTER DOOM"}
-              </div>
-              <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
-                {stage === "error"
-                  ? "Could not start emulator — refresh and try again"
-                  : "DOOM (1993) · embedded · WASM · ~5 MB"}
-              </div>
-            </div>
-          </button>
-        )}
-
-        {/* Controls when running */}
-        {stage === "running" && (
-          <div className="absolute top-2 right-2 flex gap-1 z-10">
-            <button
-              onClick={() => setMuted((m) => !m)}
-              className="w-8 h-8 bg-black/60 backdrop-blur border border-border flex items-center justify-center text-white hover:border-amber"
-              aria-label={muted ? "Unmute" : "Mute"}
-            >
-              {muted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-            </button>
-            <button
-              onClick={stop}
-              className="w-8 h-8 bg-black/60 backdrop-blur border border-border flex items-center justify-center text-white hover:border-amber"
-              aria-label="Exit DOOM"
-            >
-              <X className="w-4 h-4" />
-            </button>
-          </div>
-        )}
+      <div className="relative z-10 flex flex-col items-center justify-center h-full gap-2">
+        <Skull className="w-10 h-10 text-amber group-hover:scale-110 transition-transform" />
+        <div
+          className="font-mono text-2xl md:text-3xl font-bold tracking-[0.2em] text-amber"
+          style={{ textShadow: "0 0 24px oklch(0.55 0.25 25 / 0.6)" }}
+        >
+          ENTER DOOM
+        </div>
+        <div className="font-mono text-[10px] uppercase tracking-[0.25em] text-muted-foreground">
+          DOOM (1993) · embedded · WASM · ~5 MB
+        </div>
       </div>
-    </section>
+    </button>
   );
 }
 
-function loadScript(src: string): Promise<void> {
-  return new Promise((resolve, reject) => {
-    const existing = document.querySelector(`script[src="${src}"]`);
-    if (existing) return resolve();
-    const s = document.createElement("script");
-    s.src = src;
-    s.async = true;
-    s.onload = () => resolve();
-    s.onerror = () => reject(new Error(`Failed to load ${src}`));
-    document.head.appendChild(s);
-  });
-}
+export function DoomEmulator({ onExit }: { onExit: () => void }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const ciRef = useRef<{ exit: () => Promise<void>; mute: () => void; unmute: () => void } | null>(null);
+  const [stage, setStage] = useState<Stage>("loading");
+  const [muted, setMuted] = useState(false);
 
-function loadStylesheet(href: string): Promise<void> {
-  return new Promise((resolve, reject) => {
-    const existing = document.querySelector(`link[href="${href}"]`);
-    if (existing) return resolve();
-    const l = document.createElement("link");
-    l.rel = "stylesheet";
-    l.href = href;
-    l.onload = () => resolve();
-    l.onerror = () => reject(new Error(`Failed to load ${href}`));
-    document.head.appendChild(l);
-  });
+  useEffect(() => {
+    let cancelled = false;
+    const el = containerRef.current;
+    if (!el) return;
+
+    const init = async () => {
+      try {
+        if (!window.Dos) {
+          const script = document.createElement("script");
+          script.src = "/doom/js-dos.js";
+          script.async = true;
+          await new Promise<void>((resolve, reject) => {
+            script.onload = () => resolve();
+            script.onerror = () => reject(new Error("Failed to load js-dos.js"));
+            document.head.appendChild(script);
+          });
+        }
+        if (cancelled) return;
+
+        const ci = await window.Dos(el, { url: "/doom/doom.jsdos" });
+        if (cancelled) {
+          ci.exit();
+          return;
+        }
+        ciRef.current = ci;
+        setStage("running");
+      } catch {
+        if (!cancelled) setStage("error");
+      }
+    };
+    init();
+
+    return () => {
+      cancelled = true;
+      ciRef.current?.exit();
+    };
+  }, []);
+
+  const stop = () => {
+    ciRef.current?.exit();
+    ciRef.current = null;
+    setStage("idle");
+    onExit();
+  };
+
+  const toggleMute = () => {
+    if (!ciRef.current) return;
+    if (muted) ciRef.current.unmute();
+    else ciRef.current.mute();
+    setMuted((m) => !m);
+  };
+
+  return (
+    <div className="fixed inset-0 z-50 bg-background flex flex-col">
+      <div className="absolute top-4 right-4 z-50 flex gap-2">
+        <button
+          onClick={toggleMute}
+          className="w-10 h-10 bg-black/60 backdrop-blur border border-border flex items-center justify-center text-white hover:border-amber"
+          aria-label={muted ? "Unmute" : "Mute"}
+        >
+          {muted ? "🔇" : "🔊"}
+        </button>
+        <button
+          onClick={stop}
+          className="w-10 h-10 bg-black/60 backdrop-blur border border-border flex items-center justify-center text-white hover:border-amber"
+          aria-label="Exit DOOM"
+        >
+          <X className="w-5 h-5" />
+        </button>
+      </div>
+
+      {/* Container always visible so Dos() measures correct dimensions */}
+      <div ref={containerRef} className="flex-1 min-h-0" />
+
+      {/* Overlays on top */}
+      {(stage === "loading" || stage === "error") && (
+        <div className="absolute inset-0 flex items-center justify-center bg-background">
+          {stage === "loading" ? (
+            <div className="flex flex-col items-center gap-3">
+              <Loader2 className="w-8 h-8 text-amber animate-spin" />
+              <div className="font-mono text-xl tracking-[0.2em] text-amber">LOADING DOOM…</div>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center gap-3 text-center px-4">
+              <Skull className="w-10 h-10 text-doom" />
+              <div className="font-mono text-2xl font-bold text-doom">DOOM FAILED</div>
+              <div className="font-mono text-[10px] text-muted-foreground">
+                Could not start the emulator. Make sure /doom/doom.jsdos exists.
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
 }

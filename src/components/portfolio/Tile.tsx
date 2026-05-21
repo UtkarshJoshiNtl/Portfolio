@@ -22,6 +22,13 @@ export function Tile({
   children,
   bg = "bg-tile",
 }: TileProps) {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      onClick?.();
+    }
+  };
+
   const content = (
     <motion.div
       layoutId={id ? `tile-${id}` : undefined}
@@ -35,6 +42,10 @@ export function Tile({
       transition={{ type: "spring", stiffness: 320, damping: 22 }}
       style={{ minHeight: 0, transformStyle: "preserve-3d" }}
       className={`group relative overflow-hidden border border-transparent hover:border-amber cursor-pointer ${bg} ${className}`}
+      tabIndex={0}
+      role="button"
+      aria-label={label}
+      onKeyDown={handleKeyDown}
     >
       <div className="relative z-10 h-full w-full p-5 flex flex-col" style={{ transform: "translateZ(20px)" }}>
         {children}
@@ -55,13 +66,14 @@ export function Tile({
         target={external ? "_blank" : undefined}
         rel={external ? "noopener noreferrer" : undefined}
         className="block h-full"
+        style={{ touchAction: "manipulation" }}
       >
         {content}
       </a>
     );
   }
   return (
-    <button onClick={onClick} className="block h-full w-full text-left">
+    <button onClick={onClick} className="block h-full w-full text-left" style={{ touchAction: "manipulation" }}>
       {content}
     </button>
   );

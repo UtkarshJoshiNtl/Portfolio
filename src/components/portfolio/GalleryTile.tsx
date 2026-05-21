@@ -56,7 +56,7 @@ export function GalleryTile({ onOpen }: { onOpen: () => void }) {
           {cur?.title ?? "Loading…"}
         </div>
         <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-white/70 truncate">
-          {cur?.artist ?? "Art Institute of Chicago"}
+          {cur?.artist ?? "Steam"}
         </div>
       </div>
     </button>
