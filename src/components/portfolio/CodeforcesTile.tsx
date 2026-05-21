@@ -76,7 +76,7 @@ export function CodeforcesTile() {
       href={links.codeforces}
       target="_blank"
       rel="noopener noreferrer"
-      className="block h-full group bg-tile-alt border border-transparent hover:border-amber transition-colors p-5 relative overflow-hidden flex flex-col"
+      className="block h-full group bg-tile-alt bg-pattern-grid border border-transparent hover:border-amber transition-colors p-5 relative overflow-hidden flex flex-col"
     >
       {ratings.length >= 2 && <RatingChart ratings={ratings} />}
 

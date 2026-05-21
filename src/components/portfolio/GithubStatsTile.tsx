@@ -29,7 +29,7 @@ export function GithubStatsTile() {
       href={links.github}
       target="_blank"
       rel="noopener noreferrer"
-      className="block h-full group bg-tile border border-transparent hover:border-amber transition-colors p-5 relative overflow-hidden"
+      className="block h-full group bg-tile bg-pattern-dots border border-transparent hover:border-amber transition-colors p-5 relative overflow-hidden"
     >
       <div className="flex items-center gap-2">
         <Github className="w-4 h-4 text-amber" />

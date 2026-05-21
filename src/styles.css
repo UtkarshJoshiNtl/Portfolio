@@ -754,3 +754,33 @@
     outline-offset: 2px;
   }
 }
+
+/* Tile background patterns */
+.bg-pattern-dots {
+  background-image: radial-gradient(var(--color-border) 0.5px, transparent 0.5px);
+  background-size: 12px 12px;
+}
+
+.bg-pattern-cross {
+  background-image:
+    linear-gradient(45deg, transparent 48%, var(--color-border) 48%, var(--color-border) 52%, transparent 52%),
+    linear-gradient(-45deg, transparent 48%, var(--color-border) 48%, var(--color-border) 52%, transparent 52%);
+  background-size: 16px 16px;
+}
+
+.bg-pattern-lines {
+  background-image: repeating-linear-gradient(-45deg, transparent, transparent 4px, var(--color-border) 4px, var(--color-border) 5px);
+  background-size: 8px 8px;
+}
+
+.bg-pattern-grid {
+  background-image:
+    linear-gradient(var(--color-border) 0.5px, transparent 0.5px),
+    linear-gradient(90deg, var(--color-border) 0.5px, transparent 0.5px);
+  background-size: 20px 20px;
+}
+
+.bg-pattern-waves {
+  background-image: repeating-linear-gradient(0deg, transparent, transparent 8px, var(--color-border) 8px, var(--color-border) 9px);
+  background-size: 100% 18px;
+}

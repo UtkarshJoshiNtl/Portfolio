@@ -117,7 +117,7 @@ export function BeyondSection({
               id="roadmap"
               label="Roadmap"
               onClick={onOpenRoadmap}
-              className="h-full"
+              className="h-full bg-pattern-lines"
               bg="bg-tile-alt"
             >
               <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">

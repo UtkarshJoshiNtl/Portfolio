@@ -21,7 +21,7 @@ export function DoomTile({ onOpen }: { onOpen: () => void }) {
   return (
     <button
       onClick={onOpen}
-      className="block w-full h-full group bg-tile border border-transparent hover:border-amber transition-colors p-5 relative overflow-hidden text-left"
+      className="block w-full h-full group bg-tile bg-pattern-dots border border-transparent hover:border-amber transition-colors p-5 relative overflow-hidden text-left"
       aria-label="Launch DOOM"
     >
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,oklch(0.25_0.18_25_/_0.25)_0%,transparent_70%)]" />

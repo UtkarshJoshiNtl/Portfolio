@@ -22,7 +22,7 @@ export function MusicPlayer() {
   }, [tracks.length]);
 
   return (
-    <div className="h-full bg-tile-purple border border-transparent hover:border-amber transition-colors p-5 relative overflow-hidden flex flex-col">
+    <div className="h-full bg-tile-purple bg-pattern-waves border border-transparent hover:border-amber transition-colors p-5 relative overflow-hidden flex flex-col">
       {/* Spinning vinyl record */}
       <div className="absolute inset-0 flex items-center justify-center opacity-30 md:opacity-40">
         <div className="relative w-28 h-28 md:w-36 md:h-36">

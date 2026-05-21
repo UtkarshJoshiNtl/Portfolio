@@ -30,9 +30,9 @@ export function GalleryPanel({ onClose }: { onClose: () => void }) {
       <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-amber">
         Gallery
       </div>
-      <h2 className="mt-2 text-3xl md:text-5xl font-semibold">Steam Game Art</h2>
+      <h2 className="mt-2 text-3xl md:text-5xl font-semibold">Art Institute of Chicago</h2>
       <p className="mt-2 text-sm text-muted-foreground">
-        Header art from games I've played. Use ← → to navigate.
+        Public-domain artworks from the Art Institute of Chicago collection. Use ← → to navigate.
       </p>
 
       {cur ? (
@@ -46,7 +46,7 @@ export function GalleryPanel({ onClose }: { onClose: () => void }) {
             <div>
               <div className="font-semibold text-lg">{cur.title}</div>
               <div className="font-mono text-xs text-muted-foreground">
-                {cur.artist ?? "Unknown"}
+                {cur.artist ?? "Unknown"}{cur.date ? ` · ${cur.date}` : ""}
               </div>
             </div>
             <div className="flex items-center gap-2">
