@@ -25,7 +25,7 @@ export async function getCuratedTracks(): Promise<{
       songs.map(async (s) => {
         const term = encodeURIComponent(`${s.artist} ${s.track}`);
         const res = await fetch(
-          `https://itunes.apple.com/search?term=${term}&entity=song&limit=5`,
+          `/api/music?term=${term}&entity=song&limit=5`,
         );
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const json = (await res.json()) as {

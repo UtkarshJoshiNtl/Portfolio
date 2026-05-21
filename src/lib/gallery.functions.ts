@@ -21,7 +21,7 @@ export async function getRandomArt(): Promise<{
   try {
     const ids = games.map((g) => g.id).join(",");
     const res = await fetch(
-      `https://store.steampowered.com/api/appdetails?appids=${ids}`,
+      `/api/steam?appids=${ids}`,
     );
     if (!res.ok) return { items: [], error: `HTTP ${res.status}` };
     const json = (await res.json()) as Record<
