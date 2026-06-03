@@ -52,7 +52,12 @@ function RatingChart({ ratings }: { ratings: Array<{ rating: number }> }) {
         </linearGradient>
       </defs>
       <polygon points={areaPoints} fill="url(#cfGrad)" />
-      <polyline points={points.join(" ")} fill="none" stroke="var(--color-amber)" strokeWidth="1.5" />
+      <polyline
+        points={points.join(" ")}
+        fill="none"
+        stroke="var(--color-amber)"
+        strokeWidth="1.5"
+      />
       <circle cx={lastX} cy={lastY} r="2.5" fill="var(--color-amber)" />
     </svg>
   );
@@ -88,7 +93,9 @@ export function CodeforcesTile() {
       </div>
 
       <div className="mt-auto">
-        <div className={`font-mono text-4xl md:text-5xl font-semibold tabular-nums leading-none ${color}`}>
+        <div
+          className={`font-mono text-4xl md:text-5xl font-semibold tabular-nums leading-none ${color}`}
+        >
           {stats?.rating ?? "—"}
         </div>
         <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">

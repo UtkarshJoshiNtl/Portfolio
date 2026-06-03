@@ -47,7 +47,10 @@ export function Tile({
       aria-label={label}
       onKeyDown={handleKeyDown}
     >
-      <div className="relative z-10 h-full w-full p-5 flex flex-col" style={{ transform: "translateZ(20px)" }}>
+      <div
+        className="relative z-10 h-full w-full p-5 flex flex-col"
+        style={{ transform: "translateZ(20px)" }}
+      >
         {children}
       </div>
       <div
@@ -73,7 +76,11 @@ export function Tile({
     );
   }
   return (
-    <button onClick={onClick} className="block h-full w-full text-left" style={{ touchAction: "manipulation" }}>
+    <button
+      onClick={onClick}
+      className="block h-full w-full text-left"
+      style={{ touchAction: "manipulation" }}
+    >
       {content}
     </button>
   );

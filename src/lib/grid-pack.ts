@@ -119,12 +119,7 @@ export function pack(
       const target = above ?? left;
       if (!target) continue;
       const p = placed.find(
-        (pp) =>
-          pp.key === target &&
-          x >= pp.x &&
-          x < pp.x + pp.w &&
-          y >= pp.y &&
-          y <= pp.y + pp.h,
+        (pp) => pp.key === target && x >= pp.x && x < pp.x + pp.w && y >= pp.y && y <= pp.y + pp.h,
       );
       if (p) {
         if (above === target) p.h = Math.max(p.h, y - p.y + 1);

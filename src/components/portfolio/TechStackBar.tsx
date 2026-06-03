@@ -2,9 +2,7 @@ import { techStack } from "@/lib/portfolio-data";
 
 const LANGUAGES = techStack.filter((t) => ["C", "C++", "Python"].includes(t));
 const TOOLS = techStack.filter((t) => ["Git", "CMake"].includes(t));
-const TECHNOLOGIES = techStack.filter(
-  (t) => !["C", "C++", "Python", "Git", "CMake"].includes(t),
-);
+const TECHNOLOGIES = techStack.filter((t) => !["C", "C++", "Python", "Git", "CMake"].includes(t));
 
 const categories = [
   { label: "Languages", items: LANGUAGES },

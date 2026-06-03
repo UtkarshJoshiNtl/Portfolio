@@ -8,34 +8,6 @@ export const links = {
   resume: "/resume.pdf",
 };
 
-export const games = [
-  { id: 1245620, name: "Elden Ring", dev: "FromSoftware" },
-  { id: 1086940, name: "Baldur's Gate 3", dev: "Larian Studios" },
-  { id: 2215430, name: "Ghost of Tsushima", dev: "Sucker Punch" },
-  { id: 2331290, name: "Kingdom Come: Deliverance II", dev: "Warhorse Studios" },
-  { id: 374320, name: "Dark Souls III", dev: "FromSoftware" },
-  { id: 435150, name: "Divinity: Original Sin 2", dev: "Larian Studios" },
-  { id: 1627720, name: "Lies of P", dev: "Neowiz" },
-  { id: 292030, name: "The Witcher 3: Wild Hunt", dev: "CD Projekt Red" },
-] as const;
-
-export const songs = [
-  { artist: "Kendrick Lamar", track: "Sing About Me, I'm Dying of Thirst", album: "To Pimp a Butterfly" },
-  { artist: "Kanye West", track: "Runaway", album: "My Beautiful Dark Twisted Fantasy" },
-  { artist: "Frank Ocean", track: "Nights", album: "Blonde" },
-  { artist: "Travis Scott", track: "90210", album: "Rodeo" },
-  { artist: "Radiohead", track: "Fake Plastic Trees", album: "The Bends" },
-  { artist: "System of a Down", track: "Hypnotize", album: "Hypnotize" },
-  { artist: "System of a Down", track: "Question!", album: "Mezmerize" },
-  { artist: "System of a Down", track: "Lonely Day", album: "Hypnotize" },
-  { artist: "System of a Down", track: "Vicinity of Obscenity", album: "Mezmerize" },
-  { artist: "System of a Down", track: "Kill Rock 'n Roll", album: "Hypnotize" },
-  { artist: "Eagles", track: "Hotel California", album: "Hotel California" },
-  { artist: "Metallica", track: "Nothing Else Matters", album: "Metallica" },
-  { artist: "Death", track: "Painkiller", album: "The Sound of Perseverance" },
-  { artist: "ABOTT", track: "30th February", album: "Somnia" },
-] as const;
-
 export const timeline = [
   { year: "2025", text: "entered college" },
   { year: "2026", text: "contributing to open source" },
@@ -64,32 +36,19 @@ export const astrosisCycle = [
   "RK4 + J2/J3/J4 harmonics + atmospheric drag",
 ];
 
-export const projectsCycle = ["cjit", "Quip", "CuFloda", "OwlEchoSense", "LANParty"];
-export const roadmapCycle = ["May → October 2026", "7-phase technical plan"];
-export const hobbyCycle = ["3D Art", "Music"];
-export const aboutCycle = ["First-year CS undergraduate", "Building from first principles"];
+export const quipCycle = [
+  "Quip — Unix Shell in C99",
+  "Raw terminal mode from scratch",
+  "Pipelines · redirection · job control",
+  "Signal handling · tab completion",
+];
 
-// Small project tiles in Work section
-export const smallProjects = [
-  {
-    key: "cjit",
-    name: "cjit",
-    tags: ["C", "VCS"],
-    accent: "bg-tile",
-  },
-  {
-    key: "quip",
-    name: "Quip",
-    tags: ["C", "POSIX"],
-    accent: "bg-tile-alt",
-  },
-  {
-    key: "cufloda",
-    name: "CuFloda",
-    tags: ["Python", "LBM"],
-    accent: "bg-tile",
-  },
-] as const;
+export const cuflodaCycle = [
+  "CuFloda — Lattice Boltzmann Fluid",
+  "D2Q9 method with real-time viz",
+  "Complex boundaries · obstacle drawing",
+  "CUDA acceleration planned",
+];
 
 export const benchmarks = [
   ["Operation", "Python", "C++", "CUDA"],
@@ -146,83 +105,5 @@ export const projects = [
     description:
       "Cross-platform LAN gaming application. Real-time multiplayer using WebSocket communication with automatic game discovery and lobby management. Supports chess, ludo, and monopoly with no internet dependency.",
     github: "https://github.com/UtkarshJoshiNtl/LANParty",
-  },
-];
-
-export const roadmapRules = [
-  {
-    title: "No new directions",
-    body: "Everything stays inside systems · simulation · visualization · GPU · C++/Python",
-  },
-  {
-    title: "Projects must be readable",
-    body: "A reviewer spends 90 seconds on a repo. Make it count.",
-  },
-  {
-    title: "Consistency beats intensity",
-    body: "5-6 hours daily beats one heroic week followed by nothing",
-  },
-  {
-    title: "One rest day per week",
-    body: "Non-optional. This is what keeps the plan sustainable.",
-  },
-];
-
-export const dailyStructure = [
-  { hours: "3h", title: "Core build", body: "Main project work: Astrosis, CuFloda, or active OSS contribution" },
-  { hours: "1.5h", title: "Structured learning", body: "OpenGL / CUDA / C++ via specific resources, not random tutorials" },
-  { hours: "1.5h", title: "Codeforces", body: "2 contests/week minimum, upsolve everything" },
-  { hours: "After Aug", title: "Drop to 4-5h total", body: "Protect build time first" },
-];
-
-export const phases = [
-  {
-    n: "Phase 1",
-    when: "May 16 – May 31",
-    title: "GitHub cleanup",
-    body: "Make existing repos readable. Architecture diagrams, terminal GIFs, issue trackers, roadmap sections for each repo. Linux tooling: gdb, tmux, Makefiles.",
-    tags: ["readable GitHub", "diagrams on 2+ repos", "issue trackers active", "shell comfort"],
-  },
-  {
-    n: "Phase 2",
-    when: "Jun 1 – Jun 20",
-    title: "OpenGL foundations",
-    body: "Learn rendering pipeline, shaders, VAOs/VBOs, transformation matrices, camera movement. Build a particle/starfield renderer. Wire it into Astrosis so orbital bodies are visible dots.",
-    tags: ["working renderer", "Astrosis has visuals", "shader literacy"],
-  },
-  {
-    n: "Phase 3",
-    when: "Jun 21 – Jun 30",
-    title: "CUDA entry + C++ deepening",
-    body: "First CUDA kernel: vector addition with verified correctness. Host/device memory model. Modern C++: RAII, smart pointers, move semantics, STL.",
-    tags: ["CUDA kernel working", "host/device model understood", "cleaner C++"],
-  },
-  {
-    n: "Phase 4",
-    when: "Jul 1 – Jul 31",
-    title: "Project depth + OSS entry",
-    body: "Astrosis gets orbital rendering with real data, camera controls, trajectory trails, time scaling, and a README GIF. CuFloda gets a CUDA lattice update kernel with CPU vs GPU benchmark numbers. First OSS PR to a real project — docs, test, or build fix only.",
-    tags: ["Astrosis GIF", "CuFloda CUDA kernel", "benchmark numbers", "first OSS PR"],
-  },
-  {
-    n: "Phase 5",
-    when: "Aug 1 – Aug 31",
-    title: "External credibility",
-    body: "Hours drop to 4-5/day. Astrosis polish: UI overlays, profiling notes, clean install instructions. Second OSS contribution. Apply to Outreachy December cohort.",
-    tags: ["polished README", "2 OSS PRs", "benchmarks visible", "Outreachy applied"],
-  },
-  {
-    n: "Phase 6",
-    when: "Sep 1 – Sep 30",
-    title: "Depth, not breadth",
-    body: "CUDA deeper: shared memory, memory coalescing, kernel profiling with Nsight. Flamegraph experience. Data-oriented design basics. Third OSS contribution in same ecosystem.",
-    tags: ["faster kernel with proof", "flamegraph experience", "3+ OSS contributions"],
-  },
-  {
-    n: "Phase 7",
-    when: "Oct 1 – Oct 31",
-    title: "Hacktoberfest + writing",
-    body: "4 meaningful OSS contributions (no typo fixes). Publish one technical post about something actually learned — not a tutorial. Dev.to or GitHub Pages.",
-    tags: ["5+ OSS contributions", "1 published post", "Astrosis with GIF + benchmarks", "stable CF routine"],
   },
 ];

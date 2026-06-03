@@ -20,12 +20,11 @@ export function IdentitySection() {
           <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-amber tagline-cursor">
             Systems &amp; Simulation Engineer
           </div>
-          <h1 className="mt-3 text-3xl md:text-5xl font-semibold tracking-tight">
-            Utkarsh Joshi
-          </h1>
+          <h1 className="mt-3 text-3xl md:text-5xl font-semibold tracking-tight">Utkarsh Joshi</h1>
           <p className="mt-2 text-sm md:text-base text-muted-foreground max-w-xl">
             Building high-performance simulation and systems software with C++, CUDA, and Python.
-            Focused on orbital mechanics, GPU acceleration, scientific visualization, and low-level systems engineering.
+            Focused on orbital mechanics, GPU acceleration, scientific visualization, and low-level
+            systems engineering.
           </p>
           <div className="mt-4 flex flex-wrap gap-2">
             {tags.map((t) => (
@@ -51,13 +50,11 @@ export function IdentitySection() {
         onClick={() => {
           navigator.clipboard.writeText(links.email).then(() => {
             toast.success("Email copied to clipboard");
-          }).catch(() => {
-            window.open(`mailto:${links.email}`);
           });
         }}
         Icon={Mail}
         label="Email"
-        sub={`mailto:${links.email}`}
+        sub={links.email}
         delay={0.1}
       />
       <ContactTile

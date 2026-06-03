@@ -29,10 +29,7 @@ function fallbackIndexHtml(): import("vite").Plugin {
         .map((f) => `<link rel="stylesheet" href="/assets/${f}" />`)
         .join("\n");
       const jsScripts = jsFiles
-        .map(
-          (f) =>
-            `<script type="module" async="" src="/assets/${f}"></script>`,
-        )
+        .map((f) => `<script type="module" async="" src="/assets/${f}"></script>`)
         .join("\n");
       const html = `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="description" content="Utkarsh Joshi — Portfolio"/><title>Utkarsh Joshi</title>${cssLinks}</head><body><div id="root"></div>${jsScripts}</body></html>`;
       writeFileSync(htmlPath, html);

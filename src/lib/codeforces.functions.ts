@@ -53,10 +53,24 @@ export async function getCodeforcesAll({ handle }: { handle: string }): Promise<
         error: null,
       };
     } catch {
-      stats = { handle, rating: null, maxRating: null, rank: null, maxRank: null, error: "parse failed" };
+      stats = {
+        handle,
+        rating: null,
+        maxRating: null,
+        rank: null,
+        maxRank: null,
+        error: "parse failed",
+      };
     }
   } else {
-    stats = { handle, rating: null, maxRating: null, rank: null, maxRank: null, error: "HTTP error" };
+    stats = {
+      handle,
+      rating: null,
+      maxRating: null,
+      rank: null,
+      maxRank: null,
+      error: "HTTP error",
+    };
   }
 
   let ratings: RatingEntry[] = [];

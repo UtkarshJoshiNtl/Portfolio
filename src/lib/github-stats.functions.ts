@@ -7,11 +7,7 @@ type GHStats = {
   error: string | null;
 };
 
-export async function getGithubContributions({
-  user,
-}: {
-  user: string;
-}): Promise<GHStats> {
+export async function getGithubContributions({ user }: { user: string }): Promise<GHStats> {
   try {
     const res = await fetch(
       `https://github-contributions-api.jogruber.de/v4/${encodeURIComponent(user)}?y=last`,

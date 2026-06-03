@@ -8,20 +8,24 @@ export function AboutPanel({ onClose }: { onClose: () => void }) {
 
       <div className="mt-8 space-y-5 text-foreground/90 leading-relaxed max-w-3xl">
         <p>
-          I am a first-year computer science undergraduate focused on high-performance systems,
-          simulation, and GPU computing. My work lives at the intersection of orbital mechanics,
-          numerical methods, and low-level C/C++.
+          First-year undergraduate building high-performance systems, simulators, and GPU software.
+          I write C, C++, CUDA, and Python — from scratch, no wrappers.
         </p>
-        <p>
-          I build things from first principles. When I work on an orbital propagator, I implement
-          the RK4 integrator, the J2 gravity harmonics, the atmospheric drag model, and the CUDA
-          kernel — not call a library. When I build a shell, I implement raw terminal mode, signal
-          handling, and job control from scratch.
-        </p>
-        <p>
-          Currently deepening expertise in CUDA, OpenGL, and parallel computing while making the
-          portfolio signal clearer.
-        </p>
+      </div>
+
+      <div className="mt-8">
+        <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-amber mb-3">
+          Education
+        </div>
+        <div className="border border-border p-5">
+          <div className="font-semibold text-lg">Graphic Era Hill University, Dehradun</div>
+          <div className="font-mono text-xs text-muted-foreground mt-1">
+            B.Tech in Computer Science & Engineering
+          </div>
+          <div className="font-mono text-[10px] uppercase tracking-[0.15em] text-amber mt-2">
+            First Year
+          </div>
+        </div>
       </div>
 
       <div className="mt-8">
@@ -29,14 +33,16 @@ export function AboutPanel({ onClose }: { onClose: () => void }) {
           Currently Reading / Learning
         </div>
         <div className="flex flex-wrap gap-2">
-          {["GPU Gems 3", "Computer Graphics: Principles", "PBRT", "Real-Time Rendering"].map((item) => (
-            <span
-              key={item}
-              className="font-mono text-[10px] uppercase tracking-[0.15em] px-2 py-1 border border-border text-muted-foreground"
-            >
-              {item}
-            </span>
-          ))}
+          {["GPU Gems 3", "Computer Graphics: Principles", "PBRT", "Real-Time Rendering"].map(
+            (item) => (
+              <span
+                key={item}
+                className="font-mono text-[10px] uppercase tracking-[0.15em] px-2 py-1 border border-border text-muted-foreground"
+              >
+                {item}
+              </span>
+            ),
+          )}
         </div>
       </div>
 

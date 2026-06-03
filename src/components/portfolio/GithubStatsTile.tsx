@@ -21,7 +21,7 @@ export function GithubStatsTile() {
 
   const allDays = Array.isArray(data?.days) ? data.days : [];
   const days = allDays.slice(-126);
-  const cols: typeof days[] = [];
+  const cols: (typeof days)[] = [];
   for (let i = 0; i < days.length; i += 7) cols.push(days.slice(i, i + 7));
 
   return (
@@ -33,9 +33,7 @@ export function GithubStatsTile() {
     >
       <div className="flex items-center gap-2">
         <Github className="w-4 h-4 text-amber" />
-        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-amber">
-          GitHub
-        </span>
+        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-amber">GitHub</span>
       </div>
 
       <div className="mt-3 flex items-baseline gap-4">

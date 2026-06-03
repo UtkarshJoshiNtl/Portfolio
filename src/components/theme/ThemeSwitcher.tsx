@@ -62,9 +62,7 @@ export function ThemeSwitcher() {
                   ))}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <div className="font-mono text-xs font-semibold text-foreground">
-                    {t.label}
-                  </div>
+                  <div className="font-mono text-xs font-semibold text-foreground">{t.label}</div>
                   <div className="font-mono text-[10px] text-muted-foreground truncate">
                     {t.tagline}
                   </div>

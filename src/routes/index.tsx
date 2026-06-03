@@ -5,17 +5,18 @@ import { Shuffle } from "lucide-react";
 import { IdentitySection } from "@/components/portfolio/sections/IdentitySection";
 import { TimelineBand } from "@/components/portfolio/sections/TimelineBand";
 import { WorkSection } from "@/components/portfolio/sections/WorkSection";
+import { ConnectSection } from "@/components/portfolio/sections/ConnectSection";
 import { BeyondSection } from "@/components/portfolio/sections/BeyondSection";
 import { AstrosisPanel } from "@/components/portfolio/panels/AstrosisPanel";
-import { ProjectsPanel } from "@/components/portfolio/panels/ProjectsPanel";
-import { RoadmapPanel } from "@/components/portfolio/panels/RoadmapPanel";
-import { GalleryPanel } from "@/components/portfolio/panels/GalleryPanel";
-import { DoomEmulator } from "@/components/portfolio/DoomTile";
+import { QuipPanel } from "@/components/portfolio/panels/QuipPanel";
+import { CuFlodaPanel } from "@/components/portfolio/panels/CuFlodaPanel";
+import { AboutPanel } from "@/components/portfolio/panels/AboutPanel";
+import { ContactPanel } from "@/components/portfolio/panels/ContactPanel";
 import { ThemeSwitcher } from "@/components/theme/ThemeSwitcher";
 
 export const Route = createFileRoute("/")({ component: Index });
 
-type PanelId = "astrosis" | "projects" | "roadmap" | "gallery" | "doom" | null;
+type PanelId = "astrosis" | "quip" | "cufloda" | "about" | "contact" | null;
 
 function Index() {
   const [panel, setPanel] = useState<PanelId>(null);
@@ -24,10 +25,7 @@ function Index() {
     return 0;
   });
   const close = () => setPanel(null);
-  const reshuffle = useCallback(
-    () => setSeed(Math.floor(Math.random() * 1e9)),
-    [],
-  );
+  const reshuffle = useCallback(() => setSeed(Math.floor(Math.random() * 1e9)), []);
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -49,23 +47,23 @@ function Index() {
         <WorkSection
           seed={seed}
           onOpenAstrosis={() => setPanel("astrosis")}
-          onOpenProjects={() => setPanel("projects")}
+          onOpenQuip={() => setPanel("quip")}
+          onOpenCufloda={() => setPanel("cufloda")}
         />
-        <BeyondSection
+        <ConnectSection
           seed={seed}
-          onOpenGallery={() => setPanel("gallery")}
-          onOpenRoadmap={() => setPanel("roadmap")}
-          onOpenDoom={() => setPanel("doom")}
+          onOpenAbout={() => setPanel("about")}
+          onOpenContact={() => setPanel("contact")}
         />
-        {/* DoomTile is now active in BeyondSection — assets at public/doom/ */}
+        <BeyondSection seed={seed} />
       </div>
 
       <AnimatePresence>
         {panel === "astrosis" && <AstrosisPanel key="astrosis" onClose={close} />}
-        {panel === "projects" && <ProjectsPanel key="projects" onClose={close} />}
-        {panel === "roadmap" && <RoadmapPanel key="roadmap" onClose={close} />}
-        {panel === "gallery" && <GalleryPanel key="gallery" onClose={close} />}
-        {panel === "doom" && <DoomEmulator key="doom" onExit={close} />}
+        {panel === "quip" && <QuipPanel key="quip" onClose={close} />}
+        {panel === "cufloda" && <CuFlodaPanel key="cufloda" onClose={close} />}
+        {panel === "about" && <AboutPanel key="about" onClose={close} />}
+        {panel === "contact" && <ContactPanel key="contact" onClose={close} />}
       </AnimatePresence>
     </main>
   );

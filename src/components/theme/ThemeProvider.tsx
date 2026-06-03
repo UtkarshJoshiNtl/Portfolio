@@ -1,6 +1,16 @@
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
 
-export type ThemeId = "terminal" | "artist" | "noir" | "retro" | "blueprint" | "vaporwave" | "forest" | "ocean" | "nord" | "gruvbox";
+export type ThemeId =
+  | "terminal"
+  | "artist"
+  | "noir"
+  | "retro"
+  | "blueprint"
+  | "vaporwave"
+  | "forest"
+  | "ocean"
+  | "nord"
+  | "gruvbox";
 
 const THEME_COLORS: Record<ThemeId, string> = {
   terminal: "#252525",
