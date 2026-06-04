@@ -9,8 +9,11 @@ export const links = {
 };
 
 export const timeline = [
-  { year: "2025", text: "entered college" },
-  { year: "2026", text: "contributing to open source" },
+  { year: "2025", text: "Entered Graphic Era Hill University (CS)" },
+  { year: "Jan 2026", text: "Began quip — Unix shell in C99 from scratch" },
+  { year: "Mar 2026", text: "Built Astrosis prototype at NSH hackathon (IIT Delhi) — top 10" },
+  { year: "Apr 2026", text: "Started cjit — version control system in C" },
+  { year: "May 2026", text: "Started CuFloda — Lattice Boltzmann fluid simulation" },
 ];
 
 export const techStack = [
@@ -29,12 +32,8 @@ export const techStack = [
   "Linux",
 ];
 
-export const astrosisCycle = [
-  "Astrosis — Orbital Mechanics Engine",
-  "507× batch propagation speedup (C++ vs Python)",
-  "83× conjunction detection speedup (CUDA vs Python)",
-  "RK4 + J2/J3/J4 harmonics + atmospheric drag",
-];
+export const astrosisDesc =
+  "83× conjunction detection speedup (CUDA vs Python) · GPU-accelerated orbital mechanics engine";
 
 export const quipCycle = [
   "Quip — Unix Shell in C99",
@@ -47,7 +46,7 @@ export const cuflodaCycle = [
   "CuFloda — Lattice Boltzmann Fluid",
   "D2Q9 method with real-time viz",
   "Complex boundaries · obstacle drawing",
-  "CUDA acceleration planned",
+  "CPU prototype complete · CUDA in progress",
 ];
 
 export const benchmarks = [

@@ -5,19 +5,9 @@ import { AstrosisBg } from "../AstrosisBg";
 import { QuipBg } from "../QuipBg";
 import { CuFlodaBg } from "../CuFlodaBg";
 import { TechStackBar } from "../TechStackBar";
-import { astrosisCycle, quipCycle, cuflodaCycle } from "@/lib/portfolio-data";
+import { astrosisDesc, quipCycle, cuflodaCycle } from "@/lib/portfolio-data";
 
-export function WorkSection({
-  seed,
-  onOpenAstrosis,
-  onOpenQuip,
-  onOpenCufloda,
-}: {
-  seed: number;
-  onOpenAstrosis: () => void;
-  onOpenQuip: () => void;
-  onOpenCufloda: () => void;
-}) {
+export function WorkSection({ onSelect }: { onSelect: (id: string) => void }) {
   return (
     <section className="mt-2">
       <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-amber mb-3">Work</div>
@@ -35,7 +25,7 @@ export function WorkSection({
           <Tile
             id="astrosis"
             label="Astrosis"
-            onClick={onOpenAstrosis}
+            onClick={() => onSelect("astrosis")}
             className="h-full"
             bg="bg-tile"
           >
@@ -45,10 +35,9 @@ export function WorkSection({
                 Featured
               </div>
               <div className="mt-auto pb-6">
-                <CyclingText
-                  items={astrosisCycle}
-                  className="text-xl md:text-2xl font-semibold leading-snug max-w-md"
-                />
+                <div className="text-xl md:text-2xl font-semibold leading-snug max-w-md">
+                  {astrosisDesc}
+                </div>
               </div>
             </div>
           </Tile>
@@ -61,7 +50,13 @@ export function WorkSection({
           className="col-span-1 row-span-2"
           style={{ transformStyle: "preserve-3d" }}
         >
-          <Tile id="quip" label="Quip" onClick={onOpenQuip} className="h-full" bg="bg-tile-alt">
+          <Tile
+            id="quip"
+            label="Quip"
+            onClick={() => onSelect("quip")}
+            className="h-full"
+            bg="bg-tile-alt"
+          >
             <QuipBg />
             <div className="relative z-10 flex flex-col h-full">
               <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
@@ -87,7 +82,7 @@ export function WorkSection({
           <Tile
             id="cufloda"
             label="CuFloda"
-            onClick={onOpenCufloda}
+            onClick={() => onSelect("cufloda")}
             className="h-full"
             bg="bg-tile"
           >

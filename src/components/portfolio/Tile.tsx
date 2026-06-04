@@ -22,6 +22,8 @@ export function Tile({
   children,
   bg = "bg-tile",
 }: TileProps) {
+  const isLink = !!href;
+
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
@@ -41,11 +43,15 @@ export function Tile({
       whileTap={{ scale: 0.985, rotateY: 0, rotateX: 0 }}
       transition={{ type: "spring", stiffness: 320, damping: 22 }}
       style={{ minHeight: 0, transformStyle: "preserve-3d" }}
-      className={`group relative overflow-hidden border border-transparent hover:border-amber cursor-pointer ${bg} ${className}`}
-      tabIndex={0}
-      role="button"
-      aria-label={label}
-      onKeyDown={handleKeyDown}
+      className={`group relative overflow-hidden border border-transparent hover:border-amber ${isLink ? "" : "cursor-pointer"} ${bg} ${className}`}
+      {...(isLink
+        ? {}
+        : {
+            tabIndex: 0,
+            role: "button" as const,
+            "aria-label": label,
+            onKeyDown: handleKeyDown,
+          })}
     >
       <div
         className="relative z-10 h-full w-full p-5 flex flex-col"

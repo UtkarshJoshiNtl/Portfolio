@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { X } from "lucide-react";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 export function PanelShell({
   id,
@@ -11,7 +11,10 @@ export function PanelShell({
   onClose: () => void;
   children: ReactNode;
 }) {
+  const closeRef = useRef<HTMLButtonElement>(null);
+
   useEffect(() => {
+    closeRef.current?.focus();
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
@@ -28,13 +31,17 @@ export function PanelShell({
       layoutId={`tile-${id}`}
       className="fixed inset-0 z-50 bg-tile overflow-y-auto"
       transition={{ type: "spring", stiffness: 260, damping: 32 }}
+      role="dialog"
+      aria-modal="true"
+      aria-label={id}
     >
       <button
+        ref={closeRef}
         onClick={onClose}
-        aria-label="Close"
+        aria-label="Close panel"
         className="fixed top-4 right-4 z-50 w-10 h-10 flex items-center justify-center border border-border hover:border-amber hover:text-amber transition-colors bg-background"
       >
-        <X className="w-5 h-5" />
+        <X className="w-5 h-5" aria-hidden="true" />
       </button>
       <motion.div
         className="max-w-5xl mx-auto px-6 md:px-10 py-12 md:py-16"

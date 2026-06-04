@@ -11,7 +11,7 @@ const LEVEL_VAR = [
   "var(--gh-cell-4)",
 ];
 
-export function GithubStatsTile() {
+export function GithubStatsTile({ onClick }: { onClick?: () => void }) {
   const { data } = useQuery({
     queryKey: ["gh", links.githubUser],
     queryFn: () => getGithubContributions({ user: links.githubUser }),
@@ -24,53 +24,62 @@ export function GithubStatsTile() {
   const cols: (typeof days)[] = [];
   for (let i = 0; i < days.length; i += 7) cols.push(days.slice(i, i + 7));
 
-  return (
-    <a
-      href={links.github}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="block h-full group bg-tile bg-pattern-dots border border-transparent hover:border-amber transition-colors p-5 relative overflow-hidden"
-    >
-      <div className="flex items-center gap-2">
-        <Github className="w-4 h-4 text-amber" />
-        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-amber">GitHub</span>
-      </div>
+  const Wrapper = onClick ? "button" : "a";
+  const wrapperProps = onClick
+    ? { onClick, className: "block h-full w-full text-left" as const }
+    : {
+        href: links.github,
+        target: "_blank" as const,
+        rel: "noopener noreferrer" as const,
+        className: "block h-full" as const,
+      };
 
-      <div className="mt-3 flex items-baseline gap-4">
-        <div>
-          <span className="font-mono text-2xl font-semibold text-foreground tabular-nums">
-            {data?.total ?? "—"}
-          </span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground ml-1">
-            contributions
+  return (
+    <Wrapper {...wrapperProps}>
+      <div className="h-full group bg-tile bg-pattern-dots border border-transparent hover:border-amber transition-colors p-5 relative overflow-hidden">
+        <div className="flex items-center gap-2">
+          <Github className="w-4 h-4 text-amber" />
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-amber">
+            GitHub
           </span>
         </div>
-        {data?.currentStreak != null && data.currentStreak > 0 && (
+
+        <div className="mt-3 flex items-baseline gap-4">
           <div>
-            <span className="font-mono text-xl font-semibold text-amber tabular-nums">
-              {data.currentStreak}
+            <span className="font-mono text-2xl font-semibold text-foreground tabular-nums">
+              {data?.total ?? "—"}
             </span>
             <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground ml-1">
-              day streak
+              contributions
             </span>
           </div>
-        )}
-      </div>
+          {data?.currentStreak != null && data.currentStreak > 0 && (
+            <div>
+              <span className="font-mono text-xl font-semibold text-amber tabular-nums">
+                {data.currentStreak}
+              </span>
+              <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground ml-1">
+                day streak
+              </span>
+            </div>
+          )}
+        </div>
 
-      <div className="mt-3 flex gap-[3px]">
-        {cols.map((col, ci) => (
-          <div key={ci} className="flex flex-col gap-[3px]">
-            {col.map((d) => (
-              <div
-                key={d.date}
-                title={`${d.date}: ${d.count}`}
-                className="w-3 h-3"
-                style={{ backgroundColor: LEVEL_VAR[d.level] }}
-              />
-            ))}
-          </div>
-        ))}
+        <div className="mt-3 flex gap-[3px]">
+          {cols.map((col, ci) => (
+            <div key={ci} className="flex flex-col gap-[3px]">
+              {col.map((d) => (
+                <div
+                  key={d.date}
+                  title={`${d.date}: ${d.count}`}
+                  className="w-3 h-3"
+                  style={{ backgroundColor: LEVEL_VAR[d.level] }}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
-    </a>
+    </Wrapper>
   );
 }

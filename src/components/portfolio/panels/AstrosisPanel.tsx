@@ -22,6 +22,14 @@ export function AstrosisPanel({ onClose }: { onClose: () => void }) {
       </div>
 
       <p className="mt-8 leading-relaxed text-foreground/90">
+        I built Astrosis because I wanted to see if I could make orbital mechanics fast enough to be
+        useful. It started as an autonomous constellation manager at the NSH hackathon (IIT Delhi) —
+        50 satellites calculating their own delta-v and fuel burn to maneuver in LEO. I stripped it
+        down, rewrote it four times (React → CLI → TUI → CUDA), and pushed the bottleneck from
+        Python to C++ to parallel compute. Each version taught me where the system actually slows
+        down.
+      </p>
+      <p className="mt-4 leading-relaxed text-foreground/90">
         High-fidelity orbital mechanics engine built from first principles. Implements RK4 numerical
         integration with J2, J3, and J4 gravity harmonics, US Standard Atmosphere 1976 drag model
         with Earth-rotation correction, solar radiation pressure with cylindrical shadow modeling,
