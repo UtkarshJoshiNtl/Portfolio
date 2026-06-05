@@ -1,7 +1,7 @@
 export const links = {
   github: "https://github.com/UtkarshJoshiNtl",
   githubUser: "UtkarshJoshiNtl",
-  linkedin: "https://linkedin.com/in/utkarsh-joshi",
+  linkedin: "https://linkedin.com/in/utkarsh-joshi-3037a6377",
   email: "joshiutkarshntl@gmail.com",
   codeforces: "https://codeforces.com/profile/BakedRajma",
   codeforcesHandle: "BakedRajma",
@@ -26,8 +26,6 @@ export const techStack = [
   "OpenMP",
   "OpenGL",
   "NumPy",
-  "PyGame",
-  "POSIX",
   "Bash",
   "Linux",
 ];

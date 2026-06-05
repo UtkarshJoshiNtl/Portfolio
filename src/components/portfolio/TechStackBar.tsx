@@ -13,17 +13,17 @@ const categories = [
 export function TechStackBar() {
   return (
     <div className="relative bg-tile-alt border border-transparent hover:border-amber transition-colors group overflow-hidden">
-      <div className="px-4 pt-3 pb-2 flex gap-6 md:gap-10">
+      <div className="px-5 py-4 flex gap-8 md:gap-14">
         {categories.map((cat) => (
-          <div key={cat.label} className="flex flex-col gap-1.5">
-            <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-amber">
+          <div key={cat.label} className="flex flex-col gap-2">
+            <div className="font-mono text-xs uppercase tracking-[0.25em] text-amber">
               {cat.label}
             </div>
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap gap-2">
               {cat.items.map((t) => (
                 <span
                   key={t}
-                  className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground hover:text-amber transition-colors"
+                  className="font-mono text-sm uppercase tracking-[0.08em] text-muted-foreground hover:text-amber transition-colors"
                 >
                   {t}
                 </span>

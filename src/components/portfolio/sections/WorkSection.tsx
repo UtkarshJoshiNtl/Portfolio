@@ -3,6 +3,8 @@ import { ArrowUpRight } from "lucide-react";
 import { AstrosisBg } from "../AstrosisBg";
 import { QuipBg } from "../QuipBg";
 import { CuFlodaBg } from "../CuFlodaBg";
+import { CJitBg } from "../CJitBg";
+import { EnCripBg } from "../EnCripBg";
 
 const accentColors: Record<string, string> = {
   astrosis: "oklch(0.78 0.16 75)",
@@ -133,10 +135,8 @@ export function WorkSection({ onSelect }: { onSelect: (id: string) => void }) {
             <>
               {p.id === "quip" && <QuipBg />}
               {p.id === "cufloda" && <CuFlodaBg />}
-              <div
-                className="absolute top-0 left-0 right-0 h-[2px] opacity-60 group-hover:opacity-100 transition-opacity duration-300"
-                style={{ background: accent }}
-              />
+              {p.id === "cjit" && <CJitBg />}
+              {p.id === "encrip" && <EnCripBg />}
               <div className="relative z-10 flex flex-col h-full">
                 <div className="font-mono text-xs" style={{ color: accent }}>
                   {p.name}
@@ -210,23 +210,23 @@ function TechStackBar() {
     { label: "Tools", items: ["Git", "CMake"] },
     {
       label: "Technologies",
-      items: ["CUDA", "OpenMP", "OpenGL", "NumPy", "PyGame", "POSIX", "Bash", "Linux"],
+      items: ["CUDA", "OpenMP", "OpenGL", "NumPy", "Bash", "Linux"],
     },
   ];
 
   return (
     <div className="relative bg-tile/50 group overflow-hidden">
-      <div className="px-4 pt-3 pb-2 flex gap-6 md:gap-10">
+      <div className="px-5 py-4 flex gap-8 md:gap-14">
         {categories.map((cat) => (
-          <div key={cat.label} className="flex flex-col gap-1.5">
-            <div className="font-mono text-[9px] uppercase tracking-[0.25em] text-amber/70">
+          <div key={cat.label} className="flex flex-col gap-2">
+            <div className="font-mono text-xs uppercase tracking-[0.25em] text-amber/70">
               {cat.label}
             </div>
-            <div className="flex flex-wrap gap-1.5">
+            <div className="flex flex-wrap gap-2">
               {cat.items.map((t) => (
                 <span
                   key={t}
-                  className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground hover:text-amber transition-colors"
+                  className="font-mono text-sm uppercase tracking-[0.08em] text-muted-foreground hover:text-amber transition-colors"
                 >
                   {t}
                 </span>

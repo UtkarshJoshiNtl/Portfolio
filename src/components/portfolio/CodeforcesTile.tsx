@@ -84,7 +84,7 @@ export function CodeforcesTile({ onClick }: { onClick?: () => void }) {
         </div>
 
         <div className="mt-auto">
-          <div className="font-mono text-sm text-muted-foreground">@{links.codeforcesHandle}</div>
+          <div className="font-mono text-2xl text-muted-foreground">@{links.codeforcesHandle}</div>
         </div>
       </div>
     </Wrapper>

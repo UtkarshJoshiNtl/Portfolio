@@ -1,27 +1,17 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, FileText } from "lucide-react";
-import { toast } from "sonner";
 import { links } from "@/lib/portfolio-data";
 
 const tags = ["GPU", "CUDA", "C++", "SYSTEMS"];
 
 const contactItems = [
   { href: links.linkedin, icon: Linkedin, label: "LinkedIn" },
-  { href: null, icon: Mail, label: "Email", action: "copy" },
+  { href: `mailto:${links.email}`, icon: Mail, label: "Email" },
   { href: links.resume, icon: FileText, label: "Resume" },
   { href: links.github, icon: Github, label: "GitHub" },
 ];
 
 export function IdentitySection({ onSelect }: { onSelect: (id: string) => void }) {
-  const copyEmail = async () => {
-    try {
-      await navigator.clipboard.writeText(links.email);
-      toast.success("Email copied to clipboard");
-    } catch {
-      toast.error("Failed to copy email");
-    }
-  };
-
   return (
     <section className="flex flex-col md:flex-row md:items-center md:justify-between gap-8 md:gap-16">
       <motion.div
@@ -51,35 +41,21 @@ export function IdentitySection({ onSelect }: { onSelect: (id: string) => void }
           Open to work & internships
         </div>
         <div className="mt-6 flex items-center gap-1">
-          {contactItems.map((item) =>
-            item.action === "copy" ? (
-              <button
-                key={item.label}
-                onClick={copyEmail}
-                className="group flex items-center gap-2 px-3 py-2 font-mono text-xs uppercase tracking-[0.15em] text-muted-foreground hover:text-amber transition-colors"
-              >
-                <item.icon className="w-4 h-4" />
-                <span className="relative">
-                  {item.label}
-                  <span className="absolute bottom-0 left-0 w-0 h-px bg-amber group-hover:w-full transition-all duration-300" />
-                </span>
-              </button>
-            ) : (
-              <a
-                key={item.label}
-                href={item.href!}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex items-center gap-2 px-3 py-2 font-mono text-xs uppercase tracking-[0.15em] text-muted-foreground hover:text-amber transition-colors"
-              >
-                <item.icon className="w-4 h-4" />
-                <span className="relative">
-                  {item.label}
-                  <span className="absolute bottom-0 left-0 w-0 h-px bg-amber group-hover:w-full transition-all duration-300" />
-                </span>
-              </a>
-            ),
-          )}
+          {contactItems.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-2 px-3 py-2 font-mono text-xs uppercase tracking-[0.15em] text-muted-foreground hover:text-amber transition-colors"
+            >
+              <item.icon className="w-4 h-4" />
+              <span className="relative">
+                {item.label}
+                <span className="absolute bottom-0 left-0 w-0 h-px bg-amber group-hover:w-full transition-all duration-300" />
+              </span>
+            </a>
+          ))}
         </div>
       </motion.div>
       <motion.div
