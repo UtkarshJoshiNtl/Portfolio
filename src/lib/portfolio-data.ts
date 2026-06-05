@@ -70,7 +70,7 @@ export const projects = [
     repo: "UtkarshJoshiNtl/cjit",
     tech: ["C", "Content-Addressed Storage", "Version Control"],
     description:
-      "Version control system implemented in C. Uses content-addressed storage for integrity and deduplication. Supports branch creation, checkout, and commit operations without external dependencies. Honest systems code — no wrappers, no shortcuts.",
+      "Version control system implemented in C. Uses content-addressed storage for integrity and deduplication. Supports branch creation, checkout, and commit operations without external dependencies.",
     github: "https://github.com/UtkarshJoshiNtl/cjit",
   },
   {
@@ -90,19 +90,11 @@ export const projects = [
     github: "https://github.com/UtkarshJoshiNtl/CuFloda",
   },
   {
-    name: "OwlEchoSense",
-    repo: "UtkarshJoshiNtl/OwlEchoSense",
-    tech: ["ESP32", "AODV Mesh", "BirdNET ML", "LoRa"],
+    name: "EnCrip",
+    repo: "UtkarshJoshiNtl/EnCrip",
+    tech: ["Python", "HMAC-SHA256", "FastAPI", "Controller-Worker", "Replay Cache"],
     description:
-      "Field ecology monitoring system for bird species identification. ESP32 microcontrollers with AODV mesh networking for decentralized communication, BirdNET machine learning for species identification, and LoRa for long-range data transmission in areas without connectivity.",
-    github: "https://github.com/UtkarshJoshiNtl/OwlEchoSense",
-  },
-  {
-    name: "LANParty",
-    repo: "UtkarshJoshiNtl/LANParty",
-    tech: ["Flutter", "WebSocket", "Dart", "Real-time Multiplayer"],
-    description:
-      "Cross-platform LAN gaming application. Real-time multiplayer using WebSocket communication with automatic game discovery and lobby management. Supports chess, ludo, and monopoly with no internet dependency.",
-    github: "https://github.com/UtkarshJoshiNtl/LANParty",
+      "Secure distributed execution framework with stateless HMAC-based authentication. Controller-worker architecture dispatches computational tasks across network nodes. Features replay attack protection, time-windowed tokens, and REST API for worker nodes.",
+    github: "https://github.com/UtkarshJoshiNtl/EnCrip",
   },
 ];

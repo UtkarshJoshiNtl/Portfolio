@@ -10,29 +10,27 @@ export function AboutPanel({ onClose }: { onClose: () => void }) {
         <img
           src="/avatar.jpg"
           alt="Utkarsh Joshi"
-          width={96}
-          height={96}
-          className="w-24 h-24 object-cover grayscale hover:grayscale-0 transition-all duration-500"
+          width={160}
+          height={160}
+          className="w-32 h-32 md:w-40 md:h-40 object-cover grayscale hover:grayscale-0 transition-all duration-500"
         />
       </div>
 
       <div className="mt-6 space-y-5 text-foreground/90 leading-relaxed max-w-3xl">
         <p>
-          I've had a laptop since childhood — probably more screen time than anyone I know. That
-          machine was my window into how things work, and I never stopped pulling them apart. In
-          2020 I fell into the hardware rabbit hole: tech YouTube, CPU overclocking, the Ryzen
-          comeback live stream where AMD beat Intel in single-core for the first time. I wanted to
-          be part of that world.
+          Started with hardware in 2020 — CPU overclocking, tech YouTube, the AMD Ryzen livestream
+          where they beat Intel in single-core for the first time. I wanted to understand what a
+          computer was actually doing, so I moved up the stack until I hit the bottom. That's where
+          I stayed.
         </p>
         <p>
-          Astrosis started as an autonomous constellation manager at the NSH hackathon (IIT Delhi).
-          It went through four lives — React frontend → CLI → TUI → CUDA. Each rewrite taught me
-          something about where the bottleneck really was. That project is the clearest picture of
-          how I think: find the system, find the limit, push past it.
+          Astrosis went through four lives — React frontend → CLI → TUI → CUDA. Each rewrite taught
+          me that performance isn't an afterthought, it's the design. Some projects you build to
+          ship, some you build to see how fast you can make something go.
         </p>
         <p>
-          I build from first principles — C, C++, CUDA, no wrappers. Self-taught in Blender, FL
-          Studio, and how to make things flow.
+          I work in C, C++, CUDA, and Python. I also use Blender, FL Studio, and whatever else lets
+          me build things that didn't exist before.
         </p>
       </div>
 
@@ -74,7 +72,7 @@ export function AboutPanel({ onClose }: { onClose: () => void }) {
         <div className="text-muted-foreground uppercase tracking-[0.15em]">Location</div>
         <div>Nainital, India</div>
         <div className="text-muted-foreground uppercase tracking-[0.15em] mt-2">Status</div>
-        <div className="mt-2">First year, open to internships</div>
+        <div className="mt-2">Open to work & internships</div>
       </div>
     </PanelShell>
   );

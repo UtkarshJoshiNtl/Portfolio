@@ -73,7 +73,7 @@ export function CodeforcesTile({ onClick }: { onClick?: () => void }) {
 
   return (
     <Wrapper {...wrapperProps}>
-      <div className="h-full group bg-tile-alt bg-pattern-grid border border-transparent hover:border-amber transition-colors p-5 relative overflow-hidden flex flex-col">
+      <div className="h-full group bg-tile hover:bg-tile-alt transition-all duration-300 bg-pattern-grid p-5 relative overflow-hidden flex flex-col">
         {ratings.length >= 2 && <RatingChart ratings={ratings} />}
 
         <div className="flex items-center gap-2">

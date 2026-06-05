@@ -20,6 +20,7 @@ export type DetailId =
   | "astrosis"
   | "quip"
   | "cufloda"
+  | "encrip"
   | "about"
   | "contact"
   | "codeforces"
@@ -242,6 +243,49 @@ function CuFlodaContent() {
   );
 }
 
+function EnCripContent() {
+  const project = projects.find((p) => p.name === "EnCrip")!;
+  return (
+    <>
+      <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-amber">Project</div>
+      <h2 className="mt-2 text-3xl md:text-4xl font-semibold">EnCrip</h2>
+      <p className="mt-2 text-base md:text-lg text-muted-foreground">
+        Secure Distributed Execution Framework
+      </p>
+      <div className="mt-5 flex flex-wrap gap-2 font-mono text-[11px]">
+        {project.tech.map((t) => (
+          <span key={t} className="px-2 py-1 border border-border text-muted-foreground">
+            {t}
+          </span>
+        ))}
+      </div>
+      <p className="mt-6 leading-relaxed text-foreground/90 text-sm md:text-base">
+        {project.description}
+      </p>
+      <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-3 max-w-xl">
+        {[
+          ["394,922", "HMAC gen ops/sec"],
+          ["526,275", "HMAC verify ops/sec"],
+          ["100%", "replay detection"],
+        ].map(([val, label]) => (
+          <div key={label} className="border border-border p-4">
+            <div className="text-xl font-semibold text-amber">{val}</div>
+            <div className="font-mono text-[10px] text-muted-foreground mt-1">{label}</div>
+          </div>
+        ))}
+      </div>
+      <a
+        href={project.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-8 inline-flex items-center gap-2 px-4 py-3 bg-amber text-primary-foreground font-mono text-xs uppercase tracking-[0.15em] hover:opacity-90 transition-opacity"
+      >
+        View on GitHub <ExternalLink className="w-4 h-4" />
+      </a>
+    </>
+  );
+}
+
 function AboutContent() {
   return (
     <>
@@ -251,26 +295,26 @@ function AboutContent() {
         <img
           src="/avatar.jpg"
           alt="Utkarsh Joshi"
-          width={96}
-          height={96}
-          className="w-24 h-24 object-cover grayscale hover:grayscale-0 transition-all duration-500"
+          width={160}
+          height={160}
+          className="w-32 h-32 md:w-40 md:h-40 object-cover grayscale hover:grayscale-0 transition-all duration-500"
         />
       </div>
       <div className="mt-4 space-y-4 text-foreground/90 leading-relaxed text-sm md:text-base">
         <p>
-          I've had a laptop since childhood — probably more screen time than anyone I know. That
-          machine was my window into how things work, and I never stopped pulling them apart. In
-          2020 I fell into the hardware rabbit hole: tech YouTube, CPU overclocking, the Ryzen
-          comeback live stream where AMD beat Intel in single-core for the first time.
+          Started with hardware in 2020 — CPU overclocking, tech YouTube, the AMD Ryzen livestream
+          where they beat Intel in single-core for the first time. I wanted to understand what a
+          computer was actually doing, so I moved up the stack until I hit the bottom. That's where
+          I stayed.
         </p>
         <p>
-          Astrosis started as an autonomous constellation manager at the NSH hackathon (IIT Delhi).
-          It went through four lives — React frontend → CLI → TUI → CUDA. Each rewrite taught me
-          something about where the bottleneck really was.
+          Astrosis went through four lives — React frontend → CLI → TUI → CUDA. Each rewrite taught
+          me that performance isn't an afterthought, it's the design. Some projects you build to
+          ship, some you build to see how fast you can make something go.
         </p>
         <p>
-          I build from first principles — C, C++, CUDA, no wrappers. Self-taught in Blender, FL
-          Studio, and how to make things flow.
+          I work in C, C++, CUDA, and Python. I also use Blender, FL Studio, and whatever else lets
+          me build things that didn't exist before.
         </p>
       </div>
       <div className="mt-6">
@@ -309,7 +353,7 @@ function AboutContent() {
         <div className="text-muted-foreground uppercase tracking-[0.15em]">Location</div>
         <div>Nainital, India</div>
         <div className="text-muted-foreground uppercase tracking-[0.15em] mt-2">Status</div>
-        <div className="mt-2">First year, open to internships</div>
+        <div className="mt-2">Open to work & internships</div>
       </div>
     </>
   );
@@ -419,6 +463,8 @@ function DetailContentInner({ id }: { id: DetailId }) {
       return <QuipContent />;
     case "cufloda":
       return <CuFlodaContent />;
+    case "encrip":
+      return <EnCripContent />;
     case "about":
       return <AboutContent />;
     case "contact":

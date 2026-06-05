@@ -36,7 +36,7 @@ export function GithubStatsTile({ onClick }: { onClick?: () => void }) {
 
   return (
     <Wrapper {...wrapperProps}>
-      <div className="h-full group bg-tile bg-pattern-dots border border-transparent hover:border-amber transition-colors p-5 relative overflow-hidden">
+      <div className="h-full group bg-tile-alt hover:bg-tile transition-all duration-300 bg-pattern-dots p-5 relative overflow-hidden">
         <div className="flex items-center gap-2">
           <Github className="w-4 h-4 text-amber" />
           <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-amber">

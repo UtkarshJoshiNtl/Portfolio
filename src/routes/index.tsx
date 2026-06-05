@@ -9,6 +9,7 @@ import { BeyondSection } from "@/components/portfolio/sections/BeyondSection";
 import { AstrosisPanel } from "@/components/portfolio/panels/AstrosisPanel";
 import { QuipPanel } from "@/components/portfolio/panels/QuipPanel";
 import { CuFlodaPanel } from "@/components/portfolio/panels/CuFlodaPanel";
+import { EnCripPanel } from "@/components/portfolio/panels/EnCripPanel";
 import { AboutPanel } from "@/components/portfolio/panels/AboutPanel";
 import { ContactPanel } from "@/components/portfolio/panels/ContactPanel";
 import { DetailMobilePanel } from "@/components/portfolio/DetailPanel";
@@ -23,7 +24,7 @@ function Index() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <div className="max-w-7xl mx-auto px-5 md:px-8 py-6 md:py-8">
+      <div className="max-w-[1400px] mx-auto px-5 md:px-10 py-6 md:py-10">
         <div className="flex items-center justify-end gap-2 mb-4">
           <ThemeSwitcher />
         </div>
@@ -39,6 +40,7 @@ function Index() {
         {detail === "astrosis" && <AstrosisPanel key="astrosis" onClose={close} />}
         {detail === "quip" && <QuipPanel key="quip" onClose={close} />}
         {detail === "cufloda" && <CuFlodaPanel key="cufloda" onClose={close} />}
+        {detail === "encrip" && <EnCripPanel key="encrip" onClose={close} />}
         {detail === "about" && <AboutPanel key="about" onClose={close} />}
         {detail === "contact" && <ContactPanel key="contact" onClose={close} />}
         {detail === "codeforces" && (
