@@ -8,6 +8,8 @@ import { ConnectSection } from "@/components/portfolio/sections/ConnectSection";
 import { BeyondSection } from "@/components/portfolio/sections/BeyondSection";
 import type { DetailId } from "@/components/portfolio/DetailPanel";
 import { ThemeSwitcher } from "@/components/theme/ThemeSwitcher";
+import { OrnamentFrame } from "@/components/portfolio/OrnamentFrame";
+import { SectionDivider } from "@/components/portfolio/SectionDivider";
 
 const AstrosisPanel = lazy(() =>
   import("@/components/portfolio/panels/AstrosisPanel").then((m) => ({
@@ -53,15 +55,20 @@ function Index() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <div className="max-w-[1400px] mx-auto px-5 md:px-10 py-6 md:py-10">
+      <OrnamentFrame />
+      <div className="max-w-[1600px] mx-auto px-8 md:px-16 py-6 md:py-10">
         <div className="flex items-center justify-end gap-2 mb-4">
           <ThemeSwitcher />
         </div>
 
         <IdentitySection onSelect={setDetail} />
+        <SectionDivider seed={42} />
         <TimelineBand />
+        <SectionDivider seed={137} />
         <WorkSection onSelect={setDetail} />
+        <SectionDivider seed={256} />
         <ConnectSection onSelect={setDetail} />
+        <SectionDivider seed={365} />
         <BeyondSection onSelect={setDetail} />
       </div>
 

@@ -1,6 +1,7 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @plugin "@tailwindcss/typography";
+@import "./styles-ornament.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -36,6 +37,8 @@
   --font-mono: var(--font-mono-stack);
   --font-sans: var(--font-sans-stack);
   --font-display: var(--font-display-stack);
+  --color-ornament: var(--ornament);
+  --color-filigree: var(--filigree);
 }
 
 /* ============================================================
@@ -73,6 +76,8 @@
   --tile-purple: oklch(0.22 0.04 300);
   --amber: oklch(0.78 0.16 75);
   --doom: oklch(0.58 0.22 28);
+  --ornament: oklch(0.5 0.1 75);
+  --filigree: oklch(0.4 0.05 75);
 
   --gh-cell-0: oklch(0.25 0 0);
   --gh-cell-1: oklch(0.45 0.1 75);
@@ -116,6 +121,8 @@
   --tile-purple: oklch(0.7 0.15 330); /* magenta wash */
   --amber: oklch(0.55 0.25 30); /* vermilion accent (replaces amber) */
   --doom: oklch(0.5 0.25 25);
+  --ornament: oklch(0.45 0.15 250);
+  --filigree: oklch(0.85 0.02 85);
 
   --gh-cell-0: oklch(0.93 0.01 85);
   --gh-cell-1: oklch(0.78 0.18 85);
@@ -205,6 +212,8 @@
   --tile-purple: oklch(0.15 0 0);
   --amber: oklch(0.98 0 0);
   --doom: oklch(0.6 0.22 25);
+  --ornament: oklch(0.7 0 0);
+  --filigree: oklch(0.5 0 0);
 
   --gh-cell-0: oklch(0.2 0 0);
   --gh-cell-1: oklch(0.42 0 0);
@@ -247,6 +256,8 @@
   --tile-purple: oklch(0.08 0.04 300);
   --amber: oklch(0.7 0.18 75);
   --doom: oklch(0.55 0.25 25);
+  --ornament: oklch(0.55 0.12 75);
+  --filigree: oklch(0.4 0.08 75);
 
   --gh-cell-0: oklch(0.1 0.02 100);
   --gh-cell-1: oklch(0.25 0.08 75);
@@ -321,6 +332,8 @@
   --tile-purple: oklch(0.28 0.08 260);
   --amber: oklch(0.9 0.05 200);
   --doom: oklch(0.6 0.25 25);
+  --ornament: oklch(0.7 0.05 200);
+  --filigree: oklch(0.5 0.05 240);
 
   --gh-cell-0: oklch(0.3 0.08 240);
   --gh-cell-1: oklch(0.5 0.08 200);
@@ -389,6 +402,8 @@
   --tile-purple: linear-gradient(135deg, #2a0544, #1a0d77);
   --amber: oklch(0.7 0.32 345);
   --doom: oklch(0.6 0.25 25);
+  --ornament: oklch(0.6 0.25 300);
+  --filigree: oklch(0.35 0.1 300);
 
   --gh-cell-0: oklch(0.15 0.04 300);
   --gh-cell-1: oklch(0.35 0.15 345);
@@ -460,6 +475,8 @@
   --tile-purple: oklch(0.14 0.06 320);
   --amber: oklch(0.62 0.15 80);
   --doom: oklch(0.5 0.22 25);
+  --ornament: oklch(0.5 0.12 120);
+  --filigree: oklch(0.3 0.05 120);
 
   --gh-cell-0: oklch(0.15 0.03 120);
   --gh-cell-1: oklch(0.3 0.08 150);
@@ -542,6 +559,8 @@
   --tile-purple: oklch(0.14 0.06 300);
   --amber: oklch(0.65 0.18 30);
   --doom: oklch(0.5 0.22 25);
+  --ornament: oklch(0.5 0.1 200);
+  --filigree: oklch(0.3 0.05 250);
 
   --gh-cell-0: oklch(0.15 0.04 250);
   --gh-cell-1: oklch(0.3 0.1 210);
@@ -623,6 +642,8 @@
   --tile-purple: oklch(0.15 0.04 280);
   --amber: oklch(0.6 0.1 200);
   --doom: oklch(0.5 0.2 25);
+  --ornament: oklch(0.5 0.08 240);
+  --filigree: oklch(0.35 0.03 250);
 
   --gh-cell-0: oklch(0.18 0.02 250);
   --gh-cell-1: oklch(0.32 0.06 240);
@@ -699,6 +720,8 @@
   --tile-purple: oklch(0.14 0.06 320);
   --amber: oklch(0.55 0.18 50);
   --doom: oklch(0.5 0.22 25);
+  --ornament: oklch(0.45 0.12 50);
+  --filigree: oklch(0.3 0.05 60);
 
   --gh-cell-0: oklch(0.18 0.03 60);
   --gh-cell-1: oklch(0.32 0.1 50);

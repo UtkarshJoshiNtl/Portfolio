@@ -13,12 +13,33 @@ const contactItems = [
 
 export function IdentitySection({ onSelect }: { onSelect: (id: string) => void }) {
   return (
-    <section className="flex flex-col md:flex-row md:items-center md:justify-between gap-8 md:gap-16">
+    <section className="flex flex-col md:flex-row md:items-center md:justify-between gap-8 md:gap-16 relative">
+      {/* Ornamental background filigree accent */}
+      <div
+        className="absolute -top-8 -left-8 w-48 h-48 pointer-events-none opacity-[0.03]"
+        aria-hidden="true"
+      >
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M20 100 C20 40 60 10 100 10 C140 10 180 40 180 100 C180 160 140 190 100 190 C60 190 20 160 20 100Z"
+            stroke="currentColor"
+            strokeWidth="0.5"
+          />
+          <path
+            d="M40 100 C40 55 70 30 100 30 C130 30 160 55 160 100 C160 145 130 170 100 170 C70 170 40 145 40 100Z"
+            stroke="currentColor"
+            strokeWidth="0.3"
+          />
+          <path d="M100 10 L100 190" stroke="currentColor" strokeWidth="0.2" />
+          <path d="M10 100 L190 100" stroke="currentColor" strokeWidth="0.2" />
+        </svg>
+      </div>
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className="flex-1"
+        className="flex-1 relative z-10"
       >
         <div className="font-mono text-xs uppercase tracking-[0.2em] text-amber tagline-cursor">
           Systems & Simulation Engineer
@@ -62,7 +83,7 @@ export function IdentitySection({ onSelect }: { onSelect: (id: string) => void }
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
-        className="shrink-0"
+        className="shrink-0 relative z-10"
       >
         <button onClick={() => onSelect("about")} className="block group">
           <div className="relative w-36 h-36 md:w-44 md:h-44 rounded-full overflow-hidden ring-2 ring-amber/20 group-hover:ring-amber/60 transition-all duration-500 group-hover:animate-glow-pulse">
@@ -72,6 +93,11 @@ export function IdentitySection({ onSelect }: { onSelect: (id: string) => void }
               className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-500"
             />
           </div>
+          {/* Ornamental ring accent */}
+          <div
+            className="absolute inset-[-6px] rounded-full border border-ornament opacity-0 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none"
+            aria-hidden="true"
+          />
         </button>
       </motion.div>
     </section>

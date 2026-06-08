@@ -5,6 +5,8 @@ import { QuipBg } from "../QuipBg";
 import { CuFlodaBg } from "../CuFlodaBg";
 import { CJitBg } from "../CJitBg";
 import { EnCripBg } from "../EnCripBg";
+import { SectionHeader } from "../SectionHeader";
+import { orbitalDisplacement } from "@/lib/grid-pack";
 
 const accentColors: Record<string, string> = {
   astrosis: "oklch(0.78 0.16 75)",
@@ -66,14 +68,7 @@ const sectionVariants = {
 export function WorkSection({ onSelect }: { onSelect: (id: string) => void }) {
   return (
     <section className="mt-2">
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-40px" }}
-        className="font-mono text-[10px] uppercase tracking-[0.2em] text-amber mb-3"
-      >
-        Work
-      </motion.div>
+      <SectionHeader label="Work" />
 
       <motion.button
         initial={{ opacity: 0, y: 16 }}
@@ -83,6 +78,7 @@ export function WorkSection({ onSelect }: { onSelect: (id: string) => void }) {
         whileHover={{ y: -2, transition: { duration: 0.2 } }}
         onClick={() => onSelect("astrosis")}
         className="w-full text-left bg-tile hover:bg-tile-alt transition-all duration-300 p-6 md:p-8 mb-3 relative overflow-hidden group"
+        style={{ transformStyle: "preserve-3d", perspective: "800px" }}
       >
         <AstrosisBg />
         <div
@@ -91,7 +87,7 @@ export function WorkSection({ onSelect }: { onSelect: (id: string) => void }) {
             background: `radial-gradient(ellipse at 30% 40%, oklch(0.78 0.16 75 / 0.08), transparent 60%)`,
           }}
         />
-        <div className="relative z-10">
+        <div className="relative z-10" style={{ transform: "translateZ(20px)" }}>
           <div className="font-mono text-xs uppercase tracking-[0.2em] text-amber mb-1">
             Featured
           </div>
@@ -131,6 +127,8 @@ export function WorkSection({ onSelect }: { onSelect: (id: string) => void }) {
         {projects.slice(1).map((p, i) => {
           const isExternal = "href" in p && p.href;
           const accent = accentColors[p.id] || "oklch(0.78 0.16 75)";
+          const offset = orbitalDisplacement(i, 1, 256 + i);
+
           const Content = (
             <>
               {p.id === "quip" && <QuipBg />}
@@ -171,6 +169,11 @@ export function WorkSection({ onSelect }: { onSelect: (id: string) => void }) {
               viewport={{ once: true, margin: "-30px" }}
               variants={sectionVariants}
               whileHover={{ y: -3, transition: { duration: 0.2 } }}
+              style={{
+                transformStyle: "preserve-3d",
+                perspective: "800px",
+                transform: `translate(${offset.dx}px, ${offset.dy}px)`,
+              }}
             >
               {isExternal ? (
                 <a

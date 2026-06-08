@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
+import { TileCornerFlourish } from "./TileCornerFlourish";
 
 type TileProps = {
   id?: string;
@@ -10,6 +11,8 @@ type TileProps = {
   className?: string;
   children: ReactNode;
   bg?: string;
+  orbitalOffset?: { dx: number; dy: number };
+  depth?: number;
 };
 
 export function Tile({
@@ -21,6 +24,8 @@ export function Tile({
   className = "",
   children,
   bg = "bg-tile",
+  orbitalOffset,
+  depth = 0,
 }: TileProps) {
   const isLink = !!href;
 
@@ -31,18 +36,31 @@ export function Tile({
     }
   };
 
+  const offsetStyle = orbitalOffset
+    ? { transform: `translate(${orbitalOffset.dx}px, ${orbitalOffset.dy}px)` }
+    : {};
+
+  const depthOffset = depth * 8;
+
   const content = (
     <motion.div
       layoutId={id ? `tile-${id}` : undefined}
       whileHover={{
-        rotateY: 6,
-        rotateX: -4,
-        scale: 1.015,
-        z: 20,
+        rotateY: 12,
+        rotateX: -8,
+        scale: 1.02,
+        z: 40 + depthOffset,
+        boxShadow: "0 20px 40px rgba(0,0,0,0.3), 0 8px 16px rgba(0,0,0,0.2)",
       }}
-      whileTap={{ scale: 0.985, rotateY: 0, rotateX: 0 }}
-      transition={{ type: "spring", stiffness: 320, damping: 22 }}
-      style={{ minHeight: 0, transformStyle: "preserve-3d" }}
+      whileTap={{ scale: 0.975, rotateY: 0, rotateX: 0 }}
+      transition={{ type: "spring", stiffness: 280, damping: 20 }}
+      style={{
+        minHeight: 0,
+        transformStyle: "preserve-3d",
+        transformOrigin: depth % 2 === 0 ? "center bottom" : "center top",
+        zIndex: 10 + depth,
+        ...offsetStyle,
+      }}
       className={`group relative overflow-hidden border border-transparent hover:border-amber ${isLink ? "" : "cursor-pointer"} ${bg} ${className}`}
       {...(isLink
         ? {}
@@ -53,15 +71,16 @@ export function Tile({
             onKeyDown: handleKeyDown,
           })}
     >
+      <TileCornerFlourish />
       <div
         className="relative z-10 h-full w-full p-5 flex flex-col"
-        style={{ transform: "translateZ(20px)" }}
+        style={{ transform: `translateZ(${20 + depthOffset}px)` }}
       >
         {children}
       </div>
       <div
         className="absolute bottom-3 left-4 z-20 font-mono text-[10px] tracking-[0.15em] uppercase text-muted-foreground group-hover:text-amber transition-colors"
-        style={{ transform: "translateZ(30px)" }}
+        style={{ transform: `translateZ(${30 + depthOffset}px)` }}
       >
         {label}
       </div>

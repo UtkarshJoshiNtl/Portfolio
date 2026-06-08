@@ -31,10 +31,18 @@ export function PanelShell({
       layoutId={`tile-${id}`}
       className="fixed inset-0 z-50 bg-tile overflow-y-auto"
       transition={{ type: "spring", stiffness: 260, damping: 32 }}
+      style={{ perspective: 1200 }}
       role="dialog"
       aria-modal="true"
       aria-label={id}
     >
+      {/* Backface of the page-turn (visible during the 3D flip) */}
+      <div
+        className="absolute inset-0 bg-background/90"
+        style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
+        aria-hidden="true"
+      />
+
       <button
         ref={closeRef}
         onClick={onClose}
@@ -43,11 +51,12 @@ export function PanelShell({
       >
         <X className="w-5 h-5" aria-hidden="true" />
       </button>
+
       <motion.div
         className="max-w-5xl mx-auto px-6 md:px-10 py-12 md:py-16"
-        initial={{ clipPath: "inset(0 0 100% 0)" }}
-        animate={{ clipPath: "inset(0 0 0% 0)" }}
-        transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
+        initial={{ rotateY: -90, opacity: 0, transformOrigin: "left center" }}
+        animate={{ rotateY: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
       >
         {children}
         <div className="mt-20 pt-6 border-t border-border font-mono text-[10px] uppercase tracking-[0.15em] text-muted-foreground">

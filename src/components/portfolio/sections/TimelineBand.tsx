@@ -1,23 +1,28 @@
 import { motion } from "framer-motion";
 import { timeline } from "@/lib/portfolio-data";
+import { SectionHeader } from "../SectionHeader";
 
 export function TimelineBand() {
   return (
     <section className="my-6 md:my-8">
-      <div className="font-mono text-[10px] uppercase tracking-[0.2em] text-amber mb-3">
-        Timeline
-      </div>
-      <div className="flex flex-col gap-1.5">
+      <SectionHeader label="Timeline" />
+      <div className="relative pl-6 border-l border-ornament/20">
         {timeline.map((t, i) => (
           <motion.div
             key={t.year}
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -8 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-30px" }}
             transition={{ duration: 0.4, delay: i * 0.1 }}
-            className="flex items-baseline gap-3 font-mono text-sm"
+            className="relative pb-4 pl-4 font-mono text-sm"
           >
-            <span className="text-amber tabular-nums shrink-0 w-20">{t.year}</span>
-            <span className="text-muted-foreground">{t.text}</span>
+            {/* Timeline dot */}
+            <div
+              className="absolute left-[-25px] top-[5px] w-2 h-2 rounded-full bg-ornament/40"
+              aria-hidden="true"
+            />
+            <span className="text-amber tabular-nums">{t.year}</span>
+            <span className="text-muted-foreground ml-3">{t.text}</span>
           </motion.div>
         ))}
       </div>
