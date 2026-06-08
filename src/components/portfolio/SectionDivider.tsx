@@ -41,6 +41,7 @@ export function SectionDivider({ seed = 0 }: Props) {
         className="section-divider max-w-full"
         preserveAspectRatio="none"
         aria-hidden="true"
+        style={{ color: "var(--ornament)" }}
       >
         <defs>
           <linearGradient id={`fade-${id}`} x1="0" x2="1" y1="0" y2="0">

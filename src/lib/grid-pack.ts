@@ -133,7 +133,6 @@ export function pack(
 }
 
 // Seeded orbital displacement — returns pixel offsets for organic grid drift
-const orbitRand = mulberry32(0);
 const orbitCache = new Map<string, { dx: number; dy: number }>();
 
 export function orbitalDisplacement(

@@ -36,13 +36,6 @@ export function PanelShell({
       aria-modal="true"
       aria-label={id}
     >
-      {/* Backface of the page-turn (visible during the 3D flip) */}
-      <div
-        className="absolute inset-0 bg-background/90"
-        style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
-        aria-hidden="true"
-      />
-
       <button
         ref={closeRef}
         onClick={onClose}
