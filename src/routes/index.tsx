@@ -1,20 +1,49 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import { IdentitySection } from "@/components/portfolio/sections/IdentitySection";
 import { TimelineBand } from "@/components/portfolio/sections/TimelineBand";
 import { WorkSection } from "@/components/portfolio/sections/WorkSection";
 import { ConnectSection } from "@/components/portfolio/sections/ConnectSection";
 import { BeyondSection } from "@/components/portfolio/sections/BeyondSection";
-import { AstrosisPanel } from "@/components/portfolio/panels/AstrosisPanel";
-import { QuipPanel } from "@/components/portfolio/panels/QuipPanel";
-import { CuFlodaPanel } from "@/components/portfolio/panels/CuFlodaPanel";
-import { EnCripPanel } from "@/components/portfolio/panels/EnCripPanel";
-import { AboutPanel } from "@/components/portfolio/panels/AboutPanel";
-import { ContactPanel } from "@/components/portfolio/panels/ContactPanel";
-import { DetailMobilePanel } from "@/components/portfolio/DetailPanel";
 import type { DetailId } from "@/components/portfolio/DetailPanel";
 import { ThemeSwitcher } from "@/components/theme/ThemeSwitcher";
+
+const AstrosisPanel = lazy(() =>
+  import("@/components/portfolio/panels/AstrosisPanel").then((m) => ({
+    default: m.AstrosisPanel,
+  })),
+);
+const QuipPanel = lazy(() =>
+  import("@/components/portfolio/panels/QuipPanel").then((m) => ({
+    default: m.QuipPanel,
+  })),
+);
+const CuFlodaPanel = lazy(() =>
+  import("@/components/portfolio/panels/CuFlodaPanel").then((m) => ({
+    default: m.CuFlodaPanel,
+  })),
+);
+const EnCripPanel = lazy(() =>
+  import("@/components/portfolio/panels/EnCripPanel").then((m) => ({
+    default: m.EnCripPanel,
+  })),
+);
+const AboutPanel = lazy(() =>
+  import("@/components/portfolio/panels/AboutPanel").then((m) => ({
+    default: m.AboutPanel,
+  })),
+);
+const ContactPanel = lazy(() =>
+  import("@/components/portfolio/panels/ContactPanel").then((m) => ({
+    default: m.ContactPanel,
+  })),
+);
+const DetailMobilePanel = lazy(() =>
+  import("@/components/portfolio/DetailPanel").then((m) => ({
+    default: m.DetailMobilePanel,
+  })),
+);
 
 export const Route = createFileRoute("/")({ component: Index });
 
@@ -37,16 +66,46 @@ function Index() {
       </div>
 
       <AnimatePresence>
-        {detail === "astrosis" && <AstrosisPanel key="astrosis" onClose={close} />}
-        {detail === "quip" && <QuipPanel key="quip" onClose={close} />}
-        {detail === "cufloda" && <CuFlodaPanel key="cufloda" onClose={close} />}
-        {detail === "encrip" && <EnCripPanel key="encrip" onClose={close} />}
-        {detail === "about" && <AboutPanel key="about" onClose={close} />}
-        {detail === "contact" && <ContactPanel key="contact" onClose={close} />}
-        {detail === "codeforces" && (
-          <DetailMobilePanel key="codeforces" id="codeforces" onClose={close} />
+        {detail === "astrosis" && (
+          <Suspense key="astrosis" fallback={null}>
+            <AstrosisPanel onClose={close} />
+          </Suspense>
         )}
-        {detail === "github" && <DetailMobilePanel key="github" id="github" onClose={close} />}
+        {detail === "quip" && (
+          <Suspense key="quip" fallback={null}>
+            <QuipPanel onClose={close} />
+          </Suspense>
+        )}
+        {detail === "cufloda" && (
+          <Suspense key="cufloda" fallback={null}>
+            <CuFlodaPanel onClose={close} />
+          </Suspense>
+        )}
+        {detail === "encrip" && (
+          <Suspense key="encrip" fallback={null}>
+            <EnCripPanel onClose={close} />
+          </Suspense>
+        )}
+        {detail === "about" && (
+          <Suspense key="about" fallback={null}>
+            <AboutPanel onClose={close} />
+          </Suspense>
+        )}
+        {detail === "contact" && (
+          <Suspense key="contact" fallback={null}>
+            <ContactPanel onClose={close} />
+          </Suspense>
+        )}
+        {detail === "codeforces" && (
+          <Suspense key="codeforces" fallback={null}>
+            <DetailMobilePanel id="codeforces" onClose={close} />
+          </Suspense>
+        )}
+        {detail === "github" && (
+          <Suspense key="github" fallback={null}>
+            <DetailMobilePanel id="github" onClose={close} />
+          </Suspense>
+        )}
       </AnimatePresence>
     </main>
   );
