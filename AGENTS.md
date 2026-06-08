@@ -5,10 +5,10 @@
 - **Framework**: TanStack Start (SPA mode), React 19, Vite 7
 - **Routing**: TanStack Router — route tree at `src/routeTree.gen.ts` (auto-generated, do not edit)
 - **Styling**: Tailwind CSS v4 (CSS-driven, no `tailwind.config.js`). Config in `src/styles.css` via `@import "tailwindcss" source(none)` + `@source "../src"`
-- **UI**: shadcn/ui components in `src/components/ui/`, Radix primitives
 - **Animation**: Framer Motion
-- **Package manager**: Bun (`bun.lock`). `package-lock.json` is gitignored but present.
+- **Package manager**: npm. `bun.lock` present but deprecated.
 - **Language**: TypeScript strict, path alias `@/*` → `./src/*`
+- **Code splitting**: Detail panels lazy-loaded via `React.lazy()` + `<Suspense>`
 
 ## Commands
 
@@ -26,16 +26,12 @@ npm run format     # Prettier --write
 - **Theme system**: 10 themes via `data-theme` attribute on `<html>`. Bootstrap script in `__root.tsx` reads `localStorage('mtf-theme')` to prevent flash. Not class-based `.dark` — do not add dark-mode class logic.
 - **SPA mode**: `spa.enabled: true` in Vite config. All routes serve `index.html`. SSR is minimal (error page only).
 - **Grid layout**: Custom deterministic packing algorithm at `src/lib/grid-pack.ts`. Uses seeded PRNG (mulberry32). Components (`WorkSection`, `BeyondSection`) recompute grid via `useMemo` on seed prop.
-- **Panel animations**: Tiles pass `layoutId={id ? \`tile-${id}\` : undefined}`to Framer Motion. Panels use matching`layoutId` for seamless open/close animation.
-- **DOOM emulator**: Dynamic script load of `/doom/js-dos.js`. Requires `public/doom/` with `js-dos.js`, `js-dos.css`, `wdosbox.js`, `doom.jsdos`.
+- **Panel animations**: Tiles pass `layoutId={id ? \`tile-${id}\` : undefined}` to Framer Motion. Panels use matching `layoutId` for seamless open/close animation.
 
 ## API Layer
 
 - Direct client-side fetch for: GitHub contributions, Codeforces, Art Institute of Chicago
-- Proxied via Vercel rewrites (`vercel.json`):
-  - `/api/music` → `https://itunes.apple.com/search`
-  - `/api/steam` → `https://store.steampowered.com/api/appdetails`
-- No server-side BFF — all API calls are client-side
+- No API proxy — all API calls are client-side direct fetch
 
 ## Generated / Ignored Files
 
@@ -51,6 +47,6 @@ npm run format     # Prettier --write
 - ES modules (`"type": "module"`)
 - Prettier: `printWidth: 100`, `semi: true`, `singleQuote: false`, `trailingComma: "all"`
 - No test framework — skip test-related commands
-- No CI pipeline (no `.github/workflows/`)
+- CI pipeline: `.github/workflows/ci.yml` runs lint + typecheck + build
 - Error boundary pattern: `__root.tsx` has `errorComponent`. Custom SSR error capture in `src/lib/error-capture.ts` + `src/server.ts`
 - `dangerouslySetInnerHTML` used in two places: theme bootstrap script (safe, static), and GitHub README display (must sanitize before use)
