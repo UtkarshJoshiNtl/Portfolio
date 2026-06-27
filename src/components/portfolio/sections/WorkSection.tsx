@@ -118,7 +118,7 @@ export function WorkSection({ onSelect }: { onSelect: (id: string) => void }) {
         transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5 }}
         whileHover={prefersReducedMotion ? {} : { y: -2, transition: { duration: 0.2 } }}
         onClick={() => onSelect("astrosis")}
-        className="w-full text-left bg-tile hover:bg-tile-alt transition-all duration-300 p-6 md:p-8 mb-3 relative overflow-hidden group"
+        className="w-full text-left bg-surface-container border border-outline rounded-lg transition-smooth p-6 md:p-8 mb-3 relative overflow-hidden group hover:border-primary hover:bg-surface-bright hover:shadow-lg"
         style={{ transformStyle: "preserve-3d", perspective: "800px" }}
       >
         <AstrosisBg />
@@ -203,7 +203,7 @@ export function WorkSection({ onSelect }: { onSelect: (id: string) => void }) {
           );
 
           const cardClasses =
-            "relative overflow-hidden bg-tile hover:bg-tile-alt transition-all duration-300 p-4 md:p-5 text-left h-full group";
+            "relative overflow-hidden bg-surface-container border border-outline rounded-lg transition-smooth p-4 md:p-5 text-left h-full group hover:border-primary hover:bg-surface-bright hover:shadow-md";
 
           return (
             <motion.div
