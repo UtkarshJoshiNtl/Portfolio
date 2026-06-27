@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import type { ReactNode } from "react";
+import { useEffect, useState } from "react";
 import { TileCornerFlourish } from "./TileCornerFlourish";
 
 type TileProps = {
@@ -28,6 +29,15 @@ export function Tile({
   depth = 0,
 }: TileProps) {
   const isLink = !!href;
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" || e.key === " ") {
@@ -42,18 +52,22 @@ export function Tile({
 
   const depthOffset = depth * 8;
 
-  const content = (
-    <motion.div
-      layoutId={id ? `tile-${id}` : undefined}
-      whileHover={{
+  const hoverConfig = prefersReducedMotion
+    ? { scale: 1.01, boxShadow: "0 8px 16px rgba(0,0,0,0.2)" }
+    : {
         rotateY: 12,
         rotateX: -8,
         scale: 1.02,
         z: 40 + depthOffset,
         boxShadow: "0 20px 40px rgba(0,0,0,0.3), 0 8px 16px rgba(0,0,0,0.2)",
-      }}
-      whileTap={{ scale: 0.975, rotateY: 0, rotateX: 0 }}
-      transition={{ type: "spring", stiffness: 280, damping: 20 }}
+      };
+
+  const content = (
+    <motion.div
+      layoutId={id ? `tile-${id}` : undefined}
+      whileHover={hoverConfig}
+      whileTap={prefersReducedMotion ? { scale: 0.99 } : { scale: 0.975, rotateY: 0, rotateX: 0 }}
+      transition={prefersReducedMotion ? { duration: 0.1 } : { type: "spring", stiffness: 280, damping: 20 }}
       style={{
         minHeight: 0,
         transformStyle: "preserve-3d",
@@ -61,7 +75,7 @@ export function Tile({
         zIndex: 10 + depth,
         ...offsetStyle,
       }}
-      className={`group relative overflow-hidden border border-transparent hover:border-amber ${isLink ? "" : "cursor-pointer"} ${bg} ${className}`}
+      className={`group relative overflow-hidden border border-transparent hover:border-amber focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary ${isLink ? "" : "cursor-pointer"} ${bg} ${className}`}
       {...(isLink
         ? {}
         : {

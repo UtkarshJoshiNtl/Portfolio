@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useId } from "react";
+import { useId, useEffect, useState } from "react";
 
 type Props = {
   seed?: number;
@@ -18,6 +18,16 @@ function mulberry32(a: number) {
 
 export function SectionDivider({ seed = 0 }: Props) {
   const id = useId();
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
   const rand = mulberry32(seed);
   const amplitude = 8 + rand() * 8;
   const freq = 0.015 + rand() * 0.01;
@@ -57,10 +67,10 @@ export function SectionDivider({ seed = 0 }: Props) {
           fill="none"
           stroke={`url(#fade-${id})`}
           strokeWidth="0.5"
-          initial={{ pathLength: 0, opacity: 0 }}
+          initial={prefersReducedMotion ? { pathLength: 1, opacity: 1 } : { pathLength: 0, opacity: 0 }}
           whileInView={{ pathLength: 1, opacity: 1 }}
           viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 1.5, ease: "easeInOut" }}
+          transition={prefersReducedMotion ? { duration: 0 } : { duration: 1.5, ease: "easeInOut" }}
         />
       </svg>
     </div>

@@ -18,17 +18,26 @@ const nameChars = "Utkarsh Joshi".split("");
 export function IdentitySection({ onSelect }: { onSelect: (id: string) => void }) {
   const [bootComplete, setBootComplete] = useState(false);
   const [dismissed, setDismissed] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
 
   useEffect(() => {
     if (!bootComplete) return;
     const onKey = () => setDismissed(true);
     window.addEventListener("keydown", onKey, { once: true });
-    const timer = setTimeout(() => setDismissed(true), 4000);
+    const timer = setTimeout(() => setDismissed(true), prefersReducedMotion ? 500 : 4000);
     return () => {
       window.removeEventListener("keydown", onKey);
       clearTimeout(timer);
     };
-  }, [bootComplete]);
+  }, [bootComplete, prefersReducedMotion]);
 
   if (!dismissed) {
     return (
@@ -66,13 +75,13 @@ export function IdentitySection({ onSelect }: { onSelect: (id: string) => void }
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         className="flex-1 relative z-10"
       >
         <motion.div
-          initial={{ opacity: 0, x: -8 }}
+          initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -8 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
+          transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, delay: 0.15 }}
           className="font-mono text-xs uppercase tracking-[0.2em] text-amber tagline-cursor"
         >
           Systems & Simulation Engineer
@@ -81,9 +90,9 @@ export function IdentitySection({ onSelect }: { onSelect: (id: string) => void }
           {nameChars.map((char, i) => (
             <motion.span
               key={i}
-              initial={{ opacity: 0, y: 40, rotateX: -90 }}
+              initial={{ opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 40, rotateX: prefersReducedMotion ? 0 : -90 }}
               animate={{ opacity: 1, y: 0, rotateX: 0 }}
-              transition={{
+              transition={prefersReducedMotion ? { duration: 0 } : {
                 duration: 0.5,
                 delay: 0.3 + i * 0.035,
                 ease: [0.16, 1, 0.3, 1],
@@ -99,9 +108,9 @@ export function IdentitySection({ onSelect }: { onSelect: (id: string) => void }
           {tags.map((t, i) => (
             <motion.span
               key={t}
-              initial={{ opacity: 0, y: 12 }}
+              initial={{ opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{
+              transition={prefersReducedMotion ? { duration: 0 } : {
                 duration: 0.5,
                 delay: 0.7 + i * 0.12,
                 ease: [0.16, 1, 0.3, 1],
@@ -113,17 +122,17 @@ export function IdentitySection({ onSelect }: { onSelect: (id: string) => void }
           ))}
         </div>
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={{ opacity: prefersReducedMotion ? 1 : 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 1.1 }}
+          transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, delay: 1.1 }}
           className="mt-3 font-mono text-xs uppercase tracking-[0.15em] text-amber"
         >
           Open to work & internships
         </motion.div>
         <motion.div
-          initial={{ opacity: 0, y: 8 }}
+          initial={{ opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 1.3 }}
+          transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, delay: 1.3 }}
           className="mt-6 flex items-center gap-1"
         >
           {contactItems.map((item) => (
@@ -144,9 +153,9 @@ export function IdentitySection({ onSelect }: { onSelect: (id: string) => void }
         </motion.div>
       </motion.div>
       <motion.div
-        initial={{ opacity: 0, scale: 0.6, rotate: -15 }}
+        initial={{ opacity: prefersReducedMotion ? 1 : 0, scale: prefersReducedMotion ? 1 : 0.6, rotate: prefersReducedMotion ? 0 : -15 }}
         animate={{ opacity: 1, scale: 1, rotate: 0 }}
-        transition={{
+        transition={prefersReducedMotion ? { duration: 0 } : {
           duration: 0.8,
           delay: 0.5,
           ease: [0.16, 1, 0.3, 1],

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { lazy, Suspense, useState, useRef } from "react";
+import { lazy, Suspense, useState, useRef, useEffect } from "react";
 import { AnimatePresence, useScroll, useTransform, motion } from "framer-motion";
 import { IdentitySection } from "@/components/portfolio/sections/IdentitySection";
 import { TimelineBand } from "@/components/portfolio/sections/TimelineBand";
@@ -71,25 +71,25 @@ export const Route = createFileRoute("/")({ component: Index });
 
 function Index() {
   const [detail, setDetail] = useState<DetailId | null>(null);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const close = () => setDetail(null);
   const mainRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
-  const bgY = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const bgY = useTransform(scrollYProgress, [0, 1], prefersReducedMotion ? [0, 0] : [0, 120]);
+
+  // Detect reduced motion preference
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
 
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="grain-overlay" />
-      <motion.div
-        className="fixed inset-0 pointer-events-none z-0 opacity-[0.015]"
-        style={{ y: bgY }}
-        aria-hidden="true"
-      >
-        <svg className="w-full h-full" viewBox="0 0 1000 2000" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="200" cy="400" r="300" stroke="currentColor" strokeWidth="0.3" className="text-amber" />
-          <circle cx="800" cy="800" r="250" stroke="currentColor" strokeWidth="0.2" className="text-amber" opacity="0.6" />
-          <circle cx="500" cy="1400" r="200" stroke="currentColor" strokeWidth="0.25" className="text-amber" opacity="0.4" />
-        </svg>
-      </motion.div>
       <div ref={mainRef} className="relative z-10">
         <OrnamentFrame />
         <div className="max-w-[1600px] mx-auto px-8 md:px-16 py-6 md:py-10">

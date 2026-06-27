@@ -910,3 +910,82 @@
   );
   background-size: 100% 18px;
 }
+
+/* ===== ACCESSIBILITY & MOTION PREFERENCES ===== */
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Enhanced focus states for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Improve link visibility */
+a {
+  position: relative;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Skip to main content link */
+.skip-to-main {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
+  padding: 8px;
+  text-decoration: none;
+  z-index: 100;
+}
+
+.skip-to-main:focus {
+  top: 0;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: more) {
+  .text-muted-foreground {
+    color: var(--color-foreground);
+    opacity: 0.8;
+  }
+  
+  .border {
+    border-width: 2px;
+  }
+}
+
+/* Reduced data mode support */
+@media (prefers-reduced-data: reduce) {
+  .grain-overlay,
+  .filigree-overlay {
+    display: none;
+  }
+  
+  svg {
+    will-change: auto;
+  }
+}
