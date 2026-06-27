@@ -11,6 +11,22 @@ import { ThemeProvider } from "@/components/theme/ThemeProvider";
 
 import appCss from "../styles.css?url";
 
+// Inline script runs before hydration to set data-theme from localStorage,
+// avoiding a flash of the default theme.
+const VALID_THEMES = [
+  "terminal",
+  "artist",
+  "noir",
+  "retro",
+  "blueprint",
+  "vaporwave",
+  "forest",
+  "ocean",
+  "nord",
+  "gruvbox",
+];
+const themeBootstrap = `(function(){try{var t=localStorage.getItem('mtf-theme');if(t&&${JSON.stringify(VALID_THEMES)}.includes(t)){document.documentElement.setAttribute('data-theme',t);}else{document.documentElement.setAttribute('data-theme','terminal');}}catch(e){document.documentElement.setAttribute('data-theme','terminal');}})();`;
+
 function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -111,8 +127,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="terminal">
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
         <HeadContent />
       </head>
       <body>
