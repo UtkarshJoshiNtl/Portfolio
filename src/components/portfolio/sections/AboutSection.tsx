@@ -37,7 +37,7 @@ export function AboutSection() {
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-7 h-7 rounded-md bg-glass shadow-glass flex items-center justify-center hover:bg-glass-hover text-foreground-secondary hover:text-foreground transition-all"
+                      className="w-7 h-7 rounded-md bg-glass border border-glass-border shadow-glass flex items-center justify-center hover:bg-glass-hover hover:border-glass-border-hover text-foreground-secondary hover:text-foreground transition-all"
                     >
                       <item.icon className="w-3 h-3" strokeWidth={1.5} />
                     </a>
@@ -83,19 +83,24 @@ export function AboutSection() {
           </div>
 
           <div className="md:col-span-2">
-            <div className="rounded-xl bg-glass shadow-glass p-5 space-y-5">
+            <div className="rounded-xl bg-glass-hover border border-glass-border shadow-glass p-5 space-y-5">
               <div>
                 <div className="font-mono text-micro uppercase tracking-[0.2em] text-foreground-secondary mb-3" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>
                   Timeline
                 </div>
-                <div className="relative pl-4 space-y-3">
+                <div className="space-y-3">
                   {timeline.map((t, i) => (
-                    <div key={t.year} className="relative">
-                      <div className="absolute left-[-17px] top-[5px] w-1.5 h-1.5 rounded-full bg-foreground-tertiary" aria-hidden="true" />
-                      <span className="font-mono text-micro text-foreground-secondary tabular-nums" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>
-                        {t.year}
-                      </span>
-                      <div className="text-small text-foreground-secondary mt-0.5">{t.text}</div>
+                    <div key={t.year} className="flex gap-3">
+                      <div className="flex flex-col items-center">
+                        <div className="w-2 h-2 rounded-full bg-foreground-tertiary ring-2 ring-background mt-[5px]" />
+                        {i < timeline.length - 1 && <div className="w-px flex-1 bg-glass-border mt-1" />}
+                      </div>
+                      <div className="flex-1 pb-3">
+                        <span className="font-mono text-micro text-foreground-secondary tabular-nums" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>
+                          {t.year}
+                        </span>
+                        <div className="text-small text-foreground-secondary mt-0.5">{t.text}</div>
+                      </div>
                     </div>
                   ))}
                 </div>

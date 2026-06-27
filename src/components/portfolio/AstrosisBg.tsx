@@ -70,7 +70,7 @@ export function AstrosisBg() {
 
   return (
     <svg
-      className="absolute inset-0 h-full w-full opacity-70"
+      className="absolute inset-0 h-full w-full opacity-85"
       viewBox="0 0 400 300"
       preserveAspectRatio="xMidYMid slice"
       aria-hidden

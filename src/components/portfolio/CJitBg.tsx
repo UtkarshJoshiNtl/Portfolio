@@ -38,7 +38,7 @@ export function CJitBg() {
 
   return (
     <svg
-      className="absolute inset-0 h-full w-full opacity-20"
+      className="absolute inset-0 h-full w-full opacity-45"
       viewBox="0 0 400 300"
       preserveAspectRatio="xMidYMid slice"
       aria-hidden

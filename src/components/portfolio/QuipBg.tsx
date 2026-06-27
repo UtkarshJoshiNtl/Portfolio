@@ -25,7 +25,7 @@ export function QuipBg() {
 
   return (
     <svg
-      className="absolute inset-0 h-full w-full opacity-25"
+      className="absolute inset-0 h-full w-full opacity-55"
       viewBox="0 0 400 300"
       preserveAspectRatio="xMidYMid slice"
       aria-hidden

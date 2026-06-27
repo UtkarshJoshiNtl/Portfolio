@@ -116,7 +116,7 @@ function ProjectDetail({ id, onBack }: { id: ProjectId; onBack: () => void }) {
 
         <div className="md:col-span-2 space-y-4">
           {id === "astrosis" && (
-            <div className="rounded-xl bg-glass shadow-glass p-5">
+            <div className="rounded-xl bg-glass-hover shadow-glass p-5">
               <div className="font-mono text-micro uppercase tracking-[0.2em] text-foreground-secondary mb-3" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>
                 Benchmarks
               </div>
@@ -137,7 +137,7 @@ function ProjectDetail({ id, onBack }: { id: ProjectId; onBack: () => void }) {
           )}
 
           {id === "astrosis" && (
-            <div className="rounded-xl bg-glass shadow-glass p-5">
+            <div className="rounded-xl bg-glass-hover shadow-glass p-5">
               <div className="font-mono text-micro uppercase tracking-[0.2em] text-foreground-secondary mb-3" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>
                 Highlights
               </div>
@@ -153,7 +153,7 @@ function ProjectDetail({ id, onBack }: { id: ProjectId; onBack: () => void }) {
           )}
 
           {!isExternal && project?.repo && (
-            <div className="rounded-xl bg-glass shadow-glass p-5">
+            <div className="rounded-xl bg-glass-hover shadow-glass p-5">
               <button
                 onClick={() => setShowReadme(!showReadme)}
                 className="flex items-center gap-2 font-mono text-micro uppercase tracking-[0.15em] text-foreground-secondary hover:text-foreground transition-colors"
@@ -194,109 +194,99 @@ export function ProjectsSection() {
   }
 
   return (
-    <section>
-      <div className="flex items-center gap-3 mb-5">
-        <span className="text-small font-mono text-foreground-secondary uppercase tracking-[0.15em]" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>
-          Projects
-        </span>
+    <section className="relative">
+      <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
+        <div
+          className="absolute inset-0"
+          style={{
+            opacity: 0.04,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+            backgroundSize: '512px 512px',
+            backgroundRepeat: 'repeat',
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `
+              radial-gradient(ellipse at 20% 0%, rgba(66,133,244,0.06) 0%, transparent 50%),
+              radial-gradient(ellipse at 80% 30%, rgba(234,67,53,0.04) 0%, transparent 50%),
+              radial-gradient(ellipse at 50% 100%, rgba(52,168,83,0.04) 0%, transparent 50%)
+            `,
+          }}
+        />
       </div>
 
-      <motion.button
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
-        whileHover={{ y: -2 }}
-        onClick={() => setSelected("astrosis")}
-        className="w-full text-left rounded-xl bg-glass hover:bg-glass-hover hover:shadow-glow shadow-glass transition-all p-5 md:p-6 relative overflow-hidden group mb-3"
-      >
-        <AstrosisBg />
-        <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-          style={{ background: "radial-gradient(ellipse at 30% 40%, rgba(66,133,244,0.06), transparent 60%)" }}
-        />
-        <div className="relative z-10">
-          <div className="font-mono text-micro uppercase tracking-[0.2em] text-foreground-secondary mb-1" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>
-            Featured
-          </div>
-          <h2 className="text-2xl md:text-3xl font-bold tracking-tight" style={{ fontVariationSettings: '"MONO" 0, "CASL" 0' }}>
-            Astrosis
-          </h2>
-          <p className="text-foreground-secondary mt-1 text-sm md:text-base">
-            GPU-Accelerated Orbital Propagation and Conjunction Analysis Engine
-          </p>
-          <div className="grid grid-cols-3 gap-3 mt-4 max-w-md">
-            {[
-              { value: "507×", label: "batch propagation" },
-              { value: "83×", label: "conjunction screening" },
-              { value: "<1e-7", label: "energy drift / 24h" },
-            ].map((s) => (
-              <div key={s.label} className="bg-surface rounded-lg p-3">
-                <div className="text-lg md:text-xl font-semibold gradient-text">{s.value}</div>
-                <div className="font-mono text-micro text-foreground-secondary mt-0.5 leading-tight" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>
-                  {s.label}
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="flex flex-wrap gap-2 mt-3">
-            {["C++", "CUDA", "Python", "pybind11", "OpenMP", "RK4"].map((t) => (
-              <span key={t} className="tag-pill">{t}</span>
-            ))}
-          </div>
-        </div>
-      </motion.button>
+      <div className="relative" style={{ zIndex: 1 }}>
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.35, ease: "easeOut" }}
+          className="mb-3 max-w-3xl mx-auto"
+        >
+          <TechStackBar />
+        </motion.div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-        {projectList.slice(1).map((p, i) => {
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-3xl mx-auto">
+          {projectList.slice(0, 6).map((p, i) => {
           const isExternal = "href" in p;
+          const isFeatured = p.id === "astrosis";
+          const project = projects.find((pd) => pd.name === (
+            p.id === "cjit" ? "cjit" : p.id === "quip" ? "Quip" : p.id === "s-stream" ? "S-Stream" : p.id === "encrip" ? "EnCrip" : p.id === "ctorrent" ? "CTorrent" : p.id === "current" ? "Current" : p.id === "visage" ? "Visage" : p.id === "justLanded" ? "justLanded" : "Astrosis"
+          ));
+          const Wrapper = isExternal ? "a" : "button";
+          const wrapperProps = isExternal
+            ? { href: (p as typeof p & { href: string }).href, target: "_blank", rel: "noopener noreferrer" as const }
+            : { onClick: () => setSelected(p.id) };
           return (
             <motion.div
               key={p.id}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.35, delay: i * 0.025, ease: "easeOut" }}
-              whileHover={{ y: -2 }}
+              whileHover={{ y: -3 }}
             >
-              {isExternal ? (
-                <a href={(p as typeof p & { href: string }).href} target="_blank" rel="noopener noreferrer" className="block h-full">
-                  <div className="h-full rounded-xl bg-glass hover:bg-glass-hover hover:shadow-glow shadow-glass transition-all p-4 relative overflow-hidden group">
-                    {bgMap[p.id]}
-                    <div className="relative z-10">
-                      <div className="flex items-center gap-2 mb-1.5">
-                        <span className="text-sm" style={{ opacity: 0.3 }}>{p.icon}</span>
-                        <span className="font-mono text-small text-foreground" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>{p.name}</span>
-                        <ArrowUpRight className="w-3 h-3 text-foreground-secondary ml-auto opacity-0 group-hover:opacity-100 transition-opacity" />
-                      </div>
-                      <p className="text-small text-foreground-secondary leading-relaxed line-clamp-2">{p.desc}</p>
-                    </div>
+              <Wrapper {...(wrapperProps as any)} className={`block w-full h-full ${!isExternal ? "text-left" : ""}`}>
+                <div className="h-full rounded-xl overflow-hidden flex flex-col group shadow-glass hover:shadow-glow transition-shadow">
+                  <div className="relative h-36 shrink-0 bg-background">
+                    {p.id === "astrosis" ? <AstrosisBg /> : bgMap[p.id]}
                   </div>
-                </a>
-              ) : (
-                <button onClick={() => setSelected(p.id)} className="w-full h-full text-left">
-                  <div className="h-full rounded-xl bg-glass hover:bg-glass-hover hover:shadow-glow shadow-glass transition-all p-4 relative overflow-hidden group">
-                    {bgMap[p.id]}
-                    <div className="relative z-10">
-                      <div className="flex items-center gap-2 mb-1.5">
-                        <span className="text-sm" style={{ opacity: 0.3 }}>{p.icon}</span>
-                        <span className="font-mono text-small text-foreground" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>{p.name}</span>
+                  <div className="flex-1 p-4 md:p-5 flex flex-col justify-center gap-2 bg-glass backdrop-blur-xl">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-2 mb-0.5">
+                          {isFeatured && (
+                            <span className="font-mono text-micro uppercase tracking-[0.15em] text-gblue bg-gblue/10 px-2 py-0.5 rounded" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>
+                              Featured
+                            </span>
+                          )}
+                          <span className="font-mono text-sm font-bold text-foreground" style={{ fontVariationSettings: '"MONO" 0, "CASL" 0' }}>
+                            {p.name}
+                          </span>
+                        </div>
+                        <p className="text-xs text-foreground-secondary leading-relaxed mt-0.5">{p.desc}</p>
                       </div>
-                      <p className="text-small text-foreground-secondary leading-relaxed line-clamp-2">{p.desc}</p>
+                      {isExternal && (
+                        <ArrowUpRight className="w-3.5 h-3.5 text-foreground-secondary shrink-0 mt-0.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      )}
                     </div>
+                    {project?.tech && (
+                      <div className="flex flex-wrap gap-1">
+                        {project.tech.slice(0, 4).map((t: string) => (
+                          <span key={t} className="text-[9px] font-mono uppercase tracking-[0.1em] text-foreground-tertiary bg-glass px-1.5 py-0.5 rounded" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
-                </button>
-              )}
+                </div>
+              </Wrapper>
             </motion.div>
           );
         })}
       </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.35, delay: 0.15 }}
-        className="mt-4"
-      >
-        <TechStackBar />
-      </motion.div>
+      </div>
     </section>
   );
 }
