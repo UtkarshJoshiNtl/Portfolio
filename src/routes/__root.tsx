@@ -7,25 +7,8 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { ThemeProvider } from "@/components/theme/ThemeProvider";
 
 import appCss from "../styles.css?url";
-
-// Inline script runs before hydration to set data-theme from localStorage,
-// avoiding a flash of the default theme.
-const VALID_THEMES = [
-  "terminal",
-  "artist",
-  "noir",
-  "retro",
-  "blueprint",
-  "vaporwave",
-  "forest",
-  "ocean",
-  "nord",
-  "gruvbox",
-];
-const themeBootstrap = `(function(){try{var t=localStorage.getItem('mtf-theme');if(t&&${JSON.stringify(VALID_THEMES)}.includes(t)){document.documentElement.setAttribute('data-theme',t);}else{document.documentElement.setAttribute('data-theme','terminal');}}catch(e){document.documentElement.setAttribute('data-theme','terminal');}})();`;
 
 function NotFoundComponent() {
   return (
@@ -127,13 +110,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-theme="terminal">
+    <html lang="en" className="dark">
       <head>
-        <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
         <HeadContent />
       </head>
       <body>
-        {children}
+        <div id="root">
+          <Outlet />
+        </div>
         <Scripts />
       </body>
     </html>
@@ -145,9 +129,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider>
-        <Outlet />
-      </ThemeProvider>
+      <RootContent />
     </QueryClientProvider>
   );
 }
