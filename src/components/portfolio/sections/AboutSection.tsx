@@ -23,7 +23,7 @@ export function AboutSection() {
           <div className="md:col-span-3">
             <div className="flex flex-col sm:flex-row sm:items-start gap-5 sm:gap-6">
               <div className="shrink-0">
-                <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-2xl overflow-hidden">
+                <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-2xl overflow-hidden shadow-glass">
                   <img
                     src="/avatar.jpg"
                     alt="Utkarsh Joshi"
@@ -37,7 +37,7 @@ export function AboutSection() {
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-7 h-7 rounded-md bg-glass flex items-center justify-center hover:bg-glass-hover text-foreground-secondary hover:text-foreground transition-all"
+                      className="w-7 h-7 rounded-md bg-glass shadow-glass flex items-center justify-center hover:bg-glass-hover text-foreground-secondary hover:text-foreground transition-all"
                     >
                       <item.icon className="w-3 h-3" strokeWidth={1.5} />
                     </a>
@@ -50,7 +50,7 @@ export function AboutSection() {
                   Systems & Simulation Engineer
                 </div>
 
-                <h1 className="text-3xl md:text-5xl font-semibold tracking-tight mt-1" style={{ fontVariationSettings: '"MONO" 0, "CASL" 1' }}>
+                <h1 className="text-3xl md:text-5xl font-bold tracking-tight mt-1" style={{ fontVariationSettings: '"MONO" 0, "CASL" 0' }}>
                   Utkarsh Joshi
                 </h1>
 
@@ -83,7 +83,7 @@ export function AboutSection() {
           </div>
 
           <div className="md:col-span-2">
-            <div className="rounded-xl bg-glass p-5 space-y-5">
+            <div className="rounded-xl bg-glass shadow-glass p-5 space-y-5">
               <div>
                 <div className="font-mono text-micro uppercase tracking-[0.2em] text-foreground-secondary mb-3" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>
                   Timeline

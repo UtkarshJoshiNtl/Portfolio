@@ -12,7 +12,7 @@ const categories = [
 
 export function TechStackBar() {
   return (
-    <div className="relative bg-tile-alt transition-colors group overflow-hidden">
+    <div className="relative rounded-xl bg-glass shadow-glass transition-colors group overflow-hidden">
       <div className="px-5 py-4 flex gap-8 md:gap-14">
         {categories.map((cat) => (
           <div key={cat.label} className="flex flex-col gap-2">
@@ -23,7 +23,7 @@ export function TechStackBar() {
               {cat.items.map((t) => (
                 <span
                   key={t}
-                  className="font-mono text-sm uppercase tracking-[0.08em] text-muted-foreground hover:text-foreground transition-colors"
+                  className="font-mono text-sm uppercase tracking-[0.08em] text-foreground-secondary hover:text-foreground transition-colors"
                 >
                   {t}
                 </span>

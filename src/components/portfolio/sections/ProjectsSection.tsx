@@ -74,7 +74,7 @@ function ProjectDetail({ id, onBack }: { id: ProjectId; onBack: () => void }) {
 
       <div className="grid grid-cols-1 md:grid-cols-5 gap-6 md:gap-8">
         <div className="md:col-span-3">
-          <div className="rounded-xl bg-glass p-6 md:p-8">
+          <div className="rounded-xl bg-glass shadow-glass p-6 md:p-8">
             <div className="flex items-center gap-3 mb-2">
               <span className="text-lg" style={{ opacity: 0.4 }}>{p.icon}</span>
               <span className="font-mono text-micro uppercase tracking-[0.2em] text-foreground-secondary" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>
@@ -82,7 +82,7 @@ function ProjectDetail({ id, onBack }: { id: ProjectId; onBack: () => void }) {
               </span>
             </div>
 
-            <h2 className="text-2xl md:text-4xl font-semibold tracking-tight" style={{ fontVariationSettings: '"MONO" 0, "CASL" 1' }}>
+            <h2 className="text-2xl md:text-4xl font-bold tracking-tight" style={{ fontVariationSettings: '"MONO" 0, "CASL" 0' }}>
               {p.name}
             </h2>
 
@@ -116,7 +116,7 @@ function ProjectDetail({ id, onBack }: { id: ProjectId; onBack: () => void }) {
 
         <div className="md:col-span-2 space-y-4">
           {id === "astrosis" && (
-            <div className="rounded-xl bg-glass p-5">
+            <div className="rounded-xl bg-glass shadow-glass p-5">
               <div className="font-mono text-micro uppercase tracking-[0.2em] text-foreground-secondary mb-3" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>
                 Benchmarks
               </div>
@@ -137,7 +137,7 @@ function ProjectDetail({ id, onBack }: { id: ProjectId; onBack: () => void }) {
           )}
 
           {id === "astrosis" && (
-            <div className="rounded-xl bg-glass p-5">
+            <div className="rounded-xl bg-glass shadow-glass p-5">
               <div className="font-mono text-micro uppercase tracking-[0.2em] text-foreground-secondary mb-3" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>
                 Highlights
               </div>
@@ -153,7 +153,7 @@ function ProjectDetail({ id, onBack }: { id: ProjectId; onBack: () => void }) {
           )}
 
           {!isExternal && project?.repo && (
-            <div className="rounded-xl bg-glass p-5">
+            <div className="rounded-xl bg-glass shadow-glass p-5">
               <button
                 onClick={() => setShowReadme(!showReadme)}
                 className="flex items-center gap-2 font-mono text-micro uppercase tracking-[0.15em] text-foreground-secondary hover:text-foreground transition-colors"
@@ -207,7 +207,7 @@ export function ProjectsSection() {
         transition={{ duration: 0.4, ease: "easeOut" }}
         whileHover={{ y: -2 }}
         onClick={() => setSelected("astrosis")}
-        className="w-full text-left rounded-xl bg-glass hover:bg-glass-hover transition-all p-5 md:p-6 relative overflow-hidden group mb-3"
+        className="w-full text-left rounded-xl bg-glass hover:bg-glass-hover hover:shadow-glow shadow-glass transition-all p-5 md:p-6 relative overflow-hidden group mb-3"
       >
         <AstrosisBg />
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
@@ -217,7 +217,7 @@ export function ProjectsSection() {
           <div className="font-mono text-micro uppercase tracking-[0.2em] text-foreground-secondary mb-1" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>
             Featured
           </div>
-          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight" style={{ fontVariationSettings: '"MONO" 0, "CASL" 1' }}>
+          <h2 className="text-2xl md:text-3xl font-bold tracking-tight" style={{ fontVariationSettings: '"MONO" 0, "CASL" 0' }}>
             Astrosis
           </h2>
           <p className="text-foreground-secondary mt-1 text-sm md:text-base">
@@ -258,7 +258,7 @@ export function ProjectsSection() {
             >
               {isExternal ? (
                 <a href={(p as typeof p & { href: string }).href} target="_blank" rel="noopener noreferrer" className="block h-full">
-                  <div className="h-full rounded-xl bg-glass hover:bg-glass-hover transition-all p-4 relative overflow-hidden group">
+                  <div className="h-full rounded-xl bg-glass hover:bg-glass-hover hover:shadow-glow shadow-glass transition-all p-4 relative overflow-hidden group">
                     {bgMap[p.id]}
                     <div className="relative z-10">
                       <div className="flex items-center gap-2 mb-1.5">
@@ -272,7 +272,7 @@ export function ProjectsSection() {
                 </a>
               ) : (
                 <button onClick={() => setSelected(p.id)} className="w-full h-full text-left">
-                  <div className="h-full rounded-xl bg-glass hover:bg-glass-hover transition-all p-4 relative overflow-hidden group">
+                  <div className="h-full rounded-xl bg-glass hover:bg-glass-hover hover:shadow-glow shadow-glass transition-all p-4 relative overflow-hidden group">
                     {bgMap[p.id]}
                     <div className="relative z-10">
                       <div className="flex items-center gap-2 mb-1.5">

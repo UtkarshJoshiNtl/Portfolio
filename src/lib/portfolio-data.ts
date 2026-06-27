@@ -69,6 +69,14 @@ export const astrosisHighlights = [
 
 export const projects = [
   {
+    name: "Astrosis",
+    repo: "UtkarshJoshiNtl/Astrosis",
+    tech: ["C++", "CUDA", "Python", "pybind11", "OpenMP", "RK4"],
+    description:
+      "GPU-accelerated orbital propagation and conjunction analysis engine. SoA memory layout, RK4 integration, Brent's TCA refinement. 83× conjunction screening speedup over Python reference.",
+    github: "https://github.com/UtkarshJoshiNtl/Astrosis",
+  },
+  {
     name: "cjit",
     repo: "UtkarshJoshiNtl/cjit",
     tech: ["C", "Content-Addressed Storage", "Version Control"],

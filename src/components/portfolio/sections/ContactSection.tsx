@@ -56,12 +56,11 @@ export function ContactSection() {
 
   return (
     <section>
-      <div className="flex items-center gap-3 mb-5">
-        <span className="text-small font-mono text-foreground-secondary uppercase tracking-[0.15em]" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>
-          Contact
-        </span>
-
-      </div>
+        <div className="flex items-center gap-3 mb-5">
+          <span className="text-small font-mono text-foreground-secondary uppercase tracking-[0.15em]" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>
+            Contact
+          </span>
+        </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {platforms.map((p, i) => (
@@ -73,7 +72,7 @@ export function ContactSection() {
             href={p.href}
             target={p.label !== "Email" ? "_blank" : undefined}
             rel={p.label !== "Email" ? "noopener noreferrer" : undefined}
-            className="rounded-xl bg-glass hover:bg-glass-hover transition-all p-5 group flex flex-col items-center text-center"
+            className="rounded-xl bg-glass hover:bg-glass-hover hover:shadow-glow shadow-glass transition-all p-5 group flex flex-col items-center text-center"
           >
             <div className="w-10 h-10 rounded-xl bg-gblue/10 flex items-center justify-center group-hover:bg-gblue/20 transition-colors mb-3">
               {p.customIcon ?? (p.icon && <p.icon className="w-5 h-5 text-gblue" strokeWidth={1.5} />)}
@@ -91,7 +90,7 @@ export function ContactSection() {
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.35, delay: 0.2 }}
-        className="mt-4 rounded-xl bg-glass p-4 md:p-5"
+        className="mt-4 rounded-xl bg-glass shadow-glass p-4 md:p-5"
       >
         <div className="flex items-center justify-between flex-wrap gap-3">
           <div className="flex items-center gap-3">

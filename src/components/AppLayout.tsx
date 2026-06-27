@@ -26,8 +26,8 @@ export function AppLayout({ children, activeSection, onNavigate }: AppLayoutProp
             </div>
             <div className="flex flex-col">
               <span
-                className="text-sm font-semibold text-foreground"
-                style={{ fontVariationSettings: '"MONO" 0, "CASL" 1' }}
+                className="text-sm font-bold text-foreground"
+                style={{ fontVariationSettings: '"MONO" 0, "CASL" 0' }}
               >
                 Utkarsh Joshi
               </span>
