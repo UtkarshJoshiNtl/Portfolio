@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
+import { useEffect, useState } from "react";
 import { AstrosisBg } from "../AstrosisBg";
 import { QuipBg } from "../QuipBg";
 import { SStreamBg } from "../SStreamBg";
@@ -11,6 +12,7 @@ import { VisageBg } from "../VisageBg";
 import { JustLandedBg } from "../JustLandedBg";
 import { SectionHeader } from "../SectionHeader";
 import { orbitalDisplacement } from "@/lib/grid-pack";
+import { useReducedMotion } from "@/lib/motion-preferences";
 
 const accentColors: Record<string, string> = {
   astrosis: "oklch(0.78 0.16 75)",
@@ -88,30 +90,33 @@ const projects = [
   },
 ];
 
-const sectionVariants = {
-  hidden: { opacity: 0, y: 16 },
+const sectionVariants = (prefersReducedMotion: boolean) => ({
+  hidden: prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: {
-      duration: 0.55,
-      delay: Math.sin(i * 0.7) * 0.08 + 0.08,
-      ease: [0.16, 1, 0.3, 1],
-    },
+    transition: prefersReducedMotion
+      ? { duration: 0 }
+      : {
+          duration: 0.55,
+          delay: Math.sin(i * 0.7) * 0.08 + 0.08,
+          ease: [0.16, 1, 0.3, 1],
+        },
   }),
-};
+});
 
 export function WorkSection({ onSelect }: { onSelect: (id: string) => void }) {
+  const prefersReducedMotion = useReducedMotion();
   return (
     <section className="mt-2">
       <SectionHeader label="Work" />
 
       <motion.button
-        initial={{ opacity: 0, y: 16 }}
+        initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-40px" }}
-        transition={{ duration: 0.5 }}
-        whileHover={{ y: -2, transition: { duration: 0.2 } }}
+        transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5 }}
+        whileHover={prefersReducedMotion ? {} : { y: -2, transition: { duration: 0.2 } }}
         onClick={() => onSelect("astrosis")}
         className="w-full text-left bg-tile hover:bg-tile-alt transition-all duration-300 p-6 md:p-8 mb-3 relative overflow-hidden group"
         style={{ transformStyle: "preserve-3d", perspective: "800px" }}
@@ -207,8 +212,8 @@ export function WorkSection({ onSelect }: { onSelect: (id: string) => void }) {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-30px" }}
-              variants={sectionVariants}
-              whileHover={{ y: -3, transition: { duration: 0.2 } }}
+              variants={sectionVariants(prefersReducedMotion)}
+              whileHover={prefersReducedMotion ? {} : { y: -3, transition: { duration: 0.2 } }}
               style={{
                 transformStyle: "preserve-3d",
                 perspective: "800px",
@@ -235,10 +240,10 @@ export function WorkSection({ onSelect }: { onSelect: (id: string) => void }) {
       </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 10 }}
+        initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-40px" }}
-        transition={{ duration: 0.4, delay: 0.1 }}
+        transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.4, delay: 0.1 }}
         className="mt-3"
       >
         <TechStackBar />
