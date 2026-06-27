@@ -7,9 +7,6 @@ import { WorkSection } from "@/components/portfolio/sections/WorkSection";
 import { ConnectSection } from "@/components/portfolio/sections/ConnectSection";
 import { BeyondSection } from "@/components/portfolio/sections/BeyondSection";
 import type { DetailId } from "@/components/portfolio/DetailPanel";
-import { ThemeSwitcher } from "@/components/theme/ThemeSwitcher";
-import { OrnamentFrame } from "@/components/portfolio/OrnamentFrame";
-import { SectionDivider } from "@/components/portfolio/SectionDivider";
 
 const AstrosisPanel = lazy(() =>
   import("@/components/portfolio/panels/AstrosisPanel").then((m) => ({
@@ -87,25 +84,22 @@ function Index() {
     return () => mq.removeEventListener("change", handler);
   }, []);
 
+  const handleSelect = (id: string) => setDetail(id as DetailId);
+
   return (
     <main className="min-h-screen bg-background text-foreground">
       <div className="grain-overlay" />
       <div ref={mainRef} className="relative z-10">
-        <OrnamentFrame />
         <div className="max-w-[1600px] mx-auto px-8 md:px-16 py-6 md:py-10">
-        <div className="flex items-center justify-end gap-2 mb-4">
-          <ThemeSwitcher />
-        </div>
-
-        <IdentitySection onSelect={setDetail} />
-        <SectionDivider seed={42} />
+        <IdentitySection onSelect={handleSelect} />
+        <div className="my-20" />
         <TimelineBand />
-        <SectionDivider seed={137} />
-        <WorkSection onSelect={setDetail} />
-        <SectionDivider seed={256} />
-        <ConnectSection onSelect={setDetail} />
-        <SectionDivider seed={365} />
-        <BeyondSection onSelect={setDetail} />
+        <div className="my-20" />
+        <WorkSection onSelect={handleSelect} />
+        <div className="my-20" />
+        <ConnectSection onSelect={handleSelect} />
+        <div className="my-20" />
+        <BeyondSection onSelect={handleSelect} />
       </div>
       </div>
 

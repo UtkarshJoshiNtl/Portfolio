@@ -52,131 +52,73 @@ export function IdentitySection({ onSelect }: { onSelect: (id: string) => void }
 
   return (
     <section className="flex flex-col md:flex-row md:items-center md:justify-between gap-8 md:gap-16 relative">
-      <div
-        className="absolute -top-8 -left-8 w-48 h-48 pointer-events-none opacity-[0.03]"
-        aria-hidden="true"
-      >
-        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path
-            d="M20 100 C20 40 60 10 100 10 C140 10 180 40 180 100 C180 160 140 190 100 190 C60 190 20 160 20 100Z"
-            stroke="currentColor"
-            strokeWidth="0.5"
-          />
-          <path
-            d="M40 100 C40 55 70 30 100 30 C130 30 160 55 160 100 C160 145 130 170 100 170 C70 170 40 145 40 100Z"
-            stroke="currentColor"
-            strokeWidth="0.3"
-          />
-          <path d="M100 10 L100 190" stroke="currentColor" strokeWidth="0.2" />
-          <path d="M10 100 L190 100" stroke="currentColor" strokeWidth="0.2" />
-        </svg>
-      </div>
+
 
       <motion.div
-        initial={{ opacity: 0, y: 24 }}
+        initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.6 }}
         className="flex-1 relative z-10"
       >
-        <motion.div
-          initial={{ opacity: 0, x: prefersReducedMotion ? 0 : -8 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, delay: 0.15 }}
-          className="font-mono text-xs uppercase tracking-[0.2em] text-amber tagline-cursor"
-        >
+        <div className="font-mono text-sm uppercase tracking-wider text-accent mb-4">
           Systems & Simulation Engineer
-        </motion.div>
-        <h1 className="mt-3 text-4xl md:text-6xl font-semibold tracking-tight overflow-hidden">
-          {nameChars.map((char, i) => (
-            <motion.span
-              key={i}
-              initial={{ opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 40, rotateX: prefersReducedMotion ? 0 : -90 }}
-              animate={{ opacity: 1, y: 0, rotateX: 0 }}
-              transition={prefersReducedMotion ? { duration: 0 } : {
-                duration: 0.5,
-                delay: 0.3 + i * 0.035,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className="inline-block"
-              style={{ transformStyle: "preserve-3d" }}
-            >
-              {char === " " ? "\u00A0" : char}
-            </motion.span>
-          ))}
+        </div>
+        <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-4">
+          Utkarsh Joshi
         </h1>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {tags.map((t, i) => (
-            <motion.span
+        <p className="text-lg text-muted-foreground mb-6 max-w-xl">
+          GPU acceleration specialist. Systems engineer. Building efficient software at scale.
+        </p>
+        <div className="flex flex-wrap gap-2 mb-6">
+          {tags.map((t) => (
+            <span
               key={t}
-              initial={{ opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={prefersReducedMotion ? { duration: 0 } : {
-                duration: 0.5,
-                delay: 0.7 + i * 0.12,
-                ease: [0.16, 1, 0.3, 1],
-              }}
-              className="font-mono text-xs uppercase tracking-[0.15em] px-3 py-1.5 bg-tile/60 text-muted-foreground"
+              className="font-mono text-xs uppercase tracking-wider px-3 py-1 bg-accent/10 text-accent rounded"
             >
               {t}
-            </motion.span>
+            </span>
           ))}
         </div>
-        <motion.div
-          initial={{ opacity: prefersReducedMotion ? 1 : 0 }}
-          animate={{ opacity: 1 }}
-          transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, delay: 1.1 }}
-          className="mt-3 font-mono text-xs uppercase tracking-[0.15em] text-amber"
-        >
+        <div className="text-sm text-accent font-mono mb-6">
           Open to work & internships
-        </motion.div>
+        </div>
         <motion.div
-          initial={{ opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 8 }}
+          initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, delay: 1.3 }}
-          className="mt-6 flex items-center gap-1"
+          transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, delay: 0.2 }}
+          className="flex flex-wrap gap-3"
         >
           {contactItems.map((item) => (
-            <a
+            <motion.a
               key={item.label}
               href={item.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-2 px-3 py-2 font-mono text-xs uppercase tracking-[0.15em] text-muted-foreground hover:text-amber transition-colors"
+              whileHover={{ y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center gap-2 px-4 py-2 bg-card border border-border rounded-lg hover:border-accent/50 transition-colors duration-200 group"
             >
               <item.icon className="w-4 h-4" />
-              <span className="relative">
-                {item.label}
-                <span className="absolute bottom-0 left-0 w-0 h-px bg-amber group-hover:w-full transition-all duration-300" />
-              </span>
-            </a>
+              <span className="font-mono text-sm uppercase tracking-wider">{item.label}</span>
+            </motion.a>
           ))}
         </motion.div>
       </motion.div>
+
       <motion.div
-        initial={{ opacity: prefersReducedMotion ? 1 : 0, scale: prefersReducedMotion ? 1 : 0.6, rotate: prefersReducedMotion ? 0 : -15 }}
-        animate={{ opacity: 1, scale: 1, rotate: 0 }}
-        transition={prefersReducedMotion ? { duration: 0 } : {
-          duration: 0.8,
-          delay: 0.5,
-          ease: [0.16, 1, 0.3, 1],
-          type: "spring",
-          stiffness: 180,
-          damping: 18,
-        }}
+        initial={prefersReducedMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.5, delay: 0.1 }}
         className="shrink-0 relative z-10"
       >
         <button onClick={() => onSelect("about")} className="block group">
-          <div className="relative w-36 h-36 md:w-44 md:h-44 rounded-full overflow-hidden ring-2 ring-amber/20 group-hover:ring-amber/60 transition-all duration-500">
+          <div className="relative w-40 h-40 md:w-48 md:h-48 rounded-lg overflow-hidden border border-border group-hover:border-accent/50 transition-all duration-200">
             <img
               src="/avatar.jpg"
               alt="Utkarsh Joshi"
-              className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-500"
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
             />
           </div>
-          <div
-            className="absolute inset-[-6px] rounded-full border border-ornament opacity-0 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none"
-            aria-hidden="true"
-          />
         </button>
       </motion.div>
     </section>
