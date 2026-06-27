@@ -23,7 +23,7 @@ export function AboutSection() {
           <div className="md:col-span-3">
             <div className="flex flex-col sm:flex-row sm:items-start gap-5 sm:gap-6">
               <div className="shrink-0">
-                <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-2xl overflow-hidden border border-glass-border">
+                <div className="relative w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 rounded-2xl overflow-hidden">
                   <img
                     src="/avatar.jpg"
                     alt="Utkarsh Joshi"
@@ -37,7 +37,7 @@ export function AboutSection() {
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-7 h-7 rounded-md bg-glass border border-glass-border flex items-center justify-center hover:bg-glass-hover hover:border-glass-border-hover text-foreground-secondary hover:text-foreground transition-all"
+                      className="w-7 h-7 rounded-md bg-glass flex items-center justify-center hover:bg-glass-hover text-foreground-secondary hover:text-foreground transition-all"
                     >
                       <item.icon className="w-3 h-3" strokeWidth={1.5} />
                     </a>
@@ -83,12 +83,12 @@ export function AboutSection() {
           </div>
 
           <div className="md:col-span-2">
-            <div className="rounded-xl bg-glass border border-glass-border p-5 space-y-5">
+            <div className="rounded-xl bg-glass p-5 space-y-5">
               <div>
                 <div className="font-mono text-micro uppercase tracking-[0.2em] text-foreground-secondary mb-3" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>
                   Timeline
                 </div>
-                <div className="relative pl-4 border-l border-border space-y-3">
+                <div className="relative pl-4 space-y-3">
                   {timeline.map((t, i) => (
                     <div key={t.year} className="relative">
                       <div className="absolute left-[-17px] top-[5px] w-1.5 h-1.5 rounded-full bg-foreground-tertiary" aria-hidden="true" />
@@ -101,7 +101,7 @@ export function AboutSection() {
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-border">
+              <div className="pt-3">
                 <div className="font-mono text-micro uppercase tracking-[0.2em] text-foreground-secondary mb-2" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>
                   Reading / Learning
                 </div>
@@ -115,7 +115,7 @@ export function AboutSection() {
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-border space-y-2">
+              <div className="pt-3 space-y-2">
                 <div className="flex items-center gap-2 text-small text-foreground-secondary">
                   <MapPin className="w-3.5 h-3.5 shrink-0" strokeWidth={1.5} />
                   <span>Nainital, India</span>

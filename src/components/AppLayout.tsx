@@ -59,7 +59,7 @@ export function AppLayout({ children, activeSection, onNavigate }: AppLayoutProp
             href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-sm font-medium text-foreground bg-glass-strong hover:bg-glass-hover hover:border-glass-border-hover border border-glass-border transition-all"
+            className="w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg text-sm font-medium text-foreground bg-glass-strong hover:bg-glass-hover transition-all"
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
