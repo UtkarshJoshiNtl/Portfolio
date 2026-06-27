@@ -20,7 +20,7 @@ function initParticles(): Particle[] {
   }));
 }
 
-export function CuFlodaBg() {
+export function SStreamBg() {
   const particlesRef = useRef(initParticles());
   const circlesRef = useRef<SVGCircleElement[]>([]);
 

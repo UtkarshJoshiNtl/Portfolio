@@ -2,18 +2,26 @@ import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { AstrosisBg } from "../AstrosisBg";
 import { QuipBg } from "../QuipBg";
-import { CuFlodaBg } from "../CuFlodaBg";
+import { SStreamBg } from "../SStreamBg";
 import { CJitBg } from "../CJitBg";
 import { EnCripBg } from "../EnCripBg";
+import { CTorrentBg } from "../CTorrentBg";
+import { CurrentBg } from "../CurrentBg";
+import { VisageBg } from "../VisageBg";
+import { JustLandedBg } from "../JustLandedBg";
 import { SectionHeader } from "../SectionHeader";
 import { orbitalDisplacement } from "@/lib/grid-pack";
 
 const accentColors: Record<string, string> = {
   astrosis: "oklch(0.78 0.16 75)",
   quip: "oklch(0.7 0.15 145)",
-  cufloda: "oklch(0.65 0.15 210)",
+  "s-stream": "oklch(0.65 0.15 210)",
   cjit: "oklch(0.55 0.15 260)",
   encrip: "oklch(0.65 0.2 345)",
+  ctorrent: "oklch(0.6 0.15 30)",
+  current: "oklch(0.7 0.12 145)",
+  visage: "oklch(0.6 0.15 300)",
+  justLanded: "oklch(0.65 0.15 160)",
 };
 
 const projects = [
@@ -36,10 +44,10 @@ const projects = [
     tech: ["C", "POSIX", "termios", "Job Control"],
   },
   {
-    id: "cufloda",
-    name: "CuFloda",
-    desc: "Lattice Boltzmann fluid simulation with real-time visualization",
-    tech: ["Python", "NumPy", "PyGame", "D2Q9"],
+    id: "s-stream",
+    name: "S-Stream",
+    desc: "Lattice Boltzmann fluid simulation with GPU acceleration",
+    tech: ["Python", "CuPy", "PySide6", "D2Q9"],
   },
   {
     id: "cjit",
@@ -54,14 +62,42 @@ const projects = [
     desc: "Distributed execution framework with HMAC-SHA256 auth",
     tech: ["Python", "HMAC", "FastAPI", "Worker"],
   },
+  {
+    id: "current",
+    name: "Current",
+    desc: "Concurrent TTL hash map — C++17 performance study",
+    tech: ["C++17", "Lock-Free", "CMake"],
+  },
+  {
+    id: "ctorrent",
+    name: "CTorrent",
+    desc: "Educational CLI BitTorrent client in C",
+    tech: ["C", "POSIX", "P2P"],
+  },
+  {
+    id: "visage",
+    name: "Visage",
+    desc: "Real-time system performance TUI dashboard",
+    tech: ["Python", "Textual", "eBPF"],
+  },
+  {
+    id: "justLanded",
+    name: "justLanded",
+    desc: "Local co-op 3D physics game — Godot 4",
+    tech: ["Godot", "GDScript", "3D Physics"],
+  },
 ];
 
 const sectionVariants = {
-  hidden: { opacity: 0, y: 12 },
+  hidden: { opacity: 0, y: 16 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, delay: 0.1 + i * 0.08, ease: "easeOut" },
+    transition: {
+      duration: 0.55,
+      delay: Math.sin(i * 0.7) * 0.08 + 0.08,
+      ease: [0.16, 1, 0.3, 1],
+    },
   }),
 };
 
@@ -132,9 +168,13 @@ export function WorkSection({ onSelect }: { onSelect: (id: string) => void }) {
           const Content = (
             <>
               {p.id === "quip" && <QuipBg />}
-              {p.id === "cufloda" && <CuFlodaBg />}
+              {p.id === "s-stream" && <SStreamBg />}
               {p.id === "cjit" && <CJitBg />}
               {p.id === "encrip" && <EnCripBg />}
+              {p.id === "ctorrent" && <CTorrentBg />}
+              {p.id === "current" && <CurrentBg />}
+              {p.id === "visage" && <VisageBg />}
+              {p.id === "justLanded" && <JustLandedBg />}
               <div className="relative z-10 flex flex-col h-full">
                 <div className="font-mono text-xs" style={{ color: accent }}>
                   {p.name}
@@ -209,11 +249,11 @@ export function WorkSection({ onSelect }: { onSelect: (id: string) => void }) {
 
 function TechStackBar() {
   const categories = [
-    { label: "Languages", items: ["C", "C++", "Python"] },
-    { label: "Tools", items: ["Git", "CMake"] },
+    { label: "Languages", items: ["C", "C++", "Python", "GDScript"] },
+    { label: "Tools", items: ["Git", "CMake", "Godot"] },
     {
       label: "Technologies",
-      items: ["CUDA", "OpenMP", "OpenGL", "NumPy", "Bash", "Linux"],
+      items: ["CUDA", "OpenMP", "OpenGL", "NumPy", "CuPy", "eBPF", "Bash", "Linux"],
     },
   ];
 

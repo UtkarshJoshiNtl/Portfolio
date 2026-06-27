@@ -1,6 +1,8 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, FileText } from "lucide-react";
 import { links } from "@/lib/portfolio-data";
+import { BootSequence } from "../BootSequence";
 
 const tags = ["GPU", "CUDA", "C++", "SYSTEMS"];
 
@@ -11,10 +13,36 @@ const contactItems = [
   { href: links.github, icon: Github, label: "GitHub" },
 ];
 
+const nameChars = "Utkarsh Joshi".split("");
+
 export function IdentitySection({ onSelect }: { onSelect: (id: string) => void }) {
+  const [bootComplete, setBootComplete] = useState(false);
+  const [dismissed, setDismissed] = useState(false);
+
+  useEffect(() => {
+    if (!bootComplete) return;
+    const onKey = () => setDismissed(true);
+    window.addEventListener("keydown", onKey, { once: true });
+    const timer = setTimeout(() => setDismissed(true), 4000);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      clearTimeout(timer);
+    };
+  }, [bootComplete]);
+
+  if (!dismissed) {
+    return (
+      <BootSequence
+        onComplete={() => {
+          setBootComplete(true);
+          setTimeout(() => setDismissed(true), 1500);
+        }}
+      />
+    );
+  }
+
   return (
     <section className="flex flex-col md:flex-row md:items-center md:justify-between gap-8 md:gap-16 relative">
-      {/* Ornamental background filigree accent */}
       <div
         className="absolute -top-8 -left-8 w-48 h-48 pointer-events-none opacity-[0.03]"
         aria-hidden="true"
@@ -36,32 +64,68 @@ export function IdentitySection({ onSelect }: { onSelect: (id: string) => void }
       </div>
 
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         className="flex-1 relative z-10"
       >
-        <div className="font-mono text-xs uppercase tracking-[0.2em] text-amber tagline-cursor">
+        <motion.div
+          initial={{ opacity: 0, x: -8 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="font-mono text-xs uppercase tracking-[0.2em] text-amber tagline-cursor"
+        >
           Systems & Simulation Engineer
-        </div>
-        <h1 className="mt-3 text-4xl md:text-6xl font-semibold tracking-tight">Utkarsh Joshi</h1>
+        </motion.div>
+        <h1 className="mt-3 text-4xl md:text-6xl font-semibold tracking-tight overflow-hidden">
+          {nameChars.map((char, i) => (
+            <motion.span
+              key={i}
+              initial={{ opacity: 0, y: 40, rotateX: -90 }}
+              animate={{ opacity: 1, y: 0, rotateX: 0 }}
+              transition={{
+                duration: 0.5,
+                delay: 0.3 + i * 0.035,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              className="inline-block"
+              style={{ transformStyle: "preserve-3d" }}
+            >
+              {char === " " ? "\u00A0" : char}
+            </motion.span>
+          ))}
+        </h1>
         <div className="mt-4 flex flex-wrap gap-2">
           {tags.map((t, i) => (
             <motion.span
               key={t}
-              initial={{ opacity: 0, y: 8 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.2 + i * 0.1 }}
+              transition={{
+                duration: 0.5,
+                delay: 0.7 + i * 0.12,
+                ease: [0.16, 1, 0.3, 1],
+              }}
               className="font-mono text-xs uppercase tracking-[0.15em] px-3 py-1.5 bg-tile/60 text-muted-foreground"
             >
               {t}
             </motion.span>
           ))}
         </div>
-        <div className="mt-3 font-mono text-xs uppercase tracking-[0.15em] text-amber">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 1.1 }}
+          className="mt-3 font-mono text-xs uppercase tracking-[0.15em] text-amber"
+        >
           Open to work & internships
-        </div>
-        <div className="mt-6 flex items-center gap-1">
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 1.3 }}
+          className="mt-6 flex items-center gap-1"
+        >
           {contactItems.map((item) => (
             <a
               key={item.label}
@@ -77,23 +141,29 @@ export function IdentitySection({ onSelect }: { onSelect: (id: string) => void }
               </span>
             </a>
           ))}
-        </div>
+        </motion.div>
       </motion.div>
       <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+        initial={{ opacity: 0, scale: 0.6, rotate: -15 }}
+        animate={{ opacity: 1, scale: 1, rotate: 0 }}
+        transition={{
+          duration: 0.8,
+          delay: 0.5,
+          ease: [0.16, 1, 0.3, 1],
+          type: "spring",
+          stiffness: 180,
+          damping: 18,
+        }}
         className="shrink-0 relative z-10"
       >
         <button onClick={() => onSelect("about")} className="block group">
-          <div className="relative w-36 h-36 md:w-44 md:h-44 rounded-full overflow-hidden ring-2 ring-amber/20 group-hover:ring-amber/60 transition-all duration-500 group-hover:animate-glow-pulse">
+          <div className="relative w-36 h-36 md:w-44 md:h-44 rounded-full overflow-hidden ring-2 ring-amber/20 group-hover:ring-amber/60 transition-all duration-500">
             <img
               src="/avatar.jpg"
               alt="Utkarsh Joshi"
               className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-transform duration-500"
             />
           </div>
-          {/* Ornamental ring accent */}
           <div
             className="absolute inset-[-6px] rounded-full border border-ornament opacity-0 group-hover:opacity-30 transition-opacity duration-500 pointer-events-none"
             aria-hidden="true"

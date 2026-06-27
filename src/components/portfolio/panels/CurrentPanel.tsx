@@ -2,18 +2,38 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ExternalLink, ChevronDown, Loader2 } from "lucide-react";
 import { PanelShell } from "../PanelShell";
-import { projects, quipCycle } from "@/lib/portfolio-data";
+import { projects } from "@/lib/portfolio-data";
 import { getGithubReadme } from "@/lib/github-readme.functions";
 
-const project = projects.find((p) => p.name === "Quip")!;
+const project = projects.find((p) => p.name === "Current")!;
 
-const termLines = [
-  { prefix: "$", text: "quip --version", output: "quip 0.1.0 — Unix Shell in C99" },
-  { prefix: "$", text: "echo 'hello world' | tr a-z A-Z", output: "HELLO WORLD" },
-  { prefix: "$", text: "ls -la | grep sh | wc -l", output: "12" },
+const benchmarks = [
+  ["Operation", "ShardedMutex", "TimedEvict", "SlotMap"],
+  ["Insert (1 thread)", "85 ns", "62 ns", "38 ns"],
+  ["Lookup (1 thread)", "42 ns", "38 ns", "22 ns"],
+  ["Insert (8 threads)", "320 ns", "890 ns", "145 ns"],
+  ["Lookup (8 threads)", "180 ns", "410 ns", "68 ns"],
 ];
 
-export function QuipPanel({ onClose }: { onClose: () => void }) {
+const implementations = [
+  {
+    name: "ShardedMutexMap",
+    desc: "N shards each with a std::mutex, per-shard eviction via std::deque. Best all-rounder for moderate contention.",
+    color: "oklch(0.7 0.12 145)",
+  },
+  {
+    name: "TimedEvictMap",
+    desc: "Single global mutex + std::deque with lazy expiry on access. Lowest memory overhead, simplest correctness model.",
+    color: "oklch(0.65 0.15 210)",
+  },
+  {
+    name: "SlotMap",
+    desc: "Lock-free slot allocator using atomic CAS (compare-and-swap) with a free-list. Highest throughput under low contention, no blocking on reads.",
+    color: "oklch(0.65 0.2 345)",
+  },
+];
+
+export function CurrentPanel({ onClose }: { onClose: () => void }) {
   const [showReadme, setShowReadme] = useState(false);
   const { data: readme } = useQuery({
     queryKey: ["readme", project.repo],
@@ -24,12 +44,10 @@ export function QuipPanel({ onClose }: { onClose: () => void }) {
   });
 
   return (
-    <PanelShell id="quip" onClose={onClose}>
+    <PanelShell id="current" onClose={onClose}>
       <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-amber">Project</div>
-      <h2 className="mt-2 text-4xl md:text-5xl font-semibold">Quip</h2>
-      <p className="mt-2 text-lg text-muted-foreground">
-        Unix shell in C99 — built from scratch, no dependencies
-      </p>
+      <h2 className="mt-2 text-4xl md:text-5xl font-semibold">Current</h2>
+      <p className="mt-2 text-lg text-muted-foreground">Concurrent TTL-backed Hash Map — C++17 Performance Study</p>
 
       <div className="mt-5 flex flex-wrap gap-2 font-mono text-[11px]">
         {project.tech.map((t) => (
@@ -39,39 +57,33 @@ export function QuipPanel({ onClose }: { onClose: () => void }) {
         ))}
       </div>
 
-      <div className="mt-8 border border-border bg-background/30 font-mono text-xs overflow-hidden">
-        <div className="flex items-center gap-1.5 px-4 py-2 border-b border-border bg-tile/40">
-          <span className="w-2.5 h-2.5 rounded-full bg-doom/60" />
-          <span className="w-2.5 h-2.5 rounded-full text-amber/60" />
-          <span className="w-2.5 h-2.5 rounded-full bg-amber/40" />
-          <span className="ml-2 text-muted-foreground tracking-[0.15em] uppercase text-[10px]">quip — terminal</span>
-        </div>
-        <div className="p-4 space-y-2">
-          {termLines.map((line, i) => (
-            <div key={i}>
-              <div>
-                <span className="text-amber mr-2">{line.prefix}</span>
-                <span>{line.text}</span>
-              </div>
-              <div className="text-muted-foreground ml-5">{line.output}</div>
-            </div>
-          ))}
-          <div>
-            <span className="text-amber mr-2">$</span>
-            <span className="animate-pulse">_</span>
-          </div>
-        </div>
-      </div>
-
       <p className="mt-8 leading-relaxed text-foreground/90">{project.description}</p>
 
-      <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3">
-        {quipCycle.map((feature, i) => (
-          <div key={i} className="border border-border p-3 bg-tile/30">
-            <span className="text-amber font-mono text-[10px]">{String(i + 1).padStart(2, "0")}</span>
-            <p className="mt-1.5 text-xs text-muted-foreground leading-relaxed">{feature}</p>
+      <div className="mt-8 grid md:grid-cols-3 gap-3">
+        {implementations.map((impl) => (
+          <div key={impl.name} className="border border-border p-4 relative">
+            <div className="absolute top-0 left-0 right-0 h-0.5" style={{ background: impl.color }} />
+            <div className="font-mono text-xs" style={{ color: impl.color }}>{impl.name}</div>
+            <p className="mt-2 text-xs text-muted-foreground leading-relaxed">{impl.desc}</p>
           </div>
         ))}
+      </div>
+
+      <div className="mt-8">
+        <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-amber mb-3">Benchmarks</div>
+        <div className="overflow-x-auto border border-border">
+          <table className="w-full font-mono text-xs">
+            <tbody>
+              {benchmarks.map((row, ri) => (
+                <tr key={ri} className={ri === 0 ? "bg-tile-alt text-amber" : "border-t border-border"}>
+                  {row.map((cell, ci) => (
+                    <td key={ci} className="px-3 py-2 whitespace-nowrap">{cell}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <div className="mt-10 border border-border">

@@ -37,6 +37,9 @@
   --font-mono: var(--font-mono-stack);
   --font-sans: var(--font-sans-stack);
   --font-display: var(--font-display-stack);
+  --font-mono-vf: var(--font-mono-settings);
+  --font-sans-vf: var(--font-sans-settings);
+  --font-display-vf: var(--font-display-settings);
   --color-ornament: var(--ornament);
   --color-filigree: var(--filigree);
 }
@@ -47,9 +50,12 @@
 :root,
 [data-theme="terminal"] {
   --radius: 0px;
-  --font-mono-stack: "JetBrains Mono", ui-monospace, monospace;
-  --font-sans-stack: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display-stack: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono-stack: "Recursive", ui-monospace, monospace;
+  --font-mono-settings: "MONO" 1, "CASL" 0, "slnt" 0;
+  --font-sans-stack: "Recursive", ui-sans-serif, system-ui, sans-serif;
+  --font-sans-settings: "MONO" 0, "CASL" 0, "slnt" 0;
+  --font-display-stack: "Recursive", ui-sans-serif, system-ui, sans-serif;
+  --font-display-settings: "MONO" 0, "CASL" 0.2, "slnt" 0;
 
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.96 0 0);
@@ -91,9 +97,12 @@
    ============================================================ */
 [data-theme="artist"] {
   --radius: 2px;
-  --font-mono-stack: "JetBrains Mono", ui-monospace, monospace;
-  --font-sans-stack: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display-stack: "Fraunces", "Caprasimo", Georgia, serif;
+  --font-mono-stack: "Recursive", ui-monospace, monospace;
+  --font-mono-settings: "MONO" 1, "CASL" 0, "slnt" 0;
+  --font-sans-stack: "Recursive", ui-sans-serif, system-ui, sans-serif;
+  --font-sans-settings: "MONO" 0, "CASL" 0.05, "slnt" 0;
+  --font-display-stack: "Fraunces", "Recursive", Georgia, serif;
+  --font-display-settings: "MONO" 0, "CASL" 0, "slnt" 0;
 
   --background: oklch(0.965 0.012 85); /* warm canvas off-white */
   --foreground: oklch(0.18 0.02 30); /* ink black-brown */
@@ -184,9 +193,12 @@
    ============================================================ */
 [data-theme="noir"] {
   --radius: 0px;
-  --font-mono-stack: "JetBrains Mono", ui-monospace, monospace;
-  --font-sans-stack: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display-stack: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono-stack: "Recursive", ui-monospace, monospace;
+  --font-mono-settings: "MONO" 1, "CASL" 0, "slnt" 0;
+  --font-sans-stack: "Recursive", ui-sans-serif, system-ui, sans-serif;
+  --font-sans-settings: "MONO" 0, "CASL" 0, "slnt" 0;
+  --font-display-stack: "Recursive", ui-sans-serif, system-ui, sans-serif;
+  --font-display-settings: "MONO" 0, "CASL" 0, "slnt" 0;
 
   --background: oklch(0.08 0 0);
   --foreground: oklch(0.98 0 0);
@@ -227,9 +239,12 @@
    ============================================================ */
 [data-theme="retro"] {
   --radius: 2px;
-  --font-mono-stack: "Press Start 2P", "JetBrains Mono", ui-monospace, monospace;
-  --font-sans-stack: "Press Start 2P", "JetBrains Mono", ui-monospace, monospace;
-  --font-display-stack: "Press Start 2P", "JetBrains Mono", ui-monospace, monospace;
+  --font-mono-stack: "Press Start 2P", "Recursive", ui-monospace, monospace;
+  --font-mono-settings: "MONO" 1, "CASL" 0, "slnt" 0;
+  --font-sans-stack: "Press Start 2P", "Recursive", ui-monospace, monospace;
+  --font-sans-settings: "MONO" 1, "CASL" 0, "slnt" 0;
+  --font-display-stack: "Press Start 2P", "Recursive", ui-monospace, monospace;
+  --font-display-settings: "MONO" 1, "CASL" 0, "slnt" 0;
 
   --background: oklch(0.05 0.02 100);
   --foreground: oklch(0.7 0.18 75);
@@ -303,9 +318,12 @@
    ============================================================ */
 [data-theme="blueprint"] {
   --radius: 0px;
-  --font-mono-stack: "Share Tech Mono", "JetBrains Mono", ui-monospace, monospace;
-  --font-sans-stack: "Share Tech Mono", "JetBrains Mono", ui-monospace, monospace;
-  --font-display-stack: "Share Tech Mono", "JetBrains Mono", ui-monospace, monospace;
+  --font-mono-stack: "Share Tech Mono", "Recursive", ui-monospace, monospace;
+  --font-mono-settings: "MONO" 1, "CASL" 0, "slnt" 0;
+  --font-sans-stack: "Share Tech Mono", "Recursive", ui-monospace, monospace;
+  --font-sans-settings: "MONO" 1, "CASL" 0, "slnt" 0;
+  --font-display-stack: "Share Tech Mono", "Recursive", ui-monospace, monospace;
+  --font-display-settings: "MONO" 1, "CASL" 0, "slnt" 0;
 
   --background: oklch(0.25 0.12 240);
   --foreground: oklch(0.98 0 0);
@@ -373,9 +391,12 @@
    ============================================================ */
 [data-theme="vaporwave"] {
   --radius: 0px;
-  --font-mono-stack: "JetBrains Mono", ui-monospace, monospace;
-  --font-sans-stack: "Righteous", ui-sans-serif, system-ui, sans-serif;
-  --font-display-stack: "Righteous", ui-sans-serif, system-ui, sans-serif;
+  --font-mono-stack: "Recursive", ui-monospace, monospace;
+  --font-mono-settings: "MONO" 1, "CASL" 0, "slnt" 0;
+  --font-sans-stack: "Righteous", "Recursive", ui-sans-serif, system-ui, sans-serif;
+  --font-sans-settings: "MONO" 0, "CASL" 0, "slnt" 0;
+  --font-display-stack: "Righteous", "Recursive", ui-sans-serif, system-ui, sans-serif;
+  --font-display-settings: "MONO" 0, "CASL" 0, "slnt" 0;
 
   --background: #0d0221;
   --foreground: oklch(0.95 0.02 330);
@@ -446,9 +467,12 @@
    ============================================================ */
 [data-theme="forest"] {
   --radius: 2px;
-  --font-mono-stack: "JetBrains Mono", ui-monospace, monospace;
-  --font-sans-stack: "Fraunces", "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display-stack: "Fraunces", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono-stack: "Recursive", ui-monospace, monospace;
+  --font-mono-settings: "MONO" 1, "CASL" 0, "slnt" 0;
+  --font-sans-stack: "Fraunces", "Recursive", ui-sans-serif, system-ui, sans-serif;
+  --font-sans-settings: "MONO" 0, "CASL" 0, "slnt" 0;
+  --font-display-stack: "Fraunces", "Recursive", ui-sans-serif, system-ui, sans-serif;
+  --font-display-settings: "MONO" 0, "CASL" 0, "slnt" 0;
 
   --background: oklch(0.08 0.03 150);
   --foreground: oklch(0.92 0.02 100);
@@ -530,9 +554,12 @@
    ============================================================ */
 [data-theme="ocean"] {
   --radius: 0px;
-  --font-mono-stack: "JetBrains Mono", ui-monospace, monospace;
-  --font-sans-stack: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display-stack: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono-stack: "Recursive", ui-monospace, monospace;
+  --font-mono-settings: "MONO" 1, "CASL" 0, "slnt" 0;
+  --font-sans-stack: "Recursive", ui-sans-serif, system-ui, sans-serif;
+  --font-sans-settings: "MONO" 0, "CASL" 0, "slnt" 0;
+  --font-display-stack: "Recursive", ui-sans-serif, system-ui, sans-serif;
+  --font-display-settings: "MONO" 0, "CASL" 0.15, "slnt" 0;
 
   --background: oklch(0.07 0.04 250);
   --foreground: oklch(0.92 0.02 230);
@@ -613,9 +640,12 @@
    ============================================================ */
 [data-theme="nord"] {
   --radius: 0px;
-  --font-mono-stack: "JetBrains Mono", ui-monospace, monospace;
-  --font-sans-stack: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display-stack: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono-stack: "Recursive", ui-monospace, monospace;
+  --font-mono-settings: "MONO" 1, "CASL" 0, "slnt" 0;
+  --font-sans-stack: "Recursive", ui-sans-serif, system-ui, sans-serif;
+  --font-sans-settings: "MONO" 0, "CASL" 0, "slnt" 0;
+  --font-display-stack: "Recursive", ui-sans-serif, system-ui, sans-serif;
+  --font-display-settings: "MONO" 0, "CASL" 0, "slnt" 0;
 
   --background: oklch(0.1 0.02 250);
   --foreground: oklch(0.95 0.01 240);
@@ -691,9 +721,12 @@
    ============================================================ */
 [data-theme="gruvbox"] {
   --radius: 2px;
-  --font-mono-stack: "JetBrains Mono", ui-monospace, monospace;
-  --font-sans-stack: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display-stack: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono-stack: "Recursive", ui-monospace, monospace;
+  --font-mono-settings: "MONO" 1, "CASL" 0, "slnt" 0;
+  --font-sans-stack: "Recursive", ui-sans-serif, system-ui, sans-serif;
+  --font-sans-settings: "MONO" 0, "CASL" 0.05, "slnt" 0;
+  --font-display-stack: "Recursive", ui-sans-serif, system-ui, sans-serif;
+  --font-display-settings: "MONO" 0, "CASL" 0.15, "slnt" 0;
 
   --background: oklch(0.1 0.03 60);
   --foreground: oklch(0.9 0.02 80);
@@ -802,13 +835,20 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
+    font-variation-settings: var(--font-sans-vf);
     -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    font-variation-settings: var(--font-display-vf);
   }
   .font-mono {
     font-family: var(--font-mono);
+    font-variation-settings: var(--font-mono-vf);
   }
   .font-display {
     font-family: var(--font-display);
+    font-variation-settings: var(--font-display-vf);
   }
 
   *:focus-visible {

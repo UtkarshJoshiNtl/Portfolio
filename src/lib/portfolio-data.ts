@@ -13,19 +13,24 @@ export const timeline = [
   { year: "Jan 2026", text: "Began quip — Unix shell in C99 from scratch" },
   { year: "Mar 2026", text: "Built Astrosis prototype at NSH hackathon (IIT Delhi) — top 10" },
   { year: "Apr 2026", text: "Started cjit — version control system in C" },
-  { year: "May 2026", text: "Started CuFloda — Lattice Boltzmann fluid simulation" },
+  { year: "May 2026", text: "Started S-Stream — Lattice Boltzmann fluid simulation workbench" },
+  { year: "Jun 2026", text: "Built CTorrent — educational BitTorrent client in C" },
+  { year: "Jun 2026", text: "Started Current — concurrent TTL-backed hash map study" },
+  { year: "Jul 2026", text: "Began Visage — terminal system performance dashboard" },
+  { year: "Aug 2026", text: "Created justLanded — Godot 4 local co-op physics game" },
 ];
 
 export const techStack = [
   "C",
   "C++",
   "Python",
-  "Git",
-  "CMake",
   "CUDA",
   "OpenMP",
   "OpenGL",
   "NumPy",
+  "Godot",
+  "CMake",
+  "Git",
   "Bash",
   "Linux",
 ];
@@ -37,14 +42,14 @@ export const quipCycle = [
   "Quip — Unix Shell in C99",
   "Raw terminal mode from scratch",
   "Pipelines · redirection · job control",
-  "Signal handling · tab completion",
+  "Signal handling · tab completion · Python plugins",
 ];
 
-export const cuflodaCycle = [
-  "CuFloda — Lattice Boltzmann Fluid",
-  "D2Q9 method with real-time viz",
-  "Complex boundaries · obstacle drawing",
-  "CPU prototype complete · CUDA in progress",
+export const sStreamCycle = [
+  "S-Stream — Lattice Boltzmann Fluid",
+  "D2Q9 method with PySide6 GUI",
+  "CuPy GPU engine · Shan-Chen multiphase",
+  "9 presets · probes · parameter sweeps",
 ];
 
 export const benchmarks = [
@@ -80,12 +85,12 @@ export const projects = [
     github: "https://github.com/UtkarshJoshiNtl/quip",
   },
   {
-    name: "CuFloda",
-    repo: "UtkarshJoshiNtl/CuFloda",
-    tech: ["Python", "NumPy", "PyGame", "CUDA (planned)", "Lattice Boltzmann Method"],
+    name: "S-Stream",
+    repo: "UtkarshJoshiNtl/S-Stream",
+    tech: ["Python", "PySide6", "CuPy", "NumPy", "D2Q9 LBM", "OpenGL"],
     description:
-      "Fluid dynamics simulation using the D2Q9 Lattice Boltzmann Method. CPU prototype with real-time PyGame visualization, complex boundary conditions (inflow, outflow, walls, obstacles), and interactive obstacle drawing. CUDA acceleration planned as the next phase.",
-    github: "https://github.com/UtkarshJoshiNtl/CuFloda",
+      "2D Lattice Boltzmann fluid simulation workbench with an interactive PySide6 GUI. Implements D2Q9 + BGK collision on CPU (NumPy/Numba) and GPU (CuPy raw kernel). Features Shan-Chen multiphase liquid model, 9 built-in preset experiments, interactive geometry drawing, live probes with Reynolds/Strouhal analysis, flow regime classification, and export to PNG/MP4/GIF/CSV.",
+    github: "https://github.com/UtkarshJoshiNtl/S-Stream",
   },
   {
     name: "EnCrip",
@@ -94,5 +99,37 @@ export const projects = [
     description:
       "Secure distributed execution framework with stateless HMAC-based authentication. Controller-worker architecture dispatches computational tasks across network nodes. Features replay attack protection, time-windowed tokens, and REST API for worker nodes.",
     github: "https://github.com/UtkarshJoshiNtl/EnCrip",
+  },
+  {
+    name: "CTorrent",
+    repo: "UtkarshJoshiNtl/CTorrent",
+    tech: ["C", "POSIX Sockets", "BitTorrent Protocol", "Bencode", "SHA-1"],
+    description:
+      "Educational CLI BitTorrent client written in C. Implements bencoded metainfo parsing, peer wire protocol with handshake and block requests, multi-peer pipelined downloading, tracker HTTP/HTTPS communication, and SHA-1 piece integrity verification. Built from scratch to understand P2P protocols at the wire level.",
+    github: "https://github.com/UtkarshJoshiNtl/CTorrent",
+  },
+  {
+    name: "Current",
+    repo: "UtkarshJoshiNtl/Current",
+    tech: ["C++17", "CMake", "Google Test", "Google Benchmark", "Lock-Free"],
+    description:
+      "Concurrent TTL-backed hash map — a C++17 performance study with three implementations: sharded mutex map, timed eviction via deque, and lock-free slot map using atomic CAS. Includes Google Test suites and Google Benchmarks. Originally born from the replay-cache need in EnCrip.",
+    github: "https://github.com/UtkarshJoshiNtl/Current",
+  },
+  {
+    name: "Visage",
+    repo: "UtkarshJoshiNtl/Visage",
+    tech: ["Python", "Textual", "psutil", "FastAPI", "eBPF", "ctypes"],
+    description:
+      "Real-time system performance dashboard for the terminal built with Textual. Features live CPU, memory, disk, network, and process monitoring. Includes a benchmark mode with hardware-isolated execution: core isolation via taskset, CPU frequency locking, and PMU counters through raw perf_event_open ctypes. Remote monitoring via FastAPI, with JSON/CSV export and eBPF tracing support.",
+    github: "https://github.com/UtkarshJoshiNtl/Visage",
+  },
+  {
+    name: "justLanded",
+    repo: "UtkarshJoshiNtl/justLanded",
+    tech: ["Godot 4", "GDScript", "3D Physics", "Local Co-op", "Procedural"],
+    description:
+      "Local co-op 3D physics game built in Godot 4. Stranded astronauts scavenge debris on a tropical island, building janky vehicles from scrounged parts to escape. Randomized control bindings per seed force adaptation. Features per-seed world generation for high replayability.",
+    github: "https://github.com/UtkarshJoshiNtl/justLanded",
   },
 ];

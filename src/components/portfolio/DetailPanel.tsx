@@ -19,8 +19,12 @@ import { getGithubReadme } from "@/lib/github-readme.functions";
 export type DetailId =
   | "astrosis"
   | "quip"
-  | "cufloda"
+  | "s-stream"
   | "encrip"
+  | "current"
+  | "ctorrent"
+  | "visage"
+  | "justLanded"
   | "about"
   | "contact"
   | "codeforces"
@@ -173,9 +177,9 @@ function QuipContent() {
   );
 }
 
-function CuFlodaContent() {
+function SStreamContent() {
   const [showReadme, setShowReadme] = useState(false);
-  const project = projects.find((p) => p.name === "CuFloda")!;
+  const project = projects.find((p) => p.name === "S-Stream")!;
   const { data: readme } = useQuery({
     queryKey: ["readme", project.repo],
     queryFn: () => getGithubReadme({ repo: project.repo }),
@@ -187,9 +191,9 @@ function CuFlodaContent() {
   return (
     <>
       <div className="font-mono text-[11px] uppercase tracking-[0.2em] text-amber">Project</div>
-      <h2 className="mt-2 text-3xl md:text-4xl font-semibold">CuFloda</h2>
+      <h2 className="mt-2 text-3xl md:text-4xl font-semibold">S-Stream</h2>
       <p className="mt-2 text-base md:text-lg text-muted-foreground">
-        Lattice Boltzmann fluid simulation with real-time visualization
+        Lattice Boltzmann fluid simulation with GPU acceleration
       </p>
       <div className="mt-5 flex flex-wrap gap-2 font-mono text-[11px]">
         {project.tech.map((t) => (
@@ -461,8 +465,8 @@ function DetailContentInner({ id }: { id: DetailId }) {
       return <AstrosisContent />;
     case "quip":
       return <QuipContent />;
-    case "cufloda":
-      return <CuFlodaContent />;
+    case "s-stream":
+      return <SStreamContent />;
     case "encrip":
       return <EnCripContent />;
     case "about":
