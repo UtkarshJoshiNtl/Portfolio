@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, FileText, MapPin, GraduationCap } from "lucide-react";
-import { links, timeline } from "@/lib/portfolio-data";
+import { links, timeline, techStack } from "@/lib/portfolio-data";
+import { TechStackBar } from "../TechStackBar";
 
 const tags = ["GPU", "CUDA", "C++", "SYSTEMS", "SIMULATION"];
 
@@ -92,14 +93,14 @@ export function AboutSection() {
                   {timeline.map((t, i) => (
                     <div key={t.year} className="flex gap-3">
                       <div className="flex flex-col items-center">
-                        <div className="w-2 h-2 rounded-full bg-foreground-tertiary ring-2 ring-background mt-[5px]" />
+                        <div className={`w-2 h-2 rounded-full ${(t as any).planned ? "bg-foreground-tertiary opacity-50" : "bg-foreground-tertiary"} ring-2 ring-background mt-[5px]`} />
                         {i < timeline.length - 1 && <div className="w-px flex-1 bg-glass-border mt-1" />}
                       </div>
                       <div className="flex-1 pb-3">
-                        <span className="font-mono text-micro text-foreground-secondary tabular-nums" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>
-                          {t.year}
+                        <span className={`font-mono text-micro tabular-nums ${(t as any).planned ? "text-foreground-tertiary" : "text-foreground-secondary"}`} style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>
+                          {t.year} {(t as any).planned && "· planned"}
                         </span>
-                        <div className="text-small text-foreground-secondary mt-0.5">{t.text}</div>
+                        <div className={`text-small mt-0.5 ${(t as any).planned ? "text-foreground-tertiary" : "text-foreground-secondary"}`}>{t.text}</div>
                       </div>
                     </div>
                   ))}
@@ -119,6 +120,14 @@ export function AboutSection() {
                   ))}
                 </div>
               </div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.3 }}
+              >
+                <TechStackBar />
+              </motion.div>
 
               <div className="pt-3 space-y-2">
                 <div className="flex items-center gap-2 text-small text-foreground-secondary">

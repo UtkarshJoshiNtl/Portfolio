@@ -1,8 +1,6 @@
 import { motion } from "framer-motion";
 import { ExternalLink, Github, Trophy, Mail } from "lucide-react";
 import { links } from "@/lib/portfolio-data";
-import { useState } from "react";
-import { toast } from "sonner";
 
 const platforms = [
   {
@@ -44,24 +42,9 @@ const platforms = [
 ];
 
 export function ContactSection() {
-  const [copied, setCopied] = useState(false);
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(links.email).then(() => {
-      setCopied(true);
-      toast.success("Email copied");
-      setTimeout(() => setCopied(false), 2000);
-    });
-  };
 
   return (
     <section>
-        <div className="flex items-center gap-3 mb-5">
-          <span className="text-small font-mono text-foreground-secondary uppercase tracking-[0.15em]" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>
-            Contact
-          </span>
-        </div>
-
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
         {platforms.map((p, i) => (
           <motion.a
@@ -85,29 +68,6 @@ export function ContactSection() {
           </motion.a>
         ))}
       </div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.35, delay: 0.2 }}
-        className="mt-4 rounded-xl bg-glass-hover border border-glass-border shadow-glass p-4 md:p-5"
-      >
-        <div className="flex items-center justify-between flex-wrap gap-3">
-          <div className="flex items-center gap-3">
-            <div className="w-3 h-3 rounded-full bg-ggreen" />
-            <span className="font-mono text-small text-foreground-secondary" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>
-              {links.email}
-            </span>
-          </div>
-          <button
-            onClick={(e) => { e.preventDefault(); handleCopy(); }}
-            className="px-3 py-1.5 rounded-lg bg-gblue/15 text-foreground hover:bg-gblue/25 transition-all font-mono text-micro uppercase tracking-[0.15em]"
-            style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}
-          >
-            {copied ? "Copied" : "Copy"}
-          </button>
-        </div>
-      </motion.div>
     </section>
   );
 }

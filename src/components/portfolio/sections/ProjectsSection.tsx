@@ -11,7 +11,7 @@ import { CTorrentBg } from "../CTorrentBg";
 import { CurrentBg } from "../CurrentBg";
 import { VisageBg } from "../VisageBg";
 import { JustLandedBg } from "../JustLandedBg";
-import { TechStackBar } from "../TechStackBar";
+
 import { projects, benchmarks, astrosisHighlights } from "@/lib/portfolio-data";
 import { getGithubReadme } from "@/lib/github-readme.functions";
 
@@ -218,15 +218,6 @@ export function ProjectsSection() {
       </div>
 
       <div className="relative" style={{ zIndex: 1 }}>
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.35, ease: "easeOut" }}
-          className="mb-3 max-w-3xl mx-auto"
-        >
-          <TechStackBar />
-        </motion.div>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-3xl mx-auto">
           {projectList.slice(0, 6).map((p, i) => {
           const isExternal = "href" in p;
@@ -248,7 +239,7 @@ export function ProjectsSection() {
             >
               <Wrapper {...(wrapperProps as any)} className={`block w-full h-full ${!isExternal ? "text-left" : ""}`}>
                 <div className="h-full rounded-xl overflow-hidden flex flex-col group shadow-glass hover:shadow-glow transition-shadow">
-                  <div className="relative h-36 shrink-0 bg-background">
+                  <div className="relative h-36 shrink-0 bg-background opacity-80 group-hover:opacity-100 transition-opacity duration-300">
                     {p.id === "astrosis" ? <AstrosisBg /> : bgMap[p.id]}
                   </div>
                   <div className="flex-1 p-4 md:p-5 flex flex-col justify-center gap-2 bg-glass backdrop-blur-xl">

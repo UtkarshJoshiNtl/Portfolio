@@ -16,8 +16,8 @@ export const timeline = [
   { year: "May 2026", text: "Started S-Stream — Lattice Boltzmann fluid simulation workbench" },
   { year: "Jun 2026", text: "Built CTorrent — educational BitTorrent client in C" },
   { year: "Jun 2026", text: "Started Current — concurrent TTL-backed hash map study" },
-  { year: "Jul 2026", text: "Began Visage — terminal system performance dashboard" },
-  { year: "Aug 2026", text: "Created justLanded — Godot 4 local co-op physics game" },
+  { year: "Jul 2026", text: "Began Visage — terminal system performance dashboard", planned: true },
+  { year: "Aug 2026", text: "Created justLanded — Godot 4 local co-op physics game", planned: true },
 ];
 
 export const techStack = [
