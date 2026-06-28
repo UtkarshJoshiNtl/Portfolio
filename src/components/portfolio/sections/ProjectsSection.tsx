@@ -217,7 +217,7 @@ export function ProjectsSection() {
         />
       </div>
 
-      <div className="relative" style={{ zIndex: 1 }}>
+      <div className="relative pb-4" style={{ zIndex: 1 }}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 max-w-3xl mx-auto">
           {projectList.slice(0, 6).map((p, i) => {
           const isExternal = "href" in p;

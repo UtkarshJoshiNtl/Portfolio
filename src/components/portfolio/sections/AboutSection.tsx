@@ -3,7 +3,7 @@ import { Github, Linkedin, Mail, FileText, MapPin, GraduationCap } from "lucide-
 import { links, timeline, techStack } from "@/lib/portfolio-data";
 import { TechStackBar } from "../TechStackBar";
 
-const tags = ["GPU", "CUDA", "C++", "SYSTEMS", "SIMULATION"];
+const tags = ["C++", "C", "Python", "SYSTEMS", "SIMULATION"];
 
 const contactItems = [
   { href: links.github, icon: Github, label: "GitHub" },
@@ -48,7 +48,7 @@ export function AboutSection() {
 
               <div className="flex-1 min-w-0">
                 <div className="font-mono text-micro uppercase tracking-[0.2em] text-foreground-secondary mb-1" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>
-                  Systems & Simulation Engineer
+                  Systems & Simulation Engineering
                 </div>
 
                 <h1 className="text-3xl md:text-5xl font-bold tracking-tight mt-1" style={{ fontVariationSettings: '"MONO" 0, "CASL" 0' }}>
@@ -75,8 +75,11 @@ export function AboutSection() {
                     something go.
                   </p>
                   <p>
-                    I work in C, C++, CUDA, and Python. I also use Blender, FL Studio, and
+                    I work in C, C++, and Python. I also use Blender, FL Studio, and
                     whatever else lets me build things that didn't exist before.
+                  </p>
+                  <p className="text-foreground">
+                    Feel free to reach out — whether it's a project inquiry, collaboration, or just to discuss systems work.
                   </p>
                 </div>
               </div>
