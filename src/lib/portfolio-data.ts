@@ -16,8 +16,8 @@ export const timeline = [
   { year: "May 2026", text: "Started S-Stream — Lattice Boltzmann fluid simulation workbench" },
   { year: "Jun 2026", text: "Built CTorrent — educational BitTorrent client in C" },
   { year: "Jun 2026", text: "Started Current — concurrent TTL-backed hash map study" },
-  { year: "Jul 2026", text: "Began Visage — terminal system performance dashboard" },
-  { year: "Aug 2026", text: "Created justLanded — Godot 4 local co-op physics game" },
+  { year: "Jun 2026", text: "Built Visage — terminal system performance dashboard" },
+  { year: "Jun 2026", text: "Created justLanded — Godot 4 local co-op physics game" },
 ];
 
 export const techStack = [
@@ -75,6 +75,8 @@ export const projects = [
     description:
       "GPU-accelerated orbital propagation and conjunction analysis engine. SoA memory layout, RK4 integration, Brent's TCA refinement. 83× conjunction screening speedup over Python reference.",
     github: "https://github.com/UtkarshJoshiNtl/Astrosis",
+    tileSize: "large",
+    hasContent: "benchmarks",
   },
   {
     name: "cjit",
@@ -91,6 +93,7 @@ export const projects = [
     description:
       "Fully-featured Unix shell in C99. Supports command pipelines, I/O redirection, background job management, signal handling (SIGINT, SIGTERM, SIGCHLD), command history with arrow key navigation, tab completion, and ANSI-colored prompts. Implemented raw terminal mode from scratch using termios.",
     github: "https://github.com/UtkarshJoshiNtl/quip",
+    tileSize: "large",
   },
   {
     name: "S-Stream",
@@ -99,6 +102,8 @@ export const projects = [
     description:
       "2D Lattice Boltzmann fluid simulation workbench with an interactive PySide6 GUI. Implements D2Q9 + BGK collision on CPU (NumPy/Numba) and GPU (CuPy raw kernel). Features Shan-Chen multiphase liquid model, 9 built-in preset experiments, interactive geometry drawing, live probes with Reynolds/Strouhal analysis, flow regime classification, and export to PNG/MP4/GIF/CSV.",
     github: "https://github.com/UtkarshJoshiNtl/S-Stream",
+    tileSize: "large",
+    hasContent: "gallery",
   },
   {
     name: "EnCrip",
@@ -131,6 +136,7 @@ export const projects = [
     description:
       "Real-time system performance dashboard for the terminal built with Textual. Features live CPU, memory, disk, network, and process monitoring. Includes a benchmark mode with hardware-isolated execution: core isolation via taskset, CPU frequency locking, and PMU counters through raw perf_event_open ctypes. Remote monitoring via FastAPI, with JSON/CSV export and eBPF tracing support.",
     github: "https://github.com/UtkarshJoshiNtl/Visage",
+    tileSize: "large",
   },
   {
     name: "justLanded",
