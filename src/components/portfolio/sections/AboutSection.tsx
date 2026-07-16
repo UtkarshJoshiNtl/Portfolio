@@ -110,20 +110,6 @@ export function AboutSection() {
                 </div>
               </div>
 
-              <div className="pt-3">
-                <div className="font-mono text-micro uppercase tracking-[0.2em] text-foreground-secondary mb-2" style={{ fontVariationSettings: '"MONO" 1, "CASL" 0' }}>
-                  Reading / Learning
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {[
-                    "CS:APP",
-                    "The Missing Semester",
-                  ].map((item) => (
-                    <span key={item} className="tag-pill">{item}</span>
-                  ))}
-                </div>
-              </div>
-
               <motion.div
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}

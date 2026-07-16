@@ -12,12 +12,8 @@ export const timeline = [
   { year: "2025", text: "Entered Graphic Era Hill University (CS)" },
   { year: "Jan 2026", text: "Began quip — Unix shell in C99 from scratch" },
   { year: "Mar 2026", text: "Built Astrosis prototype at NSH hackathon (IIT Delhi) — top 10" },
-  { year: "Apr 2026", text: "Started cjit — version control system in C" },
   { year: "May 2026", text: "Started S-Stream — Lattice Boltzmann fluid simulation workbench" },
-  { year: "Jun 2026", text: "Built CTorrent — educational BitTorrent client in C" },
-  { year: "Jun 2026", text: "Started Current — concurrent TTL-backed hash map study" },
-  { year: "Jun 2026", text: "Built Visage — terminal system performance dashboard" },
-  { year: "Jun 2026", text: "Created justLanded — Godot 4 local co-op physics game" },
+  { year: "Jul 2026", text: "Began Visage — terminal system performance dashboard" },
 ];
 
 export const techStack = [
@@ -100,7 +96,7 @@ export const projects = [
     repo: "UtkarshJoshiNtl/S-Stream",
     tech: ["Python", "PySide6", "CuPy", "NumPy", "D2Q9 LBM", "OpenGL"],
     description:
-      "2D Lattice Boltzmann fluid simulation workbench with an interactive PySide6 GUI. Implements D2Q9 + BGK collision on CPU (NumPy/Numba) and GPU (CuPy raw kernel). Features Shan-Chen multiphase liquid model, 9 built-in preset experiments, interactive geometry drawing, live probes with Reynolds/Strouhal analysis, flow regime classification, and export to PNG/MP4/GIF/CSV.",
+      "2D/3D Lattice Boltzmann fluid workbench — D2Q9 BGK with bounce-back obstacles, Shan-Chen multiphase, and CuPy GPU acceleration. Validation suite (Poiseuille, lid-driven cavity, cylinder Cd), interactive geometry, live probes, REST API, Jupyter integration. Ships on PyPI.",
     github: "https://github.com/UtkarshJoshiNtl/S-Stream",
     tileSize: "large",
     hasContent: "gallery",

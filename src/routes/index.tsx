@@ -28,6 +28,7 @@ function Index() {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -4 }}
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          className={section === "projects" ? "flex-1 min-h-0 flex flex-col" : ""}
         >
           <SectionComponent />
         </motion.div>

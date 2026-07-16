@@ -75,15 +75,23 @@ body {
   min-width: 0;
   display: flex;
   flex-direction: column;
+  height: 100%;
   overflow: hidden;
 }
 
 .content-area {
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
   padding: 0 4px;
   scroll-behavior: smooth;
+}
+
+.content-area.fill {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .glass {

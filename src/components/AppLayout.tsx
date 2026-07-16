@@ -74,7 +74,7 @@ export function AppLayout({ children, activeSection, onNavigate }: AppLayoutProp
       </aside>
 
       <main className="main-area">
-        <div className="content-area px-2 md:px-4 py-4 md:py-6">
+        <div className={`content-area px-2 md:px-4 py-4 md:py-6${activeSection === "projects" ? " fill" : ""}`}>
           {children}
         </div>
       </main>
