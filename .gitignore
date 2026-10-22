@@ -1,40 +1,14 @@
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
+# The generator's output and its build directory.
+dist/
+build/
 
-node_modules
-dist
-dist-ssr
-.output
-.vinxi
-.tanstack/**
-.nitro
+# The old stack. It is gone from the site; these are its leftovers.
+node_modules/
+.vite/
 *.local
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# Editors and OS.
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
-# Lock files (using bun)
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
-
-# Environment files
-.env
-.env.*
-
-# Windows alternate data streams
-*:Zone.Identifier
+.vscode/
+.idea/
+*.swp
