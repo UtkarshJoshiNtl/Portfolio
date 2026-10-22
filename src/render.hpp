@@ -32,7 +32,7 @@ inline std::string plate(const Work& w, int index, const std::string& cls = "") 
   return out;
 }
 
-// The label.
+// The label. Museum convention: number, title, date, medium, note.
 inline std::string wall_label(const Work& w, int index) {
   std::string out;
   out += "<div class=\"label\">";
@@ -42,11 +42,21 @@ inline std::string wall_label(const Work& w, int index) {
          "</span>" + esc(w.medium) + "</p>";
   out += "<p class=\"label__note\">" + esc(w.note) + "</p>";
 
-  if (!status_label(w.status) || std::string(status_label(w.status)) != "") {
-    out += "<p class=\"label__status\"><span class=\"status status--" +
-           std::string(w.status == Status::WIP ? "wip" : "done") +
-           "\">" + esc(status_label(w.status)) + "</span></p>";
+  out += "<p class=\"label__rooms\">";
+  for (size_t i = 0; i < w.rooms.size(); ++i) {
+    if (i) out += "<span class=\"label__sep\">/</span>";
+    out += "<a href=\"/room/" + room_info(w.rooms[i]).slug + "/\">" +
+           esc(room_info(w.rooms[i]).name) + "</a>";
   }
+  out += "</p>";
+
+  out += "<p class=\"label__status\"><span class=\"status status--" +
+         std::string(w.status == Status::Verified   ? "verified"
+                     : w.status == Status::Building ? "building"
+                     : w.status == Status::Declared ? "declared"
+                     : w.status == Status::Fork     ? "fork"
+                                                     : "team") +
+         "\">" + esc(status_label(w.status)) + "</span></p>";
   out += "</div>";
   return out;
 }
@@ -71,19 +81,21 @@ inline std::string rail(const std::string& active_room) {
 
   out += "<div class=\"rail__id\">";
   out += "<a class=\"rail__name\" href=\"/\">" + esc(site_name()) + "</a>";
-  if (std::string(site_role()) != "") {
-    out += "<p class=\"rail__role\">" + esc(site_role()) + "</p>";
-  }
+  out += "<p class=\"rail__role\">" + esc(site_role()) + "</p>";
   out += "</div>";
 
   out += "<nav class=\"rail__nav\" aria-label=\"Sections\">";
   out += "<a class=\"rail__link rail__link--head" +
-         std::string(active_room.empty() ? " is-active" : "") + "\" href=\"/\">Projects</a>";
+         std::string(active_room.empty() ? " is-active" : "") + "\" href=\"/\">Collection</a>";
+  out += "<p class=\"rail__head\">Rooms</p>";
+  for (const auto& r : rooms()) {
+    std::string cls = "rail__link" + std::string(r.slug == active_room ? " is-active" : "");
+    out += "<a class=\"" + cls + "\" href=\"/room/" + r.slug + "/\">" + esc(r.name) + "</a>";
+  }
   out += "</nav>";
 
   out += "<div class=\"rail__foot\">";
   out += "<a href=\"https://github.com/UtkarshJoshiNtl\">GitHub</a>";
-  out += "<a href=\"https://www.linkedin.com/in/utkarsh-joshi-ntl/\">LinkedIn</a>";
   out += "<a href=\"mailto:joshiutkarshntl@gmail.com\">Email</a>";
   out += "<a href=\"/resume.pdf\">Resume</a>";
   out += "<a href=\"https://codeforces.com/profile/BakedRajma\">Codeforces</a>";
@@ -131,16 +143,29 @@ inline std::string render_home() {
   std::string body;
 
   body += "<section class=\"hero\">\n";
+  body += "<div class=\"hero__plate\">";
+  body += "<canvas data-art=\"knot\" data-hue=\"215\" data-seed=\"11\"></canvas>";
+  body += "</div>\n";
   body += "<div class=\"hero__text\">\n";
+  body += "<p class=\"eyebrow\">" + esc(site_role()) + "</p>\n";
   body += "<h1 class=\"hero__name\">" + esc(site_name()) + "</h1>\n";
-  body += "<p class=\"hero__status\">currently working / self employed with badtype</p>\n";
-  body += "<div class=\"hero__about\"></div>\n";
+  body += "<p class=\"hero__lede\">" + esc(site_lede()) + "</p>\n";
+  body += "<p class=\"hero__note\">" + esc(site_note()) + "</p>\n";
   body += "</div>\n";
   body += "</section>\n";
 
   body += "<section class=\"catalogue\" id=\"collection\">\n";
   body += "<header class=\"catalogue__head\">\n";
-  body += "<h2 class=\"section-title\">Projects</h2>\n";
+  body += "<h2 class=\"section-title\">The collection</h2>\n";
+  body += "<p class=\"section-note\">" + esc(collection_note()) + "</p>\n";
+
+  body += "<div class=\"filters\" role=\"group\" aria-label=\"Filter by subject\">\n";
+  body += "<button class=\"chip is-on\" data-tag=\"\" type=\"button\">All</button>\n";
+  for (const auto& tag : unique_tags()) {
+    body += "<button class=\"chip\" data-tag=\"" + esc(tag) + "\" type=\"button\">" +
+            esc(tag) + "</button>\n";
+  }
+  body += "</div>\n";
   body += "</header>\n";
 
   body += "<ol class=\"works\">\n";
@@ -148,10 +173,13 @@ inline std::string render_home() {
   for (size_t i = 0; i < ws.size(); ++i)
     body += work_article(ws[i], static_cast<int>(i) + 1);
   body += "</ol>\n";
+  body += "<p class=\"empty\" hidden>Nothing in the collection carries that subject.</p>\n";
   body += "</section>\n";
 
   body += "{{COLOPHON}}";
-  return shell(site_name(), "Projects by " + site_name(), "", body);
+  return shell(site_name() + " — " + site_role(),
+               "A collection of systems, simulations and one very bad language.", "",
+               body);
 }
 
 inline std::string render_room(const RoomInfo& r) {
@@ -186,14 +214,16 @@ inline std::string render_work(const Work& w, int index) {
   body += "<article class=\"piece\">\n";
 
   body += "<header class=\"piece__head\">\n";
-  body += "<p class=\"eyebrow\"><a href=\"/\">Projects</a> / № " + two_digits(index) + "</p>\n";
+  body += "<p class=\"eyebrow\"><a href=\"/\">Collection</a> / № " + two_digits(index) + "</p>\n";
   body += "<h1 class=\"piece__title\">" + esc(w.title) + "</h1>\n";
   body += "<p class=\"piece__medium\">" + esc(w.year) + " &nbsp;·&nbsp; " + esc(w.medium) + "</p>\n";
-  if (std::string(status_label(w.status)) != "") {
-    body += "<p class=\"label__status\"><span class=\"status status--" +
-            std::string(w.status == Status::WIP ? "wip" : "done") +
-            "\">" + esc(status_label(w.status)) + "</span></p>\n";
-  }
+  body += "<p class=\"label__status\"><span class=\"status status--" +
+          std::string(w.status == Status::Verified   ? "verified"
+                      : w.status == Status::Building ? "building"
+                      : w.status == Status::Declared ? "declared"
+                      : w.status == Status::Fork     ? "fork"
+                                                      : "team") +
+          "\">" + esc(status_label(w.status)) + "</span></p>\n";
   body += "</header>\n";
 
   body += "<div class=\"piece__plate\">";
@@ -249,7 +279,7 @@ inline std::string render_work(const Work& w, int index) {
   // The next work in the catalogue, so the collection never dead-ends.
   const auto& ws = works();
   size_t next = (static_cast<size_t>(index)) % ws.size();
-  body += "<nav class=\"next\"><a href=\"/work/" + ws[next].id + "/\">Next &nbsp;→&nbsp; " +
+  body += "<nav class=\"next\"><a href=\"/work/" + ws[next].id + "/\">Next work &nbsp;→&nbsp; " +
           esc(ws[next].title) + "</a></nav>\n";
 
   body += "{{COLOPHON}}";
